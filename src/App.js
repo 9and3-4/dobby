@@ -5,11 +5,11 @@ import {
   Routes,
   Outlet,
 } from "react-router-dom";
-import UserMyPage from "./Woohee/pages/UserMyPage";
-import { StyledBackground } from "./Woohee/component/styles";
-import CompanyMyPage from "./Woohee/pages/CompanyMyPage";
-import EditCompanyMain from "./Woohee/pages/EditCompany";
-import JobListings from "./Woohee/pages/JobListings";
+import UserMyPage from "./pages/MyPage.jsx/UserMyPage";
+import { StyledBackground } from "./components/Styles";
+import CompanyMyPage from "./pages/CompanyMyPage";
+import EditCompanyMain from "./pages/EditCompanyMain";
+import JobListings from "./pages/JobListings";
 
 function App() {
   return (

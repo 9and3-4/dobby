@@ -1,5 +1,5 @@
 import React from "react";
-import profile_img from "../images/userprofile.png";
+import profile_img from "../../../images/companyprofile.png";
 import styled from "styled-components";
 
 const Profile_box = styled.div`

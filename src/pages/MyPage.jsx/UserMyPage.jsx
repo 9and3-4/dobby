@@ -1,7 +1,7 @@
-import Profile from "../component/Profile";
-import Header from "../component/Header";
-import Footer from "../component/Footer";
-import { Wrapper } from "../component/styles";
+import Profile from "../../components/Mypage/profile/ProfileUser";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { Wrapper } from "../../components/Styles";
 
 const UserMyPage = () => {
   return (

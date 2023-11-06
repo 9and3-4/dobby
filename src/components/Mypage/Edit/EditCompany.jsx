@@ -1,7 +1,7 @@
 /* 기업 마이페이지내 정보 수정 화면(로그아웃+회원탈퇴 가능) 컴포넌트*/
 
 import React from "react";
-import profile_img from "../images/companyprofile.png";
+import profile_img from "../../../images/companyprofile.png";
 import styled from "styled-components";
 import { useState } from "react";
 

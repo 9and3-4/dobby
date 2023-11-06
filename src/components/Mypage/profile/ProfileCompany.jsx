@@ -67,7 +67,7 @@
 /* 대안2 :  흰색 바탕 + ed342e(밝은 빨강) 조합 */
 
 import React from "react";
-import profile_img from "../images/companyprofile.png";
+import profile_img from "../../../images/companyprofile.png";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
