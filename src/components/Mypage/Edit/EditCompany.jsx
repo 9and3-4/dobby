@@ -99,13 +99,13 @@ const InputLabel = styled.label`
 `;
 
 const InputField = styled.input`
-    width: 200px;
-    height: 20px;
-    padding: 10px;
-    margin 10px 0;
-    border: 2px solid #ed342e;
-    border-radius : 5px;
-    outline: none;
+  width: 200px;
+  height: 20px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ed342e;
+  border-radius: 5px;
+  outline: none;
 `;
 
 const ButtonContainer = styled.div`
