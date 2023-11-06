@@ -8,11 +8,11 @@ import EditCompany from "../../components/Mypage/Edit/EditCompany";
 const EditCompanyMain = () => {
   return (
     <>
-      <Wrapper>
-        <Header />
-        <EditCompany />
-        <Footer />
-      </Wrapper>
+      {/* <Wrapper>
+        <Header /> */}
+      <EditCompany />
+      {/* <Footer />
+      </Wrapper> */}
     </>
   );
 };
