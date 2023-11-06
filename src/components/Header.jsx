@@ -89,6 +89,7 @@
 import styled from "styled-components";
 import newLogo from "../images/newlogo.jpg";
 import searchIcon from "../images/searchicon.jpg";
+import companyicon from "../images/companyprofile.png";
 
 const Container = styled.div`
   padding: 0 10px;
@@ -102,7 +103,7 @@ const Container = styled.div`
 `;
 
 const TitleItem = styled.div`
-  padding: 0 10px;
+  padding: 10px 10px;
   display: flex;
   align-items: center;
 `;
@@ -149,6 +150,11 @@ const SearchIcon = styled.img`
   height: 20px;
 `;
 
+const CompanyIcon = styled.img`
+  width: 30px;
+  heigth: auto;
+`;
+
 const Header = () => {
   return (
     <Container>
@@ -157,13 +163,16 @@ const Header = () => {
         <Title>9&3/4 Platform</Title>
       </TitleItem>
       <Menu>
-        <MenuItem>회사소개</MenuItem>
-        <MenuItem>채용 공고</MenuItem>
-        <MenuItem>광고 신청</MenuItem>
         <SearchBox>
           <SearchIcon src={searchIcon} alt="돋보기" />
           <SearchInput type="text" />
         </SearchBox>
+        <MenuItem>회사소개</MenuItem>
+        <MenuItem>채용 공고</MenuItem>
+        <MenuItem>광고 신청</MenuItem>
+        <MenuItem>
+          <CompanyIcon src={companyicon}></CompanyIcon>
+        </MenuItem>
       </Menu>
     </Container>
   );

@@ -41,6 +41,7 @@ const ProfileImg = styled.img`
 
 const ProfileText = styled.p`
   font-size: 15px;
+  margin: 10px;
   color: #ed342e;
 `;
 
@@ -70,13 +71,14 @@ const EditWrite = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 50px;
+  padding-top: 50px;
 `;
 
 // margin-top은 옆 editwrite input창과 줄 맞추기 위해서
 const EditWrite2 = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 103px;
+  margin-top: 95px;
 `;
 
 const MainText = styled.p`
@@ -96,12 +98,13 @@ const InputLabel = styled.label`
   font-size: 15px;
   color: #ed342e;
   margin: 10px;
+  padding-top: 7px;
 `;
 
 const InputField = styled.input`
   width: 200px;
   height: 20px;
-  padding: 10px;
+  padding: 15px;
   margin: 10px 0;
   border: 2px solid #ed342e;
   border-radius: 5px;

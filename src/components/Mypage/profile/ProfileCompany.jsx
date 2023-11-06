@@ -99,6 +99,12 @@ const Dobby = styled.img`
   height: auto;
 `;
 
+const ProfileText = styled.text`
+  font-size: 15px;
+  margin: 10px;
+  color: #ed342e;
+`;
+
 const Btn = styled.button`
   width: 250px;
   background-color: #fff;
@@ -138,8 +144,8 @@ const Profile = () => {
       <Profile_box2>
         <Profile_box>
           <Dobby src={profile_img} alt="기업 프로필 사진" />
-          <p>{name}님</p>
-          <p>ID : {ID_email}</p>
+          <ProfileText>{name}님</ProfileText>
+          <ProfileText>ID : {ID_email}</ProfileText>
         </Profile_box>
         <Btn onClick={editNavigate}>내 정보 수정</Btn>
         <Btn onClick={jobListNavigate}>채용 공고 목록</Btn>
