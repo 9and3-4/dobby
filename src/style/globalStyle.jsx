@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --BLACK : #333;
     --RED : #ed342e;
-    /* background-color : var(--RED); 전체 배경 깔 때 사용  */
+
   }
 
   * {
@@ -24,8 +24,10 @@ const GlobalStyle = createGlobalStyle`
   article, aside, canvas, details, embed,
   figure, figcaption, footer, header, hgroup,
   menu, nav, output, ruby, section, summary,
-  time, mark, audio, video{
-    font-family: 'Gowun Dodum', sans-serif;
+  time, mark, audio, video, button{
+    /* font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Orbit', sans-serif; */
+  font-family: 'Gowun Dodum', sans-serif;
   }
   h2 {
     font-size: 2.4em;
