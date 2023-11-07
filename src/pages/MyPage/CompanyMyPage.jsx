@@ -68,6 +68,9 @@ const CompanyMyPage = () => {
   const jobListNavigate = () => {
     navigate("/JobListings");
   };
+  const adListNavigate = () => {
+    navigate("/AdList");
+  };
 
   const profile_inner = () => {
     const name = "Company";
@@ -81,7 +84,7 @@ const CompanyMyPage = () => {
         </Profile_box>
         <Btn onClick={editNavigate}>내 정보 수정</Btn>
         <Btn onClick={jobListNavigate}>채용 공고 목록</Btn>
-        <Btn>광고 목록</Btn>
+        <Btn onClick={adListNavigate}>광고 목록</Btn>
       </Profile_box2>
     );
   };

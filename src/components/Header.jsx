@@ -125,7 +125,7 @@ const Menu = styled.div`
 
 const MenuItem = styled.div`
   padding: 0 10px;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: bold;
 `;
 

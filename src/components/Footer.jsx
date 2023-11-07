@@ -44,7 +44,7 @@
 import styled from "styled-components";
 
 const Position = styled.div`
-  position: absolute;
+  position: relative;
   bottom: 0;
 `;
 

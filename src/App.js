@@ -6,6 +6,7 @@ import GlobalStyle from "./style/globalStyle";
 import JobListings from "./pages/MyPage/JobListings";
 import Layout from "./components/Layout";
 import BoardWritePage from "./pages/Board/BoardWritePage";
+import AdList from "./pages/MyPage/AdList";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
             <Route path="/" element={<CompanyMyPage />} />
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
-            <Route path="/" element={<BoardWritePage />} />
+            <Route path="/AdList" element={<AdList />} />
           </Route>
         </Routes>
       </Router>

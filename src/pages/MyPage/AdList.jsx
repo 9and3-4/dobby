@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import profile_img from "../../images/companyprofile.png";
-import joblistex from "../../images/Joblistex.png";
+import adlistex from "../../images/adlistex.png";
 
 // 맨 하단 ..
 const Container = styled.div`
@@ -99,7 +99,7 @@ const ListDate = styled.div`
   text-align: center;
 `;
 
-const JobListings = () => {
+const AdList = () => {
   const profileInfo = {
     name: "기업",
     id: "songwoohee@naver.com",
@@ -116,29 +116,29 @@ const JobListings = () => {
           </ProfileBox2>
         </Profile>
         <PostList>
-          <MainText>채용 공고 목록</MainText>
+          <MainText>광고 등록 목록</MainText>
           <List>
-            <ListImage src={joblistex} alt="채용 공고 이미지" />
-            <ListTitle>글제목 신입직원 채용</ListTitle>
+            <ListImage src={adlistex} alt="채용 공고 이미지" />
+            <ListTitle>요금제 STANDARD</ListTitle>
             <ListDate>날짜 2023-11-06</ListDate>
-            <ListImage src={joblistex} alt="채용 공고 이미지" />
-            <ListTitle>글제목 신입직원 채용</ListTitle>
+            <ListImage src={adlistex} alt="채용 공고 이미지" />
+            <ListTitle>요금제 DELUXE</ListTitle>
             <ListDate>날짜 2023-11-07</ListDate>
           </List>
           <List>
-            <ListImage src={joblistex} alt="채용 공고 이미지" />
-            <ListTitle>글제목 신입직원 채용</ListTitle>
+            <ListImage src={adlistex} alt="채용 공고 이미지" />
+            <ListTitle>요금제 DELUXE</ListTitle>
             <ListDate>날짜 2023-11-10</ListDate>
-            <ListImage src={joblistex} alt="채용 공고 이미지" />
-            <ListTitle>글제목 신입직원 채용</ListTitle>
+            <ListImage src={adlistex} alt="채용 공고 이미지" />
+            <ListTitle>요금제 STANDARD</ListTitle>
             <ListDate>날짜 2023-11-11</ListDate>
           </List>
           <List>
-            <ListImage src={joblistex} alt="채용 공고 이미지" />
-            <ListTitle>글제목 신입직원 채용</ListTitle>
+            <ListImage src={adlistex} alt="채용 공고 이미지" />
+            <ListTitle>요금제 PREMIUM</ListTitle>
             <ListDate>날짜 2023-11-20</ListDate>
-            <ListImage src={joblistex} alt="채용 공고 이미지" />
-            <ListTitle>글제목 신입직원 채용</ListTitle>
+            <ListImage src={adlistex} alt="채용 공고 이미지" />
+            <ListTitle>요금제 STANDARD</ListTitle>
             <ListDate>날짜 2023-11-25</ListDate>
           </List>
         </PostList>
@@ -147,4 +147,4 @@ const JobListings = () => {
   );
 };
 
-export default JobListings;
+export default AdList;
