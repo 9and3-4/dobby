@@ -71,7 +71,10 @@ const UserMyPage = () => {
     return (
       <Profile_box2>
         <Profile_box>
-          <Dobby src={profile_img} alt="개인 프로필 사진" />
+          <Dobby
+            url="https://firebasestorage.googleapis.com/v0/b/kh-mini-prj.appspot.com/o/userprofile.png?alt=media&token=2a16b8e8-48a9-4bd7-8f33-dcabe97db3b2"
+            alt="개인 프로필 사진"
+          />
           <ProfileText>{name}님</ProfileText>
           <ProfileText>ID : {ID_email}</ProfileText>
         </Profile_box>
