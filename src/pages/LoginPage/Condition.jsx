@@ -14,16 +14,7 @@ const List = styled.ul`
   }
 `;
 const ListEl = styled.li`
-  margin: 45px 3.2vw;
-  @media (max-width: 1024px) {
-    margin: 45px 6.2vw;
-  }
-  @media (max-width: 768px) {
-    margin: 45px 9.2vw;
-  }
-  @media (max-width: 480px) {
-    margin: 45px 12.2vw;
-  }
+  margin: 45px auto;
 `;
 
 const Condition = (props) => {
