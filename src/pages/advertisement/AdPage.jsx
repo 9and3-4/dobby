@@ -10,27 +10,43 @@ const Container = styled.div`
   color: var(--RED);
 `;
 const Maincontents = styled.div`
-  font-size: clamp(10px, 7vw, 70px);
+  font-size: 70px;
   margin-top: 20vh;
   margin-left: 15vw;
-  white-space: nowrap;
+  word-break: keep-all;
+  @media only screen and (max-width: 768px) {
+    font-size: 50px;
+    line-height: 70px;
+  }
 `;
 const Subcontents = styled.div`
-  font-size: clamp(5px, 4vw, 40px);
+  font-size: 30px;
   margin-top: 5vh;
   margin-left: 15vw;
-  white-space: nowrap;
+  word-break: keep-all;
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+    line-height: 30px;
+  }
 `;
 const JoinBtn = styled.button`
-  font-size: clamp(5px, 3vw, 30px);
+  font-size: 30px;
   margin-top: 20vh;
   margin-left: 15vw;
   padding: 15px;
   padding-left: 30px;
   padding-right: 30px;
   border: 2px solid var(--RED);
-  background-color: transparent;
+  background-color: transparent; // 버튼 배경색 없애기
   color: var(--RED);
+  &:hover {
+    background-color: var(--RED);
+    color: white;
+  }
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+    word-break: keep-all;
+  }
 `;
 const AdPage = () => {
   const navigate = useNavigate();

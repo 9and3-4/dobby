@@ -71,11 +71,17 @@ const Menu = styled.div`
 const MenuItem = styled.div`
   padding: 0 10px;
   font-size: 15px;
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const Copyright = styled.div`
   font-size: 15px;
   padding-right: 20px;
+  @media only screen and (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const Footer = () => {
