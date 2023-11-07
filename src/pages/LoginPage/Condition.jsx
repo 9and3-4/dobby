@@ -1,5 +1,17 @@
+import styled from "styled-components";
 import Checkbox from "../../components/CheckBox";
-import { List, ListEl } from "../../components/Styles";
+
+const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ed342e;
+  font-size: 30px;
+`;
+const ListEl = styled.li`
+  margin: 3.2vw;
+`;
 
 const Condition = (props) => {
   return (
