@@ -8,6 +8,7 @@ import Layout from "./components/Layout";
 import BoardWritePage from "./pages/Board/BoardWritePage";
 import AdList from "./pages/MyPage/AdList";
 import Condition from "./pages/LoginPage/Condition";
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 function App() {
   return (
@@ -15,12 +16,14 @@ function App() {
       <GlobalStyle />
       <Router>
         <Routes>
+          <Route path="/LoginPage" element={<LoginPage />} />
           <Route element={<Layout />}>
-            <Route path="/" element={<CompanyMyPage />} />
+            {/* <Route path="/" element={<CompanyMyPage />} />
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
             <Route path="/AdList" element={<AdList />} />
-            <Route path="/Condition" element={<Condition user="company" />} />
+            <Route path="/Condition" element={<Condition user="company" />} /> */}
+            <Route path="/BoardWritePage" element={<BoardWritePage />} />
           </Route>
         </Routes>
       </Router>
