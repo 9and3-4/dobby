@@ -8,9 +8,22 @@ const List = styled.ul`
   align-items: center;
   color: #ed342e;
   font-size: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 26px;
+  }
 `;
 const ListEl = styled.li`
-  margin: 3.2vw;
+  margin: 45px 3.2vw;
+  @media (max-width: 1024px) {
+    margin: 45px 6.2vw;
+  }
+  @media (max-width: 768px) {
+    margin: 45px 9.2vw;
+  }
+  @media (max-width: 480px) {
+    margin: 45px 12.2vw;
+  }
 `;
 
 const Condition = (props) => {
