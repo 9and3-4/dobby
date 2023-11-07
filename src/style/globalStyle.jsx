@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+
   }
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -24,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
   article, aside, canvas, details, embed,
   figure, figcaption, footer, header, hgroup,
   menu, nav, output, ruby, section, summary,
-  time, mark, audio, video, button{
+  time, mark, audio, video, button, textarea, select, input{
     /* font-family: 'Noto Sans KR', sans-serif;
   font-family: 'Orbit', sans-serif; */
   font-family: 'Gowun Dodum', sans-serif;
