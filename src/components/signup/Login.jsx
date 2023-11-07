@@ -19,8 +19,10 @@ const Input = styled.input`
 `;
 
 const TitleItem = styled.div`
+  margin-bottom: 100px;
   padding: 10px 10px;
   display: flex;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -36,13 +38,11 @@ const Title = styled.p`
 `;
 
 const Button = styled.button`
-  margin-top: 100px;
+  margin-top: 60px;
   margin-left: 30px;
   margin-right: 30px;
-
-  font-size: 26px;
-  /* font-weight: bold; */
-  width: 100%; /* 원하는 너비 설정 */
+  cursor: pointer;
+  width: 80%; /* 원하는 너비 설정 */
   height: 50px;
   color: white;
   background-color: #ed342e;
@@ -60,14 +60,14 @@ const Button = styled.button`
   &:active {
     border: #ed342e;
     font-weight: 700;
-    background-color: #999;
+    background-color: #90130e;
   }
 `;
 
 const Container = styled.div`
   height: 800px;
+  width: 500px;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: column;
@@ -124,15 +124,6 @@ const Items = styled.div`
       text-decoration-line: none;
     }
   }
-  &.bdlogo {
-    background-color: #ed342e;
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    justify-content: center;
-  }
 `;
 
 const Login = () => {
@@ -158,13 +149,13 @@ const Login = () => {
 
   // 5~ 20자리의 영문자, 숫자, 언더스코어(_)로 이루어진 문자열이 유효한 아이디 형식인지 검사하는 정규표현식
   const onChangeId = (e) => {
-    const regexId = /^\w{5,20}$/;
+    const regexId = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     setInputId(e.target.value);
     if (!regexId.test(e.target.value)) {
-      setIdMessage("5자리 이상 20자리 미만으로 입력해 주세요.");
+      setIdMessage("유효한 이메일 형식이 아닙니다.");
       setIsId(false);
     } else {
-      setIdMessage("올바른 형식 입니다.");
+      setIdMessage("올바른 이메일 형식입니다.");
       setIsId(true);
     }
   };
@@ -235,9 +226,6 @@ const Login = () => {
           <span>회원가입</span>
         </Link>
       </Items>
-      {/* <Items className="bdlogo">
-        <img src={imgBottom} alt="NedBank" />
-      </Items> */}
     </Container>
   );
 };
