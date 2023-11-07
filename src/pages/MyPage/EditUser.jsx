@@ -40,7 +40,11 @@ const ProfileBox2 = styled.div`
   border: 2px solid #ed342e;
   margin-left: 100px;
 
-  @media n;
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+  }
 `;
 
 const ProfileImg = styled.img`
@@ -81,6 +85,10 @@ const EditWrite = styled.div`
   flex-direction: column;
   padding-left: 50px;
   padding-top: 50px;
+
+  @media only screen and (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 // margin-top은 옆 editwrite input창과 줄 맞추기 위해서
@@ -101,6 +109,11 @@ const InputContainer = styled.div`
   display: flex;
   margin: 10px;
   justify-content: flex-end;
+
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const InputLabel = styled.label`
