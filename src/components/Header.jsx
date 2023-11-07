@@ -152,7 +152,7 @@ const SearchIcon = styled.img`
 
 const CompanyIcon = styled.img`
   width: 30px;
-  heigth: auto;
+  height: auto;
 `;
 
 const Header = () => {

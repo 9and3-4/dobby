@@ -1,7 +1,6 @@
 import { Wrapper } from "../../components/Styles";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import AdComponent from "../../components/advertisement/AdJoinComponent";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 
