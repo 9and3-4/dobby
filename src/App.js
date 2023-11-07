@@ -9,6 +9,7 @@ import BoardWritePage from "./pages/Board/BoardWritePage";
 import AdList from "./pages/MyPage/AdList";
 import Condition from "./pages/LoginPage/Condition";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import UserMyPage from "./pages/MyPage/UserMyPage";
 
 function App() {
   return (
@@ -18,12 +19,13 @@ function App() {
         <Routes>
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route element={<Layout />}>
-            {/* <Route path="/" element={<CompanyMyPage />} />
+            <Route path="/" element={<CompanyMyPage />} />
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
             <Route path="/AdList" element={<AdList />} />
-            <Route path="/Condition" element={<Condition user="company" />} /> */}
+            <Route path="/Condition" element={<Condition user="company" />} />
             <Route path="/BoardWritePage" element={<BoardWritePage />} />
+            <Route path="/UserMyPage" element={<UserMyPage />} />
           </Route>
         </Routes>
       </Router>

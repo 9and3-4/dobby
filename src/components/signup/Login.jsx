@@ -42,7 +42,7 @@ const Button = styled.button`
   margin-left: 30px;
   margin-right: 30px;
   cursor: pointer;
-  width: 80%; /* 원하는 너비 설정 */
+  width: 100%; /* 원하는 너비 설정 */
   height: 50px;
   color: white;
   background-color: #ed342e;
@@ -165,10 +165,10 @@ const Login = () => {
     const passwordCurrent = e.target.value;
     setInputPw(passwordCurrent);
     if (!passwordRegex.test(passwordCurrent)) {
-      setPwMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요");
+      setPwMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.");
       setIsPw(false);
     } else {
-      setPwMessage("안전한 비밀번호에요 : )");
+      setPwMessage("올바른 비밀번호 입니다.");
       setIsPw(true);
     }
   };
@@ -192,6 +192,7 @@ const Login = () => {
         <LogoImage src={newLogo} alt="logo image" />
         <Title>9&3/4 Platform</Title>
       </TitleItem>
+      <></>
       <Items className="item2">
         <Input placeholder="이메일" value={inputId} onChange={onChangeId} />
       </Items>
@@ -202,7 +203,12 @@ const Login = () => {
       </Items>
 
       <Items className="item2">
-        <Input placeholder="패스워드" value={inputPw} onChange={onChangePw} />
+        <Input
+          type="password"
+          placeholder="패스워드"
+          value={inputPw}
+          onChange={onChangePw}
+        />
       </Items>
       <Items className="hint">
         {inputPw.length > 0 && (
