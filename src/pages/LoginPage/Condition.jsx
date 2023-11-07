@@ -14,7 +14,24 @@ const List = styled.ul`
   }
 `;
 const ListEl = styled.li`
-  margin: 45px auto;
+  margin: 35px auto;
+`;
+
+const CustomButton = styled.button`
+  background-color: white;
+  color: #ed342e;
+  padding: 5px 10px;
+  width: 100px;
+  height: 40px;
+  font-size: 1rem;
+  border: 2px solid #ed342e;
+  border-radius: 0.35rem;
+  cursor: pointer; // 커서를 손가락 모양으로 변경
+
+  &:hover {
+    background-color: #ed342e;
+    color: white;
+  }
 `;
 
 const Condition = (props) => {
@@ -38,6 +55,9 @@ const Condition = (props) => {
             <Checkbox text={"단체 회원 이용 시 주의사항에 대한 동의"} />
           </ListEl>
         )}
+        <ListEl>
+          <CustomButton>다음으로</CustomButton>
+        </ListEl>
       </List>
     </>
   );
