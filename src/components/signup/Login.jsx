@@ -54,7 +54,7 @@ const Button = styled.button`
   ${(props) =>
     props.enabled &&
     css`
-      background-color: white;
+      background-color: #ed342e;
     `};
 
   &:active {
@@ -221,10 +221,10 @@ const Login = () => {
       <Items className="item2">
         {isId && isPw ? (
           <Button enabled onClick={onClickLogin}>
-            SIGN IN
+            로그인
           </Button>
         ) : (
-          <Button disabled>SIGN IN</Button>
+          <Button disabled>로그인</Button>
         )}
       </Items>
       <Modal open={modalOpen} close={closeModal} header="오류">
