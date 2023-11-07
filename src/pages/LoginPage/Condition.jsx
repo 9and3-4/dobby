@@ -38,6 +38,8 @@ const Condition = (props) => {
     </>
   );
 };
+
+// 외부에서 props가 안들어 왔을경우 props.user 디폴트 값을 "user"로 설정
 Condition.defaultProps = {
   user: "user",
 };
