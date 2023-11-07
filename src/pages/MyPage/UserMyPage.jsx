@@ -72,7 +72,9 @@ const UserMyPage = () => {
       <Profile_box2>
         <Profile_box>
           <Dobby
-            url="https://firebasestorage.googleapis.com/v0/b/kh-mini-prj.appspot.com/o/userprofile.png?alt=media&token=2a16b8e8-48a9-4bd7-8f33-dcabe97db3b2"
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/kh-mini-prj.appspot.com/o/userprofile.png?alt=media&token=2a16b8e8-48a9-4bd7-8f33-dcabe97db3b2"
+            }
             alt="개인 프로필 사진"
           />
           <ProfileText>{name}님</ProfileText>
