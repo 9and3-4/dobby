@@ -7,7 +7,8 @@ import JobListings from "./pages/MyPage/JobListings";
 import Layout from "./components/Layout";
 import BoardWritePage from "./pages/Board/BoardWritePage";
 import AdList from "./pages/MyPage/AdList";
-import Condition from "./pages/LoginPage/Condition";
+import UserMyPage from "./pages/MyPage/UserMyPage";
+import EditUserMain from "./pages/MyPage/EditUser";
 
 function App() {
   return (
@@ -16,16 +17,15 @@ function App() {
       <Router>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<CompanyMyPage />} />
+            {/* <Route path="/" element={<CompanyMyPage />} />
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
-            <Route path="/AdList" element={<AdList />} />
-            <Route path="/Condition" element={<Condition user="company" />} />
+            <Route path="/AdList" element={<AdList />} /> */}
+            <Route path="/" element={<UserMyPage />} />
+            <Route path="/EditUserMain" element={<EditUserMain />} />
           </Route>
         </Routes>
       </Router>
-
-      {/* <JobListings /> */}
     </>
   );
 }

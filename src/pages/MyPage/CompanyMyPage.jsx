@@ -1,3 +1,5 @@
+/* 기업 마이페이지 메인 */
+
 import React from "react";
 import profile_img from "../../images/companyprofile.png";
 import styled from "styled-components";
@@ -6,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 const Profile_box = styled.div`
   width: 300px;
   height: 400px;
-  /* background-color: #ed342e; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +22,6 @@ const Profile_box2 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* color: white; */
   margin: 30px;
   background-color: white;
   height: 78vh;

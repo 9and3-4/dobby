@@ -1,11 +1,15 @@
-/* 기업 마이페이지 정보 수정 */
+/* 개인 마이페이지 정보 수정 */
 import React from "react";
-import profile_img from "../../images/companyprofile.png";
+import profile_img from "../../images/userprofile.png";
 import styled from "styled-components";
 import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 // profile 맨 하단에 깔려 있음
@@ -18,6 +22,9 @@ const Profile = styled.div`
   margin: 30px;
   background-color: white;
   height: 78vh;
+
+  @media only screen and (max-width: 768px) {
+  }
 `;
 
 // 그 위에 프로필
@@ -32,6 +39,8 @@ const ProfileBox2 = styled.div`
   color: #ed342e;
   border: 2px solid #ed342e;
   margin-left: 100px;
+
+  @media n;
 `;
 
 const ProfileImg = styled.img`
@@ -155,28 +164,23 @@ const UpdateButton = styled.button`
   }
 `;
 
-const EditCompanyMain = () => {
-  const [companyName, setCompanyName] = useState(""); // 기업명 상태 추가
+const EditUserMain = () => {
+  const [userName, setUserName] = useState(""); // 이름
   const NameChange = (e) => {
-    setCompanyName(e.target.value);
+    setUserName(e.target.value);
   };
 
-  const [contactPerson, setContactPerson] = useState(""); // 담당자 이름
-  const contactPersonChange = (e) => {
-    setContactPerson(e.target.value);
+  const [nickName, setNickName] = useState(""); // 닉네임
+  const nickNameChange = (e) => {
+    setNickName(e.target.value);
   };
 
-  const [department, setDepartment] = useState(""); // 부서
-  const departmentChange = (e) => {
-    setDepartment(e.target.value);
+  const [company, setCompany] = useState(""); // 소속 회사명
+  const companyChange = (e) => {
+    setCompany(e.target.value);
   };
 
-  const [scale, setScale] = useState(""); // 기업 규모
-  const scaleChange = (e) => {
-    setScale(e.target.value);
-  };
-
-  const [phoneNumber, setPhoneNumber] = useState(""); // 담당자 전화번호
+  const [phoneNumber, setPhoneNumber] = useState(""); // 휴대폰번호
   const PhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
   };
@@ -191,13 +195,13 @@ const EditCompanyMain = () => {
     setNewPw(e.target.value);
   };
 
-  const [newPwCheck, setNewPwCheck] = useState(""); // 새 비밀번화 확인
+  const [newPwCheck, setNewPwCheck] = useState(""); // 새 비밀번호 확인
   const newPwCheckChange = (e) => {
     setNewPwCheck(e.target.value);
   };
 
   const profileInfo = {
-    name: "기업",
+    name: "개인", // 추후 닉네임 가져올 수 있도록 useEffect, api, axios
     id: "songwoohee@naver.com",
   };
   return (
@@ -205,7 +209,7 @@ const EditCompanyMain = () => {
       <Container>
         <Profile>
           <ProfileBox2>
-            <ProfileImg src={profile_img} alt="기업 프로필 사진" />
+            <ProfileImg src={profile_img} alt="개인 프로필 사진" />
             <ProfileText>{profileInfo.name}님</ProfileText>
             <ProfileText>ID : {profileInfo.id}</ProfileText>
             <BtnProfile>로그아웃</BtnProfile>
@@ -215,53 +219,43 @@ const EditCompanyMain = () => {
         <EditWrite>
           <MainText>내 정보 수정</MainText>
           <InputContainer>
-            <InputLabel htmlFor="companyName">기업명</InputLabel>
+            <InputLabel htmlFor="userName">이름</InputLabel>
             <InputField
-              id="companyName"
+              id="userName"
               type="text"
-              value={companyName} // 입력 필드의 값으로 기업명 상태 사용
+              value={userName} // 입력 필드의 값으로 실명 사용
               onChange={NameChange} // 값이 변경될 때 호출
             />
           </InputContainer>
           <InputContainer>
-            <InputLabel htmlFor="contacPerson">담당자 이름</InputLabel>
+            <InputLabel htmlFor="nickName">사용자명</InputLabel>
             <InputField
-              id="contacPerson"
+              id="nickName"
               type="text"
-              value={contactPerson} // 입력 필드의 값으로 기존 담당자이름 상태 사용
-              onChange={contactPersonChange} // 값이 변경될 때 호출
+              value={nickName} // 입력 필드의 값으로 닉네임 사용
+              onChange={nickNameChange} // 값이 변경될 때 호출
             />
           </InputContainer>
           <InputContainer>
-            <InputLabel htmlFor="department">소속 팀명</InputLabel>
+            <InputLabel htmlFor="company">회사명</InputLabel>
             <InputField
-              id="department"
+              id="company"
               type="text"
-              value={department} // 입력 필드의 값으로 직무 상태 사용
-              onChange={departmentChange} // 값이 변경될 때 호출
+              value={company} // 입력 필드의 값으로 소속회사 상태 사용
+              onChange={companyChange} // 값이 변경될 때 호출
             />
           </InputContainer>
-          <InputContainer>
-            <InputLabel htmlFor="scale">기업 규모</InputLabel>
-            <InputField
-              id="scale"
-              type="text"
-              value={scale} // 입력 필드의 값으로 규모 상태 사용
-              onChange={scaleChange} // 값이 변경될 때 호출
-            />
-          </InputContainer>
-        </EditWrite>
-        <EditWrite2>
           <InputContainer>
             <InputLabel htmlFor="phoneNumber">휴대폰 번호</InputLabel>
             <InputField
               id="phoneNumber"
-              type="tel"
-              placeholder="only number"
-              value={phoneNumber} // 입력 필드의 값으로 휴대폰번호 상태 사용
+              type="text"
+              value={phoneNumber} // 입력 필드의 값으로 휴대폰번호 사용
               onChange={PhoneNumberChange} // 값이 변경될 때 호출
             />
           </InputContainer>
+        </EditWrite>
+        <EditWrite2>
           <InputContainer>
             <InputLabel htmlFor="currentPw">현재 비밀번호</InputLabel>
             <InputField
@@ -299,4 +293,4 @@ const EditCompanyMain = () => {
   );
 };
 
-export default EditCompanyMain;
+export default EditUserMain;
