@@ -7,6 +7,7 @@ import JobListings from "./pages/MyPage/JobListings";
 import Layout from "./components/Layout";
 import BoardWritePage from "./pages/Board/BoardWritePage";
 import AdList from "./pages/MyPage/AdList";
+import Condition from "./pages/LoginPage/Condition";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
             <Route path="/AdList" element={<AdList />} />
+            <Route path="/Condition" element={<Condition user="company" />} />
           </Route>
         </Routes>
       </Router>

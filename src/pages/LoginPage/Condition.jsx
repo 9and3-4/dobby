@@ -1,7 +1,7 @@
 import Checkbox from "../../components/CheckBox";
 import { List, ListEl } from "../../components/Styles";
 
-const UserCondition = (props) => {
+const Condition = (props) => {
   return (
     <>
       <List>
@@ -26,8 +26,8 @@ const UserCondition = (props) => {
     </>
   );
 };
-UserCondition.defaultProps = {
+Condition.defaultProps = {
   user: "user",
 };
 
-export default UserCondition;
+export default Condition;
