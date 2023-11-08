@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TransBtn from "../../components/Button";
 
 const Container = styled.div`
   height: 800px;
@@ -89,7 +90,9 @@ const AdJoinPage = () => {
           <BoxTitle>STANDARD</BoxTitle>
           <Period>1주일</Period>
           <Price>가격</Price>
-          <Join>신청하기</Join>
+          <TransBtn width="200px" height="65px" margin="80px" fontsize="30px">
+            신청하기
+          </TransBtn>
         </Box>
       </StandardBox>
       <DeluxeBox>
@@ -97,7 +100,9 @@ const AdJoinPage = () => {
           <BoxTitle>DELUXE</BoxTitle>
           <Period>1개월</Period>
           <Price>가격</Price>
-          <Join>신청하기</Join>
+          <TransBtn width="200px" height="65px" margin="80px" fontsize="30px">
+            신청하기
+          </TransBtn>
         </Box>
       </DeluxeBox>
       <PremiumBox>
@@ -105,7 +110,9 @@ const AdJoinPage = () => {
           <BoxTitle>PREMIUM</BoxTitle>
           <Period>3개월</Period>
           <Price>가격</Price>
-          <Join>신청하기</Join>
+          <TransBtn width="200px" height="65px" margin="80px" fontsize="30px">
+            신청하기
+          </TransBtn>
         </Box>
       </PremiumBox>
     </Container>

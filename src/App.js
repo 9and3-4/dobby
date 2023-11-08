@@ -10,6 +10,8 @@ import AdList from "./pages/MyPage/AdList";
 import Condition from "./pages/LoginPage/Condition";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import UserMyPage from "./pages/MyPage/UserMyPage";
+import AdPage from "./pages/advertisement/AdPage";
+import AdJoinPage from "./pages/advertisement/AdJoinPage";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route path="/Condition" element={<Condition user="company" />} />
             <Route path="/BoardWritePage" element={<BoardWritePage />} />
             <Route path="/UserMyPage" element={<UserMyPage />} />
+            <Route path="/AdPage" element={<AdPage />} />
+            <Route path="/AdJoinPage" element={<AdJoinPage />} />
           </Route>
         </Routes>
       </Router>

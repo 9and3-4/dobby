@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import TransBtn from "../../components/Button";
 
 const Container = styled.div`
   height: 800px;
@@ -28,25 +29,7 @@ const Subcontents = styled.div`
     line-height: 30px;
   }
 `;
-const JoinBtn = styled.button`
-  font-size: 30px;
-  margin-top: 20vh;
-  margin-left: 15vw;
-  padding: 15px;
-  padding-left: 30px;
-  padding-right: 30px;
-  border: 2px solid var(--RED);
-  background-color: transparent; // 버튼 배경색 없애기
-  color: var(--RED);
-  &:hover {
-    background-color: var(--RED);
-    color: white;
-  }
-  @media only screen and (max-width: 768px) {
-    font-size: 20px;
-    word-break: keep-all;
-  }
-`;
+
 const AdPage = () => {
   const navigate = useNavigate();
 
@@ -59,7 +42,15 @@ const AdPage = () => {
       <Subcontents>
         9와 3/4 홈페이지에 기업 맞춤형 광고를 게시해보세요.
       </Subcontents>
-      <JoinBtn onClick={onClickBtn}>즉시 신청</JoinBtn>
+      <TransBtn
+        width="120px"
+        height="70px"
+        margin="5vh 15vw"
+        fontsize="20px"
+        onClick={onClickBtn}
+      >
+        즉시 신청
+      </TransBtn>
     </Container>
   );
 };
