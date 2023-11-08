@@ -16,6 +16,8 @@ const TransBtn = styled.button`
       padding: ${props.padding};
       margin: ${props.margin};
       font-size: ${props.fontsize};
+      background-color: ${props.backgroundcolor};
+      border-radius: ${props.borderradius};
     `;
   }}
 `;
