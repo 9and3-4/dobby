@@ -16,20 +16,22 @@ const Signup = () => {
   const [inputPw, setInputPw] = useState("");
   const [inputConPw, setInputConPw] = useState("");
   const [inputName, setInputName] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
+  const [inputNickName, setInputNickName] = useState("");
+  const [inputCompanyName, setInputCompanyName] = useState("");
 
   // 오류 메시지
   const [idMessage, setIdMessage] = useState("");
   const [pwMessage, setPwMessage] = useState("");
   const [conPwMessage, setConPwMessage] = useState("");
-  const [mailMessage, setMailMessage] = useState("");
+  const [nickNameMessage, setNickNameMessage] = useState("");
 
   // 유효성 검사
   const [isId, setIsId] = useState(false);
   const [isPw, setIsPw] = useState(false);
   const [isConPw, setIsConPw] = useState(false);
   const [isName, setIsName] = useState(false);
-  const [isMail, setIsMail] = useState(false);
+  const [isNickName, setIsNickName] = useState(false);
+  const [isCompanyName, setIsCompanyName] = useState(false);
   // 팝업
   const [modalOpen, setModalOpen] = useState(false);
   const [modalText, setModelText] = useState("중복된 아이디 입니다.");
@@ -38,18 +40,18 @@ const Signup = () => {
     setModalOpen(false);
   };
 
-  const onChangId = (e) => {
+  const onChangeId = (e) => {
+    const regexId = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     setInputId(e.target.value);
-    if (e.target.value.length < 5 || e.target.value.length > 12) {
-      setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
+    if (!regexId.test(e.target.value)) {
+      setIdMessage("유효한 이메일 형식이 아닙니다.");
       setIsId(false);
     } else {
-      setIdMessage("올바른 형식 입니다.");
+      setIdMessage("올바른 이메일 형식입니다.");
       setIsId(true);
     }
   };
   const onChangePw = (e) => {
-    //const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
     const passwordCurrent = e.target.value;
     setInputPw(passwordCurrent);
@@ -76,9 +78,13 @@ const Signup = () => {
     setInputName(e.target.value);
     setIsName(true);
   };
-  const onChangeMail = (e) => {
-    setInputEmail(e.target.value);
-    setIsMail(true);
+  const onChangeNickName = (e) => {
+    setInputNickName(e.target.value);
+    setIsNickName(true);
+  };
+  const onChangeCompanyName = (e) => {
+    setInputCompanyName(e.target.value);
+    setIsCompanyName(true);
   };
 
   const onClickLogin = async () => {
@@ -94,11 +100,11 @@ const Signup = () => {
         inputId,
         inputPw,
         inputName,
-        inputEmail
+        inputNickName
       );
       console.log(memberReg.data);
       if (memberReg.data === true) {
-        navigate("/");
+        navigate("/home");
       } else {
         setModalOpen(true);
         setModelText("회원 가입에 실패 했습니다.");
@@ -117,7 +123,7 @@ const Signup = () => {
       </Items>
 
       <Items className="item2">
-        <Input placeholder="아이디" value={inputId} onChange={onChangId} />
+        <Input placeholder="이메일" value={inputId} onChange={onChangeId} />
       </Items>
       <Items className="hint">
         {inputId.length > 0 && (
@@ -150,7 +156,7 @@ const Signup = () => {
         />
       </Items>
       <Items className="hint">
-        {inputPw.length > 0 && (
+        {inputConPw.length > 0 && (
           <span className={`message ${isConPw ? "success" : "error"}`}>
             {conPwMessage}
           </span>
@@ -166,15 +172,23 @@ const Signup = () => {
       </Items>
       <Items className="item2">
         <Input
-          type="email"
-          placeholder="이메일"
-          value={inputEmail}
-          onChange={onChangeMail}
+          type="text"
+          placeholder="닉네임"
+          value={inputNickName}
+          onChange={onChangeNickName}
+        />
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="소속 회사명"
+          value={inputCompanyName}
+          onChange={onChangeCompanyName}
         />
       </Items>
 
       <Items className="item2">
-        {isId && isPw && isConPw && isName && isMail ? (
+        {isId && isPw && isConPw && isName && isNickName ? (
           <Button enabled onClick={onClickLogin}>
             NEXT
           </Button>

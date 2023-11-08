@@ -14,6 +14,20 @@ const AxiosApi = {
   memberGet: async (id) => {
     return await axios.get(DOBBY_DOMAIN + `/users/member/?name=${id}`);
   },
+  // 회원 가입
+  memberReg: async (id, pwd, name, nickName) => {
+    const member = {
+      id: id,
+      pwd: pwd,
+      name: name,
+      nickName: nickName,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/users/new", member);
+  },
+  // 회원 가입 여부 확인
+  memberRegCheck: async (id) => {
+    return await axios.get(DOBBY_DOMAIN + `/users/check/?id=${id}`);
+  },
 };
 
 export default AxiosApi;
