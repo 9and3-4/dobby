@@ -61,6 +61,9 @@ const ModalStyle = styled.div`
         border-radius: 5px;
         font-size: 13px;
       }
+      .confirmBtn {
+        background-color: var(--RED);
+      }
     }
   }
 
@@ -106,7 +109,11 @@ const Modal = (props) => {
             </header>
             <main>{children}</main>
             <footer>
-              {type && <Button onClick={confirm}>확인</Button>}
+              {type && (
+                <Button className="confirmBtn" onClick={confirm}>
+                  확인
+                </Button>
+              )}
               <Button onClick={close}>취소</Button>
             </footer>
           </section>

@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import TransBtn from "../../components/Button";
+import Modal from "../../util/Modal";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AxiosApi from "../../api/AxiosApi";
 
 const Container = styled.div`
   height: 800px;
@@ -62,27 +66,49 @@ const Price = styled.div`
     margin-top: 20px;
   }
 `;
-const Join = styled.button`
-  font-size: 30px;
-  width: 200px;
-  padding: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  margin-top: 80px;
-  border: 2px solid var(--RED);
-  background-color: transparent; // 버튼 배경색 없애기
-  color: var(--RED);
-  &:hover {
-    background-color: var(--RED);
-    color: white;
-  }
-  @media only screen and (max-width: 768px) {
-    font-size: 20px;
-    margin-top: 20px;
-  }
-`;
 
 const AdJoinPage = () => {
+  //   const navigate = useNavigate();
+  //   //팝업 처리
+  //   const [modalOpen, setModalOpen] = useState(false);
+  //   const closeModal = () => {
+  //     setModalOpen(false);
+  //   };
+  //   const sucModal = () => {
+  //     setModalOpen(false);
+  //     navigate("/AdPage");
+  //   };
+  //  const onClickBtn = (price) => {
+  //   swich (price) {
+  //     case 1:
+  //       navigate("/");
+  //       setModalOpen(true);
+  //       break;
+  //       case 2:
+  //         navigate("/");
+  //         setModalOpen(true);
+  //         break;
+  //         case 3:
+  //           navigate("/");
+  //           setModalOpen(true);
+  //           default:
+  //             break;
+  //   }
+
+  //  }
+  //  const onClickLogin = async () => {
+  //   //로그인을 위한 axios 호출
+  //   const res = await AxiosApi.memberLogin(inputId, inputPw);
+  //   console.log(res.data);
+  //   if (res.data === true) {
+  //     window.localStorage.setItem("userId", inputId); // 브라우저에서 임시로 값을 저장하는 기술
+  //     window.localStorage.setItem("userPw", inputPw);
+  //     window.localStorage.setItem("isLogin", "TRUE");
+  //     navigate("/home");
+  //   } else {
+  //     setModalOpen(true);
+  //   }
+  // };
   return (
     <Container>
       <StandardBox>
@@ -113,6 +139,15 @@ const AdJoinPage = () => {
           <TransBtn width="200px" height="65px" margin="80px" fontsize="30px">
             신청하기
           </TransBtn>
+          {/* <Modal
+            open={modalOpen}
+            type="true"
+            confirm={sucModal}
+            close={closeModal}
+            header="오류"
+          >
+            아이디 및 패스워드를 재확인해 주세요.
+          </Modal> */}
         </Box>
       </PremiumBox>
     </Container>
