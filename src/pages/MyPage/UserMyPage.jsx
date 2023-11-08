@@ -64,6 +64,9 @@ const UserMyPage = () => {
   const editNavigate = () => {
     navigate("/EditUserMain");
   };
+  const PostNavigate = () => {
+    navigate("/UserPostList");
+  };
 
   const profile_inner = () => {
     const name = "USER"; // 추후 지정한 닉네임 가져오도록
@@ -81,7 +84,7 @@ const UserMyPage = () => {
           <ProfileText>ID : {ID_email}</ProfileText>
         </Profile_box>
         <Btn onClick={editNavigate}>내 정보 수정</Btn>
-        <Btn>작성글 보기</Btn>
+        <Btn onClick={PostNavigate}>작성글 보기</Btn>
         <Btn>지원 회사 목록</Btn>
         <Btn>즐겨찾기 목록</Btn>
       </Profile_box2>

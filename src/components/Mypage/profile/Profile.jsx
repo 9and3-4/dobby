@@ -1,4 +1,5 @@
-import react from "react";
+// 프로필 컴포넌트
+import React from "react";
 import styled from "styled-components";
 
 // 제일 아래 배치된 div
@@ -13,15 +14,34 @@ const Profilebox = styled.div`
   border: 2px solid var(--RED);
 `;
 
-const ProfileImg = styled.ima`
-  width: 100px;
-  padding-bottom: 15px;
+const Profileimg = styled.img`
+  width: 130px;
 `;
 
 const ProfileText = styled.text`
   font-size: 15px;
   margin: 10px;
   color: var(--RED);
+`;
+
+const BtnProfile = styled.button`
+  width: 200px;
+  background-color: #fff;
+  color: #ed342e;
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 15px;
+  border: 2px solid #ed342e;
+  transition: background-color 0.2s color 0.2s;
+
+  &:hover {
+    background-color: #ed342e;
+    color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 1); /* 호버 상태일 때 그림자 효과를 추가합니다 */
+    transform: translateY(
+      -2px
+    ); /* 약간 위로 올라가는 효과를 주기 위해 translateY를 사용합니다 */
+  }
 `;
 
 const Profile = (props) => {
@@ -33,14 +53,24 @@ const Profile = (props) => {
   // axios로 서버에 요청하기
   //}, []);
 
+  //임시 데이터 출력 (파이어베이스 통해 프로필 사진 가져옴)
+  const profileData = {
+    profileurl:
+      "https://firebasestorage.googleapis.com/v0/b/kh-mini-prj.appspot.com/o/userprofile.png?alt=media&token=2a16b8e8-48a9-4bd7-8f33-dcabe97db3b2",
+    name: "user",
+    id: "woohee@google.com",
+  };
+
   return (
     <>
       <Profilebox>
-        {props.user === "user" && (
+        {/* {props.user === "user" && (
           <ProfileImg src={ProfileImg} alt="개인 프로필 사진" />
-        )}
-        <ProfileText>님</ProfileText>
-        <ProfileText>ID : </ProfileText>
+        )} */}
+        <Profileimg img src={profileData.profileurl} alt="프로필사진" />
+        <ProfileText>{profileData.name} 님</ProfileText>
+        <ProfileText>ID : {profileData.id}</ProfileText>
+        <BtnProfile>로그아웃</BtnProfile>
       </Profilebox>
     </>
   );
