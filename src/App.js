@@ -13,6 +13,7 @@ import UserMyPage from "./pages/MyPage/UserMyPage";
 import AdPage from "./pages/advertisement/AdPage";
 import AdJoinPage from "./pages/advertisement/AdJoinPage";
 import BoardListPage from "./pages/Board/BoardListPage";
+import Signup from "./pages/LoginPage/Signup";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/AdPage" element={<AdPage />} />
             <Route path="/AdJoinPage" element={<AdJoinPage />} />
             <Route path="/BoardListPage" element={<BoardListPage />} />
+            <Route path="/Signup" element={<Signup />} />
           </Route>
         </Routes>
       </Router>

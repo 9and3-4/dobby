@@ -12,9 +12,8 @@ const AxiosApi = {
   },
   //회원 조회
   memberGet: async (id) => {
-    return await axios.get(DOBBY_DOMAIN + `/users/member/?id=${id}`);
+    return await axios.get(DOBBY_DOMAIN + `/users/member/?name=${id}`);
   },
-  
 };
 
 export default AxiosApi;

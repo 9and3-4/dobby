@@ -68,47 +68,37 @@ const Price = styled.div`
 `;
 
 const AdJoinPage = () => {
-  //   const navigate = useNavigate();
-  //   //팝업 처리
-  //   const [modalOpen, setModalOpen] = useState(false);
-  //   const closeModal = () => {
-  //     setModalOpen(false);
-  //   };
-  //   const sucModal = () => {
-  //     setModalOpen(false);
-  //     navigate("/AdPage");
-  //   };
-  //  const onClickBtn = (price) => {
-  //   swich (price) {
-  //     case 1:
-  //       navigate("/");
-  //       setModalOpen(true);
-  //       break;
-  //       case 2:
+  //     const navigate = useNavigate();
+  //     //팝업 처리
+  //     const [modalOpen, setModalOpen] = useState(false);
+  //     const closeModal = () => {
+  //       setModalOpen(false);
+  //     };
+  //     const sucModal = (price) => {
+  //       setModalOpen(false);
+  //       navigate("/AdPage");
+  //     };
+  //    const onClickBtn = (price) => {
+  //     swich (price) {
+  //       case 1:
   //         navigate("/");
   //         setModalOpen(true);
   //         break;
-  //         case 3:
+  //         case 2:
   //           navigate("/");
   //           setModalOpen(true);
-  //           default:
-  //             break;
-  //   }
+  //           break;
+  //           case 3:
+  //             navigate("/");
+  //             setModalOpen(true);
+  //             default:
+  //               break;
+  //     }
 
-  //  }
-  //  const onClickLogin = async () => {
-  //   //로그인을 위한 axios 호출
+  //    }
+
   //   const res = await AxiosApi.memberLogin(inputId, inputPw);
-  //   console.log(res.data);
-  //   if (res.data === true) {
-  //     window.localStorage.setItem("userId", inputId); // 브라우저에서 임시로 값을 저장하는 기술
-  //     window.localStorage.setItem("userPw", inputPw);
-  //     window.localStorage.setItem("isLogin", "TRUE");
-  //     navigate("/home");
-  //   } else {
-  //     setModalOpen(true);
-  //   }
-  // };
+  //
   return (
     <Container>
       <StandardBox>

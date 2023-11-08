@@ -175,12 +175,20 @@ const Login = () => {
   const onClickLogin = async () => {
     //로그인을 위한 axios 호출
     const res = await AxiosApi.memberLogin(inputId, inputPw);
+    const res2 = await AxiosApi.memberGet(inputId);
     console.log(res.data);
+    console.log(res2.data[0].role);
     if (res.data === true) {
       window.localStorage.setItem("userId", inputId); // 브라우저에서 임시로 값을 저장하는 기술
       window.localStorage.setItem("userPw", inputPw);
       window.localStorage.setItem("isLogin", "TRUE");
-      navigate("/home");
+      if (res2.data[0].role === "user") {
+        navigate("/home");
+      } else if (res2.data[0].role === "company") {
+        navigate("/CompanyMyPage");
+      } else {
+        navigate("/AdPage");
+      }
     } else {
       setModalOpen(true);
     }
