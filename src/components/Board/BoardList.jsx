@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-// import boardAxiosApi from "../../api/BoardAxiosApi";
+import boardAxiosApi from "../../api/BoardAxiosApi";
 
 const ListWrapper = styled.div`
   width: 75%;
@@ -98,15 +98,15 @@ const BoardList = ({ boardName, pageNum, resultData }) => {
       if (resultData) {
         items = resultData; // 검색결과가 있을 경우 해당 값을 items에 할당
       } else {
-        // items = await boardAxiosApi.requestGeneralList(boardName, pageNum);
+        items = await boardAxiosApi.requestGeneralList(boardName, pageNum);
       }
       setBoardItem(items);
     };
     fetchBoardItems();
   }, [boardName, pageNum, resultData]);
 
-  //   return boardItem.length ? (
-  return (
+  return boardItem.length ? (
+    // return (
     <ListWrapper>
       <TableBox>
         <TableHeader>
@@ -124,9 +124,7 @@ const BoardList = ({ boardName, pageNum, resultData }) => {
               <TableCell className="majorCategory">{item.postNum}</TableCell>
               <TableCell className="subCategory">{item.postNum}</TableCell>
               <TableCell className="title">
-                <StyledLink to={`/post/${item.postID}`}>
-                  {item.title}
-                </StyledLink>
+                <StyledLink to={`/post/${item.ID}`}>{item.title}</StyledLink>
               </TableCell>
               <TableCell className="writeDate">{item.writeDate}</TableCell>
               <TableCell className="viewCound">{item.viewCount}</TableCell>
@@ -135,12 +133,11 @@ const BoardList = ({ boardName, pageNum, resultData }) => {
         </tbody>
       </TableBox>
     </ListWrapper>
+  ) : (
+    <div style={{ fontSize: "18px", textAlign: "center", padding: "150px" }}>
+      검색 결과가 없습니다 🥲
+    </div>
   );
-  //   : (
-  //     <div style={{ fontSize: "18px", textAlign: "center", padding: "150px" }}>
-  //       검색 결과가 없습니다 🥲
-  //     </div>
-  //   );
 };
 
 export default BoardList;
