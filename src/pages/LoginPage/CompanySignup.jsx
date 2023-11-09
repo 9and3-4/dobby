@@ -10,16 +10,25 @@ import {
 } from "../../components/signup/SignupComponent";
 import { SelectBox } from "../../components/signup/SignupEmailComponent";
 
-const Signup = () => {
+const CompanySignup = () => {
   const navigate = useNavigate();
   // 키보드 입력
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
   const [inputConPw, setInputConPw] = useState("");
   const [inputName, setInputName] = useState("");
-  const [inputNickName, setInputNickName] = useState("");
+  const [inputPhone, setInputPhone] = useState("");
   const [inputCompanyName, setInputCompanyName] = useState("");
-  const [inputEmail, setInputEmail] = useState("naver.com");
+  const [inputSizeScale, setInputSizeScale] = useState("");
+  const [inputCeo, setInputCeo] = useState("");
+  const [inputContactNumber, setInputContactNumber] = useState("");
+  const [inputUrl, setInputUrl] = useState("");
+  const [inputCategory, setInputCategory] = useState("");
+  const [inputAddress, setInputAddress] = useState("");
+  const [inputYear, setInputYear] = useState("");
+  const [inputStaff, setInputStaff] = useState("");
+  const [inputProfile, setInputProfile] = useState("");
+  const [inputLogo, setInputLogo] = useState("");
 
   // 오류 메시지
   const [idMessage, setIdMessage] = useState("");
@@ -31,7 +40,7 @@ const Signup = () => {
   const [isPw, setIsPw] = useState(false);
   const [isConPw, setIsConPw] = useState(false);
   const [isName, setIsName] = useState(false);
-  const [isNickName, setIsNickName] = useState(false);
+  const [isPhone, setIsPhone] = useState(false);
   const [isCompanyName, setIsCompanyName] = useState(false);
   // 팝업
   const [modalOpen, setModalOpen] = useState(false);
@@ -74,9 +83,9 @@ const Signup = () => {
     setInputName(e.target.value);
     setIsName(true);
   };
-  const onChangeNickName = (e) => {
-    setInputNickName(e.target.value);
-    setIsNickName(true);
+  const onChangePhone = (e) => {
+    setInputPhone(e.target.value);
+    setIsPhone(true);
   };
   const onChangeCompanyName = (e) => {
     setInputCompanyName(e.target.value);
@@ -86,17 +95,17 @@ const Signup = () => {
   const onClickLogin = async () => {
     console.log("Click 회원가입");
     // 가입 여부 우선 확인
-    const memberCheck = await AxiosApi.memberRegCheck(inputEmail);
+    const memberCheck = await AxiosApi.memberRegCheck(inputId);
     console.log("가입 가능 여부 확인 : ", memberCheck.data);
     // 가입 여부 확인 후 가입 절차 진행
 
     if (memberCheck.data === true) {
       console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
       const memberReg = await AxiosApi.memberReg(
-        inputEmail,
+        inputId,
         inputPw,
         inputName,
-        inputNickName,
+        inputPhone,
         "user"
       );
       console.log(memberReg.data);
@@ -121,11 +130,11 @@ const Signup = () => {
   };
 
   // 이메일 합치기
-  useEffect(() => {
-    console.log("setSelected : " + selected);
-    setInputEmail(inputId + "@" + selected);
-    console.log("inputEmail : " + inputEmail);
-  }, [selected, inputId, inputEmail]);
+  // useEffect(() => {
+  //   console.log("setSelected : " + selected);
+  //   setInputId(inputId + "@" + selected);
+  //   console.log("inputEmail : " + inputEmail);
+  // }, [selected, inputId, inputEmail]);
 
   // 회사 테이블에서 url 가져와서 @ 뒤에 형식으로 만들기 위해 문자열 자르기
   useEffect(() => {
@@ -168,12 +177,6 @@ const Signup = () => {
 
       <Items className="item2">
         <Input placeholder="이메일" value={inputId} onChange={onChangeId} />
-        <p>@</p>
-        <SelectBox onChange={handleSelect} value={selected}>
-          {data.map((url, index) => (
-            <option key={index}>{url}</option>
-          ))}
-        </SelectBox>
       </Items>
       <Items className="hint">
         {inputId.length > 0 && (
@@ -223,22 +226,22 @@ const Signup = () => {
       <Items className="item2">
         <Input
           type="text"
-          placeholder="닉네임"
-          value={inputNickName}
-          onChange={onChangeNickName}
+          placeholder="전화번호"
+          value={inputPhone}
+          onChange={onChangePhone}
         />
       </Items>
       <Items className="item2">
         <Input
           type="text"
-          placeholder="소속 회사명"
+          placeholder="기업명"
           value={inputCompanyName}
           onChange={onChangeCompanyName}
         />
       </Items>
 
       <Items className="item2">
-        {isId && isPw && isConPw && isName && isNickName && isCompanyName ? (
+        {isId && isPw && isConPw && isName && isPhone && isCompanyName ? (
           <Button enabled onClick={onClickLogin}>
             NEXT
           </Button>
@@ -253,4 +256,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default CompanySignup;
