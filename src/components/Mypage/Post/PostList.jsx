@@ -99,138 +99,213 @@
 
 // export default PostList;
 
+// /* 2번 대안 : 선생님 코드 참고 */
+
+// import React, { useState, useEffect } from "react";
+// import styled from "styled-components";
+// import { useNavigate } from "react-router-dom";
+// import AxiosApi from "../../../api/AxiosApi";
+// import PostDate from "./PostDate";
+
+// const Container = styled.div`
+//   display: flex;
+// `;
+
+// const PostUl = styled.ul`
+//   list-style-type: none;
+// `;
+
+// const PostLi = styled.li`
+//   color: var(--RED);
+//   display: flex;
+// `;
+
+// const PostWrapper = styled.div`
+//   display: flex;
+//   flex-grow: 1;
+//   flex-direction: column;
+// `;
+
+// const PostHeader = styled.div`
+//   display: flex;
+//   flex-grow: 1;
+//   justify-content: space-between;
+// `;
+
+// const PostId = styled.p`
+//   font-size: 13px;
+// `;
+
+// const PostTitle = styled.p`
+//   font-size: 13px;
+//   color: var(--RED);
+// `;
+
+// const CustomerId = styled.p`
+//   color: var(--RED);
+//   font-size: 13px;
+// `;
+
+// const PostContent = styled.p`
+//   font-size: 13px;
+// `;
+
+// const PostView = styled.p`
+//   font-size: 13px;
+// `;
+
+// const PostWriteDate = styled.p`
+//   font-size: 0.8em;
+// `;
+
+// const PostList = () => {
+//   const [postList, setPostList] = useState([]);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const postList = async () => {
+//       try {
+//         const rsp = await AxiosApi.mypostlist("min123@naver.com");
+//         console.log(rsp.data);
+//         setPostList(rsp.data);
+//       } catch (error) {
+//         console.log(error);
+//       } finally {
+//         console.log("finally");
+//       }
+//     };
+//     postList();
+//   }, []);
+
+//   // 글 상세보기 버튼 클릭 시
+//   const detailClick = (id) => {
+//     navigate(`/PostDetail/${id}`);
+//   };
+
+//   return (
+//     <>
+//       <Container>
+//         <PostUl>
+//           {postList &&
+//             postList.map((post) => (
+//               <PostLi
+//                 key={postList.postId}
+//                 onClick={() => detailClick(post.postId)}
+//               >
+//                 <PostWrapper>
+//                   <PostHeader>
+//                     <PostId>{post.id}</PostId>
+//                     <PostTitle>{post.title}</PostTitle>
+//                     <CustomerId>{post.nickName}</CustomerId>
+//                     <PostContent>{post.content}</PostContent>
+//                     <PostWriteDate>
+//                       <PostDate date={post.writeDate} />
+//                     </PostWriteDate>
+//                     <PostView>{post.ViewCount}</PostView>
+//                     <PostDate>{post.likeCount}</PostDate>
+//                   </PostHeader>
+//                 </PostWrapper>
+//               </PostLi>
+//             ))}
+//         </PostUl>
+//       </Container>
+//     </>
+//   );
+// };
+
+// export default PostList;
+
 // 2번 대안
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-// import boardAxiosApi from "../../api/BoardAxiosApi";
+import { useNavigate } from "react-router-dom";
+import AxiosApi from "../../../api/AxiosApi";
+import PostDate from "./PostDate";
 
-const ListWrapper = styled.div`
-  width: 75%;
-  margin: 5% auto;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
-  border-radius: 4px;
-  overflow: hidden;
-  @media (max-width: 768px) {
-    min-width: 600px;
-  }
-  @media (max-width: 400px) {
-    min-width: 300px;
-    width: 95%;
-  }
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
 `;
 
-const TableBox = styled.table`
-  width: 100%;
+const PostTable = styled.table`
   border-collapse: collapse;
+  width: 100%;
+`;
+
+const TableHead = styled.thead`
   text-align: center;
-  tbody tr:hover {
-    background-color: #ed342e;
-  }
-`;
-
-const HeaderCell = styled.th`
-  padding: 15px;
-  color: var(--RED);
-`;
-
-const TableHeader = styled.thead`
-  border-top: 1px solid #ed342e;
-  border-bottom: 1px solid #ed342e;
 `;
 
 const TableRow = styled.tr`
-  border-bottom: 1px solid #e5e5e5;
-  &:last-child {
-    border-bottom: none;
-  }
+  color: var(--RED);
 `;
 
-const TableCell = styled.td`
-  padding: 16px;
-  &.title {
-    text-align: start;
-  }
-  @media (max-width: 768px) {
-    &.view {
-      display: none;
-    }
-  }
-  @media (max-width: 400px) {
-    &.view {
-      display: none;
-    }
-    &.writedate {
-      display: none;
-    }
-    &.nickname {
-      display: none;
-    }
-  }
+const TableHeader = styled.th`
+  padding: 8px;
+  text-align: center;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #ed342e;
+const TableBody = styled.tbody``;
+
+const TableData = styled.td`
+  padding: 8px;
+  text-align: center;
 `;
 
-// 게시판 이름, 제목, 작성일을 받아 데이터를 관리
-const PostList = ({ boardName, title, resultData }) => {
-  // 초기값으로 빈 객체 {}를 포함하는 배열 [{}]을 설정
-  const [boardItem, setBoardItem] = useState([{}]);
+const PostList = () => {
+  const [postList, setPostList] = useState([]);
+  const navigate = useNavigate();
 
-  // 비동기 함수 fetchBoardItems를 정의
-  // boardName, title, 및 resultData에 의존성이 있고, 변경될 때 호출
   useEffect(() => {
-    const fetchBoardItems = async () => {
-      let items = [];
-      if (resultData) {
-        items = resultData; // 검색결과가 있을 경우 해당 값을 items에 할당
-      } else {
-        // items = await boardAxiosApi.requestGeneralList(boardName, pageNum);
+    const fetchPostList = async () => {
+      try {
+        const rsp = await AxiosApi.mypostlist("min123@naver.com");
+        console.log(rsp.data);
+        setPostList(rsp.data);
+      } catch (error) {
+        console.log(error);
       }
-      setBoardItem(items);
     };
-    fetchBoardItems();
-  }, [boardName, title, resultData]);
+    fetchPostList();
+  }, []);
 
-  //   return boardItem.length ? (
+  const detailClick = (id) => {
+    navigate(`/PostDetail/${id}`);
+  };
+
   return (
-    <ListWrapper>
-      <TableBox>
-        <TableHeader>
+    <Container>
+      <PostTable>
+        <TableHead>
           <TableRow>
-            <HeaderCell>POST ID</HeaderCell>
-            <HeaderCell>제목</HeaderCell>
-            <HeaderCell>작성자</HeaderCell>
-            <HeaderCell>작성일</HeaderCell>
-            <HeaderCell>조회수</HeaderCell>
-            <HeaderCell>♡</HeaderCell>
+            <TableHeader>Post ID</TableHeader>
+            <TableHeader>제목</TableHeader>
+            <TableHeader>작성자</TableHeader>
+            <TableHeader>작성일</TableHeader>
+            <TableHeader>조회수</TableHeader>
+            <TableHeader>♡</TableHeader>
           </TableRow>
-        </TableHeader>
-        <tbody>
-          {boardItem.map((item, index) => (
-            <TableRow key={index}>
-              <TableCell className="postid">{item.postID}</TableCell>
-              <TableCell className="title">{item.title}</TableCell>
-              <StyledLink to={`/post/${item.postID}`}>{item.title}</StyledLink>
-              <TableCell className="nickname">{item.nickname}</TableCell>
-              <TableCell className="writeDate">{item.writeDate}</TableCell>
-              <TableCell className="viewCound">{item.viewCount}</TableCell>
-              <TableCell className="likeCound">{item.likeCound}</TableCell>
-            </TableRow>
-          ))}
-        </tbody>
-      </TableBox>
-    </ListWrapper>
+        </TableHead>
+        <TableBody>
+          {postList &&
+            postList.map((post) => (
+              <TableRow key={post.id} onClick={() => detailClick(post.id)}>
+                <TableData>{post.id}</TableData>
+                <TableData>{post.title}</TableData>
+                <TableData>{post.nickName}</TableData>
+                <TableData>
+                  <PostDate date={post.writeDate} />
+                </TableData>
+                <TableData>{post.viewCount}</TableData>
+                <TableData>{post.likeCount}</TableData>
+              </TableRow>
+            ))}
+        </TableBody>
+      </PostTable>
+    </Container>
   );
-  //   : (
-  //     <div style={{ fontSize: "18px", textAlign: "center", padding: "150px" }}>
-  //       검색 결과가 없습니다 🥲
-  //     </div>
-  //   );
 };
 
 export default PostList;

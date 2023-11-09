@@ -116,12 +116,32 @@ const ProfileBox = styled.div`
 
 const Maintextbox = styled.div`
   width: 150px;
-  height: 50px;
+  height: 20px;
 `;
-const Maintext = styled.text`
+const Maintext = styled.p`
   font-size: 25px;
   color: var(--RED);
   font-weight: bold;
+`;
+const Mainbox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TextBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+`;
+
+const PostMainText = styled.p`
+  font-size: 20px;
+  color: var(--RED);
+  display: flex;
+`;
+
+const PostListbox = styled.div`
+  display: flex;
 `;
 
 const PostListPage = () => {
@@ -134,7 +154,11 @@ const PostListPage = () => {
         <Maintextbox>
           <Maintext>MY POST</Maintext>
         </Maintextbox>
-        <PostList />
+        <Mainbox>
+          <PostListbox>
+            <PostList />
+          </PostListbox>
+        </Mainbox>
       </Container>
     </>
   );

@@ -28,6 +28,11 @@ const AxiosApi = {
   memberRegCheck: async (id) => {
     return await axios.get(DOBBY_DOMAIN + `/users/check/?id=${id}`);
   },
+
+  // 마이페이지 내가 쓴 글 리스트
+  mypostlist: async (email) => {
+    return await axios.get(DOBBY_DOMAIN + `/post/mypostlist/?email=${email}`);
+  },
 };
 
 export default AxiosApi;
