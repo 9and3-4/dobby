@@ -102,6 +102,13 @@ import styled from "styled-components";
 const Container = styled.div`
   height: 800px;
   display: flex;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px;
+  }
 `;
 const ProfileBox = styled.div`
   display: flex;
@@ -128,20 +135,9 @@ const Mainbox = styled.div`
   flex-direction: column;
 `;
 
-const TextBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-`;
-
-const PostMainText = styled.p`
-  font-size: 20px;
-  color: var(--RED);
-  display: flex;
-`;
-
 const PostListbox = styled.div`
   display: flex;
+  padding-top: 70px;
 `;
 
 const PostListPage = () => {

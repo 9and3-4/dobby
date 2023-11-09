@@ -226,7 +226,12 @@ import PostDate from "./PostDate";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70vw;
+  width: 65vw;
+  justify-content: center; /* 수평 가운데 정렬 */
+
+  @media only screen and (max-width: 768px) {
+    width: 95vw;
+  }
 `;
 
 const PostTable = styled.table`
@@ -245,6 +250,12 @@ const TableRow = styled.tr`
 const TableHeader = styled.th`
   padding: 8px;
   text-align: center;
+  border-top: 1px solid var(--RED);
+  border-bottom: 1px solid var(--RED);
+
+  @media only screen and (max-width: 768px) {
+    width: 100vw;
+  }
 `;
 
 const TableBody = styled.tbody``;
@@ -252,6 +263,10 @@ const TableBody = styled.tbody``;
 const TableData = styled.td`
   padding: 8px;
   text-align: center;
+
+  @media only screen and (max-width: 768px) {
+    width: 100vw;
+  }
 `;
 
 const PostList = () => {
