@@ -1,144 +1,158 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-// import boardAxiosApi from "../../api/BoardAxiosApi";
+import { useNavigate } from "react-router-dom";
+import boardAxiosApi from "../../api/BoardAxiosApi";
 
-const ListWrapper = styled.div`
-  width: 75%;
-  margin: 5% auto;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
-  border-radius: 4px;
-  overflow: hidden;
-  @media (max-width: 768px) {
-    min-width: 600px;
-  }
-  @media (max-width: 400px) {
-    min-width: 300px;
-    width: 95%;
-  }
+const BoardContainer = styled.div`
+  padding: 30px;
+  position: relative;
 `;
 
-const TableBox = styled.table`
-  width: 100%;
-  border-collapse: collapse;
+const Title = styled.h1`
+  color: #333;
   text-align: center;
-  tbody tr:hover {
-    background-color: #ed342e;
-  }
 `;
 
-const HeaderCell = styled.th`
-  padding: 15px;
+const BoardUl = styled.ul`
+  list-style-type: none;
+  padding: 0;
 `;
 
-const TableHeader = styled.thead`
-  border-top: 1px solid #ed342e;
-  border-bottom: 1px solid #ed342e;
-
-  @media (max-width: 768px) {
-    ${HeaderCell}:nth-child(5) {
-      display: none;
-    }
-  }
-  @media (max-width: 400px) {
-    ${HeaderCell}:nth-child(3) {
-      display: none;
-    }
-    ${HeaderCell}:nth-child(4) {
-      display: none;
-    }
-    ${HeaderCell}:nth-child(5) {
-      display: none;
-    }
-  }
+const BoardImage = styled.img`
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  margin-right: 15px; // 이미지와 텍스트 사이의 간격을 조정하세요
 `;
 
-const TableRow = styled.tr`
-  border-bottom: 1px solid #e5e5e5;
-  &:last-child {
-    border-bottom: none;
-  }
+const BoardLi = styled.li`
+  background-color: #f2f2f2;
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex; // 내부 요소들을 flex로 배치합니다.
+  align-items: center; // 세로 중앙 정렬
 `;
 
-const TableCell = styled.td`
-  padding: 16px;
-  &.title {
-    text-align: start;
-  }
-  @media (max-width: 768px) {
-    &.view {
-      display: none;
-    }
-  }
-  @media (max-width: 400px) {
-    &.view {
-      display: none;
-    }
-    &.writedate {
-      display: none;
-    }
-    &.nickname {
-      display: none;
-    }
-  }
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
+const BoardTitle = styled.h2`
+  font-size: 1.4em;
   color: #ed342e;
+  margin: 0 0 10px;
 `;
 
-const BoardList = ({ boardName, pageNum, resultData }) => {
-  const [boardItem, setBoardItem] = useState([{}]);
+const BoardContent = styled.p`
+  color: #444;
+  font-size: 1em;
+`;
+
+const BoardDate = styled.p`
+  color: #777;
+  font-size: 0.8em;
+  text-align: right;
+`;
+
+const BoardContentWrapper = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding-top: 10px;
+`;
+
+const BoardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const UserId = styled.span`
+  color: #555;
+  font-style: italic;
+  font-size: 13px;
+`;
+
+const WriteButton = styled.button`
+  position: fixed; // 버튼을 부모 컨테이너에 대해 절대적 위치로 설정
+  right: 50px; // 오른쪽에서 10px 떨어진 위치에
+  bottom: 20px; // 하단에서 10px 떨어진 위치에
+  z-index: 10;
+  width: 60px; // 버튼의 크기를 정사각형으로 설정
+  height: 60px; // 버튼의 크기를 정사각형으로 설정
+  border-radius: 50%; // 동그란 모양으로 만들기 위해 반지름을 50%로 설정
+  display: flex; // Flexbox 레이아웃 사용
+  justify-content: center; // 가로 중앙 정렬
+  align-items: center; // 세로 중앙 정렬
+  background-color: #ed342e; // 트위터 색상
+  color: white;
+  font-size: 30px; // 플러스 기호 크기
+  line-height: 1; // 기본 라인 높이 제거
+  border: none; // 기본 테두리 제거
+  cursor: pointer;
+  outline: none; // 클릭 시 테두리 제거
+
+  &:hover {
+    background-color: #ed342e; // 호버 시 배경색 변경
+  }
+
+  &:before {
+    // 가상 요소로 플러스 기호 생성
+    content: "+";
+  }
+`;
+
+function BoardList() {
+  const [boardList, setBoardList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchBoardItems = async () => {
-      let items = [];
-      if (resultData) {
-        items = resultData; // 검색결과가 있을 경우 해당 값을 items에 할당
-      } else {
-        // items = await boardAxiosApi.requestGeneralList(boardName, pageNum);
+    const boardList = async () => {
+      try {
+        const rsp = await boardAxiosApi.boardList();
+        console.log(rsp.data);
+        setBoardList(rsp.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        console.log("finally");
       }
-      setBoardItem(items);
     };
-    fetchBoardItems();
-  }, [boardName, pageNum, resultData]);
+    boardList();
+  }, []);
 
-  // return boardItem.length ? (
+  // // 글쓰기 버튼 클릭 시
+  // const handleWriteClick = () => {
+  //   navigate("/boardWrite");
+  // };
+
+  // 글 상세보기 버튼 클릭 시
+  const handleDetailClick = (id) => {
+    navigate(`/boardDetail/${id}`);
+  };
+
   return (
-    <ListWrapper>
-      <TableBox>
-        <TableHeader>
-          <TableRow>
-            <HeaderCell>대분류</HeaderCell>
-            <HeaderCell>소분류</HeaderCell>
-            <HeaderCell>제목</HeaderCell>
-            <HeaderCell>날짜</HeaderCell>
-            <HeaderCell>조회수</HeaderCell>
-          </TableRow>
-        </TableHeader>
-        <tbody>
-          {boardItem.map((item, index) => (
-            <TableRow key={index}>
-              <TableCell className="majorCategory">{item.postNum}</TableCell>
-              <TableCell className="subCategory">{item.postNum}</TableCell>
-              <TableCell className="title">
-                <StyledLink to={`/post/${item.ID}`}>{item.title}</StyledLink>
-              </TableCell>
-              <TableCell className="writeDate">{item.writeDate}</TableCell>
-              <TableCell className="viewCound">{item.viewCount}</TableCell>
-            </TableRow>
+    <BoardContainer>
+      <BoardUl>
+        {boardList &&
+          boardList.map((board) => (
+            <BoardLi
+              key={board.boardId}
+              onClick={() => handleDetailClick(board.boardId)}
+            >
+              <Title>{board.major}</Title>
+              <Title>{board.sub}</Title>
+              <BoardContentWrapper>
+                <BoardHeader>
+                  <BoardTitle>{board.title}</BoardTitle>
+                  <UserId>{board.boardId}</UserId>
+                </BoardHeader>
+                <BoardContent>{board.content}</BoardContent>
+                <BoardDate>{board.regDate}</BoardDate>
+              </BoardContentWrapper>
+            </BoardLi>
           ))}
-        </tbody>
-      </TableBox>
-    </ListWrapper>
+      </BoardUl>
+      {/* <WriteButton onClick={handleWriteClick}></WriteButton> */}
+    </BoardContainer>
   );
-  // ) : (
-  //   <div style={{ fontSize: "18px", textAlign: "center", padding: "150px" }}>
-  //     검색 결과가 없습니다 🥲
-  //   </div>
-  // );
-};
+}
 
 export default BoardList;
