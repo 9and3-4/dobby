@@ -263,6 +263,7 @@ const TableBody = styled.tbody``;
 const TableData = styled.td`
   padding: 8px;
   text-align: center;
+  cursor: pointer;
 
   @media only screen and (max-width: 768px) {
     width: 100vw;

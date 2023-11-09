@@ -3,13 +3,20 @@ import React from "react";
 import profile_img from "../../images/companyprofile.png";
 import styled from "styled-components";
 import { useState } from "react";
+import Profile from "../../components/Mypage/profile/Profile";
 
 const Container = styled.div`
   display: flex;
+  height: 800px;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    height: 150vh;
+  }
 `;
 
 // profile 맨 하단에 깔려 있음
-const Profile = styled.div`
+const Profilebox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,31 +25,6 @@ const Profile = styled.div`
   margin: 30px;
   background-color: white;
   height: 78vh;
-`;
-
-// 그 위에 프로필
-const ProfileBox2 = styled.div`
-  width: 300px;
-  height: 550px;
-  /* background-color: #ed342e; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #ed342e;
-  border: 2px solid #ed342e;
-  margin-left: 100px;
-`;
-
-const ProfileImg = styled.img`
-  width: 100px;
-  padding-bottom: 15px;
-`;
-
-const ProfileText = styled.p`
-  font-size: 15px;
-  margin: 10px;
-  color: #ed342e;
 `;
 
 const BtnProfile = styled.button`
@@ -72,6 +54,11 @@ const EditWrite = styled.div`
   flex-direction: column;
   padding-left: 50px;
   padding-top: 50px;
+
+  @media only screen and (max-width: 768px) {
+    padding-left: 0;
+    padding-top: 0;
+  }
 `;
 
 // margin-top은 옆 editwrite input창과 줄 맞추기 위해서
@@ -79,6 +66,10 @@ const EditWrite2 = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 95px;
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 0;
+  }
 `;
 
 const MainText = styled.p`
@@ -86,12 +77,24 @@ const MainText = styled.p`
   color: #ed342e;
   font-weight: bold;
   padding-bottom: 20px;
+
+  @media only screen and (max-width: 768px) {
+    text-align: center;
+    padding-right: 25px;
+  }
 `;
 
 const InputContainer = styled.div`
   display: flex;
   margin: 10px;
   justify-content: flex-end;
+
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: flex-end;
+    padding-right: 190px;
+  }
 `;
 
 const InputLabel = styled.label`
@@ -113,8 +116,15 @@ const InputField = styled.input`
 
 const ButtonContainer = styled.div`
   display: flex;
+  /* flex-direction: column; */
   padding: 10px;
   margin-top: auto;
+  justify-content: flex-end;
+
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const BackButton = styled.button`
@@ -145,6 +155,27 @@ const UpdateButton = styled.button`
   border-radius: 15px;
   border: 2px solid #ed342e;
   transition: background-color 0.2s color 0.2s;
+
+  &:hover {
+    color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 1); /* 호버 상태일 때 그림자 효과를 추가합니다 */
+    transform: translateY(
+      -2px
+    ); /* 약간 위로 올라가는 효과를 주기 위해 translateY를 사용합니다 */
+  }
+`;
+
+// 회원 탈퇴 버튼
+const Withdraw = styled.button`
+  width: 200px;
+  background-color: #ed342e;
+  color: white;
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 2px solid #ed342e;
+  transition: background-color 0.2s color 0.2s;
+  justify-content: flex-end;
 
   &:hover {
     color: #fff;
@@ -196,22 +227,12 @@ const EditCompanyMain = () => {
     setNewPwCheck(e.target.value);
   };
 
-  const profileInfo = {
-    name: "기업",
-    id: "songwoohee@naver.com",
-  };
   return (
     <>
       <Container>
-        <Profile>
-          <ProfileBox2>
-            <ProfileImg src={profile_img} alt="기업 프로필 사진" />
-            <ProfileText>{profileInfo.name}님</ProfileText>
-            <ProfileText>ID : {profileInfo.id}</ProfileText>
-            <BtnProfile>로그아웃</BtnProfile>
-            <BtnProfile>회원 탈퇴</BtnProfile>
-          </ProfileBox2>
-        </Profile>
+        <Profilebox>
+          <Profile />
+        </Profilebox>
         <EditWrite>
           <MainText>내 정보 수정</MainText>
           <InputContainer>
@@ -289,6 +310,10 @@ const EditCompanyMain = () => {
               onChange={newPwCheckChange} // 값이 변경될 때 호출
             />
           </InputContainer>
+          <InputContainer>
+            <Withdraw>회원 탈퇴</Withdraw>
+          </InputContainer>
+
           <ButtonContainer>
             <BackButton>이전으로</BackButton>
             <UpdateButton>수정하기</UpdateButton>

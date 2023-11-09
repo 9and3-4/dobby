@@ -4,20 +4,10 @@ import React from "react";
 import profile_img from "../../images/companyprofile.png";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
-const Profile_box = styled.div`
-  width: 300px;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #ed342e;
-  border: 2px solid #ed342e;
-`;
+import Profile from "../../components/Mypage/profile/Profile";
 
 // 제일 아래에 배치된 div
-const Profile_box2 = styled.div`
+const Profile_box = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,17 +15,6 @@ const Profile_box2 = styled.div`
   margin: 30px;
   background-color: white;
   height: 78vh;
-`;
-
-const Dobby = styled.img`
-  width: 100px;
-  height: auto;
-`;
-
-const ProfileText = styled.text`
-  font-size: 15px;
-  margin: 10px;
-  color: #ed342e;
 `;
 
 const Btn = styled.button`
@@ -72,24 +51,14 @@ const CompanyMyPage = () => {
     navigate("/AdList");
   };
 
-  const profile_inner = () => {
-    const name = "Company";
-    const ID_email = "songwoohee@naver.com";
-    return (
-      <Profile_box2>
-        <Profile_box>
-          <Dobby src={profile_img} alt="기업 프로필 사진" />
-          <ProfileText>{name}님</ProfileText>
-          <ProfileText>ID : {ID_email}</ProfileText>
-        </Profile_box>
-        <Btn onClick={editNavigate}>내 정보 수정</Btn>
-        <Btn onClick={jobListNavigate}>채용 공고 목록</Btn>
-        <Btn onClick={adListNavigate}>광고 목록</Btn>
-      </Profile_box2>
-    );
-  };
-
-  return <>{profile_inner()}</>;
+  return (
+    <Profile_box>
+      <Profile />
+      <Btn onClick={editNavigate}>내 정보 수정</Btn>
+      <Btn onClick={jobListNavigate}>채용 공고 목록</Btn>
+      <Btn onClick={adListNavigate}>광고 목록</Btn>
+    </Profile_box>
+  );
 };
 
 export default CompanyMyPage;
