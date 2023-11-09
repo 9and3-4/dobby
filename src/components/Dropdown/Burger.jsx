@@ -6,6 +6,10 @@ const Burger = () => {
   const [isOpen, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  // ---------------------------------------------------------------------
+  const customer = "company"; // user , company, admin
+  // ---------------------------------------------------------------------
+
   useEffect(() => {
     const handleResize = () => {
       // 화면 너비가 768px 미만인 경우 isMobile을 true로 설정, 그렇지 않으면 false로 설정.
@@ -34,10 +38,10 @@ const Burger = () => {
             toggled={isOpen}
             toggle={setOpen}
           />
-          {isOpen && <Menu />}
+          {<Menu user={customer} open={isOpen} />}
         </>
       ) : (
-        <Menu />
+        <Menu user={customer} />
       )}
     </>
   );
