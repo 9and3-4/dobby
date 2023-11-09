@@ -1,34 +1,16 @@
+// 초기에 만든것. 참고용. 삭제예정
+
 import React from "react";
 import styled from "styled-components";
 import Profile from "../../components/Mypage/profile/Profile";
 
 const Container = styled.div`
   display: flex;
-
+  height: 800px;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
   }
 `;
-
-// const BtnProfile = styled.button`
-//   width: 200px;
-//   background-color: #fff;
-//   color: #ed342e;
-//   margin: 15px 0;
-//   padding: 10px;
-//   border-radius: 15px;
-//   border: 2px solid #ed342e;
-//   transition: background-color 0.2s color 0.2s;
-
-//   &:hover {
-//     background-color: #ed342e;
-//     color: #fff;
-//     box-shadow: 0 3px 6px rgba(0, 0, 0, 1); /* 호버 상태일 때 그림자 효과를 추가합니다 */
-//     transform: translateY(
-//       -2px
-//     ); /* 약간 위로 올라가는 효과를 주기 위해 translateY를 사용합니다 */
-//   }
-// `;
 
 // 프로필 옆 작성글 맨 아래 깔림
 const Board = styled.div`
@@ -42,6 +24,20 @@ const Board = styled.div`
 
   @media only screen and (max-width: 768px) {
     text-align: center;
+  }
+`;
+
+const Profilebox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* color: white; */
+  margin: 30px;
+  background-color: white;
+  height: 78vh;
+
+  @media only screen and (max-width: 768px) {
   }
 `;
 
@@ -84,7 +80,9 @@ const UserPostList = () => {
   return (
     <>
       <Container>
-        <Profile />
+        <Profilebox>
+          <Profile />
+        </Profilebox>
         <Board>
           <Title>MY POST</Title>
           <TableHeader>

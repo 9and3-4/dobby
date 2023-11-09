@@ -1,6 +1,5 @@
 /* 개인 마이페이지 정보 수정 */
 import React from "react";
-import profile_img from "../../images/userprofile.png";
 import styled from "styled-components";
 import { useState } from "react";
 import Profile from "../../components/Mypage/profile/Profile";
@@ -203,10 +202,6 @@ const EditUserMain = () => {
     setNewPwCheck(e.target.value);
   };
 
-  const profileInfo = {
-    name: "개인", // 추후 닉네임 가져올 수 있도록 useEffect, api, axios
-    id: "songwoohee@naver.com",
-  };
   return (
     <>
       <Container>
@@ -276,7 +271,7 @@ const EditUserMain = () => {
             <InputField
               id="newPwCheck"
               type="text"
-              value={newPw} // 입력 필드의 값으로 새 비밀번호 확인 상태 사용
+              value={newPwCheck} // 입력 필드의 값으로 새 비밀번호 확인 상태 사용
               onChange={newPwCheckChange} // 값이 변경될 때 호출
             />
           </InputContainer>

@@ -1,23 +1,12 @@
 /* 개인 마이페이지 메인 */
 
 import React from "react";
-import profile_img from "../../images/userprofile.png";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
-const Profile_box = styled.div`
-  width: 300px;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #ed342e;
-  border: 2px solid #ed342e;
-`;
+import Profile from "../../components/Mypage/profile/Profile";
 
 // 제일 아래에 배치된 div
-const Profile_box2 = styled.div`
+const Profile_box = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,17 +15,6 @@ const Profile_box2 = styled.div`
   margin: 30px;
   background-color: white;
   height: 78vh;
-`;
-
-const Dobby = styled.img`
-  width: 100px;
-  height: auto;
-`;
-
-const ProfileText = styled.text`
-  font-size: 15px;
-  margin: 10px;
-  color: #ed342e;
 `;
 
 const Btn = styled.button`
@@ -65,33 +43,21 @@ const UserMyPage = () => {
     navigate("/EditUserMain");
   };
   const PostNavigate = () => {
-    navigate("/UserPostList");
+    navigate("/PostListPage");
+  };
+  const ApplyNavigate = () => {
+    navigate("/ApplyListPage");
   };
 
-  const profile_inner = () => {
-    const name = "USER"; // 추후 지정한 닉네임 가져오도록
-    const ID_email = "songwoohee@naver.com";
-    return (
-      <Profile_box2>
-        <Profile_box>
-          <Dobby
-            src={
-              "https://firebasestorage.googleapis.com/v0/b/kh-mini-prj.appspot.com/o/userprofile.png?alt=media&token=2a16b8e8-48a9-4bd7-8f33-dcabe97db3b2"
-            }
-            alt="개인 프로필 사진"
-          />
-          <ProfileText>{name}님</ProfileText>
-          <ProfileText>ID : {ID_email}</ProfileText>
-        </Profile_box>
-        <Btn onClick={editNavigate}>내 정보 수정</Btn>
-        <Btn onClick={PostNavigate}>작성글 보기</Btn>
-        <Btn>지원 회사 목록</Btn>
-        <Btn>즐겨찾기 목록</Btn>
-      </Profile_box2>
-    );
-  };
-
-  return <>{profile_inner()}</>;
+  return (
+    <Profile_box>
+      <Profile />
+      <Btn onClick={editNavigate}>내 정보 수정</Btn>
+      <Btn onClick={PostNavigate}>작성글 보기</Btn>
+      <Btn onClick={ApplyNavigate}>지원 회사 목록</Btn>
+      <Btn>즐겨찾기 목록</Btn>
+    </Profile_box>
+  );
 };
 
 export default UserMyPage;
