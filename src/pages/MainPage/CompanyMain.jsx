@@ -16,6 +16,7 @@ const MainBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: -150px;
 `;
 
 const Title = styled.p`
@@ -55,6 +56,7 @@ const CompanyMain = () => {
       <Container>
         <MainBox>
           <Title>기업 메인 페이지</Title>
+          <Title>메 뉴</Title>
           <MenuBtn>우리 회사 게시글 읽기</MenuBtn>
           <MenuBtn>채용 공고 등록하기</MenuBtn>
           <MenuBtn>광고 신청 바로가기</MenuBtn>
