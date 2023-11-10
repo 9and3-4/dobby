@@ -25,7 +25,7 @@ const AdCarousel = () => {
     showStatus: false,
     infiniteLoop: true, // 무한 루프
     autoPlay: true, // 자동 재생ㅅ
-    interval: 5000, // 슬라이드 전환 간격(ms)
+    interval: 3000, // 슬라이드 전환 간격(ms)
     transitionTime: 1000, // 슬라이드 전환 시간(ms)
     // autoFocus: true,
   };

@@ -47,7 +47,7 @@ const MenuBtn = styled.button`
   }
 `;
 
-const AdminyMain = () => {
+const AdminMain = () => {
   const navigate = useNavigate();
   // 회원정보관리(개인/기업), 게시글 관리, 기업 관리, 광고 관리 바로 가기 4가지 연결
 
@@ -67,4 +67,4 @@ const AdminyMain = () => {
   );
 };
 
-export default AdminyMain;
+export default AdminMain;

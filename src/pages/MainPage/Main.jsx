@@ -87,7 +87,7 @@ const Main = () => {
           onMouseLeave={() => setShowImage1(false)}
         >
           <img
-            src={showImage1 ? "/Main/티끌모으기.png" : "/Main/investment5.jpg"}
+            src={showImage1 ? "/Main/티끌모으기.png" : "/Main/investment5.png"}
             alt="도비의 티끌모으기"
           />
         </BoardItem>
@@ -96,7 +96,7 @@ const Main = () => {
           onMouseLeave={() => setShowImage2(false)}
         >
           <img
-            src={showImage2 ? "/Main/사랑과전쟁.png" : "/Main/kiss3.jpg"}
+            src={showImage2 ? "/Main/사랑과전쟁.png" : "/Main/kiss3.png"}
             alt="도비의 사랑과전쟁"
           />
         </BoardItem>
@@ -105,7 +105,7 @@ const Main = () => {
           onMouseLeave={() => setShowImage3(false)}
         >
           <img
-            src={showImage3 ? "/Main/은밀한취미생활.png" : "/Main/hobby2.jpg"}
+            src={showImage3 ? "/Main/은밀한취미생활.png" : "/Main/hobby2.png"}
             alt="도비의 은밀한 취미 생활"
           />
         </BoardItem>
@@ -114,7 +114,7 @@ const Main = () => {
           onMouseLeave={() => setShowImage4(false)}
         >
           <img
-            src={showImage4 ? "/Main/주인교체작전.png" : "/Main/work4.jpg"}
+            src={showImage4 ? "/Main/주인교체작전.png" : "/Main/work4.png"}
             alt="도비의 주인 교체 작전"
           />
         </BoardItem>
@@ -123,7 +123,7 @@ const Main = () => {
           onMouseLeave={() => setShowImage5(false)}
         >
           <img
-            src={showImage5 ? "/Main/채용공고.png" : "/Main/hire.jpg"}
+            src={showImage5 ? "/Main/채용공고.png" : "/Main/hire.png"}
             alt="채용공고"
           />
         </BoardItem>
@@ -133,7 +133,7 @@ const Main = () => {
             onMouseLeave={() => setShowImage6(false)}
           >
             <img
-              src={showImage6 ? "/Main/회사라운지.png" : "/Main/secret.jpg"}
+              src={showImage6 ? "/Main/회사라운지.png" : "/Main/secret.png"}
               alt="회사라운지"
             />
           </BoardItem>

@@ -16,6 +16,7 @@ import BoardListPage from "./pages/Board/BoardListPage";
 import Signup from "./pages/LoginPage/Signup";
 import Main from "./pages/MainPage/Main";
 import BoardDetail from "./pages/Board/BoardDetailPage";
+import AdminMain from "./pages/MainPage/AdminMain";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/BoardListPage" element={<BoardListPage />} />
             <Route path="/BoardDetailPage" element={<BoardDetail />} />
             <Route path="/Signup" element={<Signup />} />
+            <Route path="/AdminMain" element={<AdminMain />} />
           </Route>
         </Routes>
       </Router>
