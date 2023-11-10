@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import AdCarousel from "./MainAd";
+import { useNavigate } from "react-router-dom";
 
 const PageTitle = styled.div`
   background-color: #ed342e;
@@ -50,9 +51,9 @@ const BoardItem = styled.div`
 
 const AdContainer = styled.div`
   flex: 1;
-  padding: 10px;
+  /* padding: 10px;
   background-color: #ed342e;
-  border-radius: 10px;
+  border-radius: 10px; */
   margin: 0 50px;
   margin-bottom: 50px;
 `;
@@ -65,6 +66,7 @@ const Main = () => {
   const [showImage4, setShowImage4] = useState(false);
   const [showImage5, setShowImage5] = useState(false);
   const [showImage6, setShowImage6] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -83,6 +85,7 @@ const Main = () => {
       <PageTitle>Topic Best TOP 5</PageTitle>
       <BoardContainer>
         <BoardItem
+          onClick={() => navigate("/BoardListPage")}
           onMouseEnter={() => setShowImage1(true)}
           onMouseLeave={() => setShowImage1(false)}
         >
@@ -92,6 +95,7 @@ const Main = () => {
           />
         </BoardItem>
         <BoardItem
+          onClick={() => navigate("/BoardListPage")}
           onMouseEnter={() => setShowImage2(true)}
           onMouseLeave={() => setShowImage2(false)}
         >
@@ -101,6 +105,7 @@ const Main = () => {
           />
         </BoardItem>
         <BoardItem
+          onClick={() => navigate("/BoardListPage")}
           onMouseEnter={() => setShowImage3(true)}
           onMouseLeave={() => setShowImage3(false)}
         >
@@ -110,6 +115,7 @@ const Main = () => {
           />
         </BoardItem>
         <BoardItem
+          onClick={() => navigate("/BoardListPage")}
           onMouseEnter={() => setShowImage4(true)}
           onMouseLeave={() => setShowImage4(false)}
         >
@@ -119,6 +125,7 @@ const Main = () => {
           />
         </BoardItem>
         <BoardItem
+          onClick={() => navigate("/BoardListPage")}
           onMouseEnter={() => setShowImage5(true)}
           onMouseLeave={() => setShowImage5(false)}
         >
@@ -129,6 +136,7 @@ const Main = () => {
         </BoardItem>
         {isSmallScreen && (
           <BoardItem
+            onClick={() => navigate("/BoardListPage")}
             onMouseEnter={() => setShowImage6(true)}
             onMouseLeave={() => setShowImage6(false)}
           >

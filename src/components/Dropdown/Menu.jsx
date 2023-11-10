@@ -39,7 +39,6 @@ const MenuContainer = styled.div`
 const MenuItem = styled.div`
   margin: 10px;
   font-size: 18px;
-  /* border: 1px solid black; */
   cursor: pointer;
   &:hover {
     text-decoration: underline;
@@ -95,7 +94,7 @@ const menuOptions = {
     menuItem2: "게시글 관리",
     menuItem3: "기업 관리",
     menuItem4: "광고 관리",
-    icon: adminIcon,
+    icon: null,
   },
   default: {
     menuItem1: "기업 리뷰",
@@ -160,9 +159,6 @@ const Menu = (props) => {
         break;
       case "company":
         navigate("/companyMypage");
-        break;
-      case "admin":
-        navigate("/adminMypage");
         break;
       default:
         navigate("/");

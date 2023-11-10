@@ -9,15 +9,24 @@ import styled from "styled-components";
 // `;
 const CardBox = styled.div`
   cursor: pointer;
-  border: 1px solid black;
 `;
 
 const CardImg = styled.img`
   width: auto;
-  height: 200px;
+  height: 600px;
+  border: none;
+  @media (max-width: 768px) {
+    height: 30%;
+  }
 `;
 
-const images = ["/Main/cat1.jpg", "/Main/cat2.jpg", "/Main/cat3.jpg"];
+// ****** 메인 화면 광고 슬라이드 (Carousel) 이미지 리스트 ***********
+const images = [
+  "/Main/ad1.png",
+  "/Main/ad2.png",
+  "/Main/ad3.png",
+  "/Main/ad4.png",
+];
 
 const AdCarousel = () => {
   const settings = {
@@ -27,7 +36,6 @@ const AdCarousel = () => {
     autoPlay: true, // 자동 재생ㅅ
     interval: 3000, // 슬라이드 전환 간격(ms)
     transitionTime: 1000, // 슬라이드 전환 시간(ms)
-    // autoFocus: true,
   };
 
   return (
