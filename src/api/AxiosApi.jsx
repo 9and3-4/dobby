@@ -33,6 +33,10 @@ const AxiosApi = {
   mypostlist: async (email) => {
     return await axios.get(DOBBY_DOMAIN + `/post/mypostlist/?email=${email}`);
   },
-};
 
+  // 기업 정보 조회
+  companyGet: async () => {
+    return await axios.get(DOBBY_DOMAIN + "/company/companylist");
+  },
+};
 export default AxiosApi;
