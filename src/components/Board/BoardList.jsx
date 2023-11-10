@@ -134,7 +134,7 @@ function BoardList() {
 
   // 글 상세보기 버튼 클릭 시
   const handleDetailClick = (id) => {
-    navigate(`/boardDetail/${id}`);
+    navigate(`/BoardDetail/${id}`);
   };
 
   return (
@@ -160,7 +160,7 @@ function BoardList() {
                     <BoardTitle>{board.title}</BoardTitle>
                     <UserId>{board.boardId}</UserId>
                   </BoardHeader>
-                  <BoardContent>{board.content}</BoardContent>
+                  {/* <BoardContent>{board.content}</BoardContent> */}
                   <BoardDate>{board.regDate}</BoardDate>
                 </BoardContentWrapper>
               </BoardLi>

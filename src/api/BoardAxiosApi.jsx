@@ -7,10 +7,11 @@ const BoardAxiosApi = {
     return await axios.get(DOBBY_DOMAIN + "/api/board");
   },
 
-  // // 게시글 상세 조회
-  // boardDetail: async (boardId) => {
-  //   return await axios.get(DOBBY_DOMAIN + `/api/board/detail/${boardId}`);
-  // },
+  // 게시글 상세 조회
+  boardDetail: async (boardId) => {
+    return await axios.get(DOBBY_DOMAIN + `/api/board/detail/${boardId}`);
+  },
+
   // // 게시글 쓰기
   // boardWrite: async (title, content, userId, img) => {
   //   const board = {

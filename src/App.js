@@ -15,6 +15,7 @@ import AdJoinPage from "./pages/advertisement/AdJoinPage";
 import BoardListPage from "./pages/Board/BoardListPage";
 import Signup from "./pages/LoginPage/Signup";
 import Main from "./pages/MainPage/Main";
+import BoardDetail from "./pages/Board/BoardDetailPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/AdPage" element={<AdPage />} />
             <Route path="/AdJoinPage" element={<AdJoinPage />} />
             <Route path="/BoardListPage" element={<BoardListPage />} />
+            <Route path="/BoardDetailPage" element={<BoardDetail />} />
             <Route path="/Signup" element={<Signup />} />
           </Route>
         </Routes>
