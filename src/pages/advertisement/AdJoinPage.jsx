@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 import AxiosApi from "../../api/AxiosApi";
 
 const Container = styled.div`
-  height: 800px;
+  /* height: 800px; */
+  margin: 100px 0;
   color: var(--RED);
   display: flex;
   @media only screen and (max-width: 768px) {
     flex-direction: column;
-    height: 1200px;
+    height: 1500px;
   }
 `;
 const Box = styled.div`
