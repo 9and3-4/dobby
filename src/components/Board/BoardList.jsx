@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import boardAxiosApi from "../../api/BoardAxiosApi";
+import Categories from "../../components/Board/Categories";
 
 const BoardContainer = styled.div`
   padding: 30px;
@@ -101,10 +102,13 @@ const WriteButton = styled.button`
 
 function BoardList() {
   const [boardList, setBoardList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  // const [category, setCategory] = useState("all");
+  const onSelect = useCallback((category) => setSelectedCategory(category), []);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const boardList = async () => {
+    const fetchBoardList = async () => {
       try {
         const rsp = await boardAxiosApi.boardList();
         console.log(rsp.data);
@@ -115,13 +119,18 @@ function BoardList() {
         console.log("finally");
       }
     };
-    boardList();
+    fetchBoardList();
   }, []);
 
   // // 글쓰기 버튼 클릭 시
   // const handleWriteClick = () => {
   //   navigate("/boardWrite");
   // };
+
+  // 카테고리 선택 시
+  const handleCategorySelect = (selectedCategory) => {
+    setSelectedCategory(selectedCategory);
+  };
 
   // 글 상세보기 버튼 클릭 시
   const handleDetailClick = (id) => {
@@ -130,25 +139,30 @@ function BoardList() {
 
   return (
     <BoardContainer>
+      {/* <Categories category={selectedCategory} onSelect={handleCategorySelect} /> */}
+      <Categories onSelect={handleCategorySelect} category={selectedCategory} />
       <BoardUl>
         {boardList &&
-          boardList.map((board) => (
-            <BoardLi
-              key={board.boardId}
-              onClick={() => handleDetailClick(board.boardId)}
-            >
-              <Title>{board.major}</Title>
-              <Title>{board.sub}</Title>
-              <BoardContentWrapper>
-                <BoardHeader>
-                  <BoardTitle>{board.title}</BoardTitle>
-                  <UserId>{board.boardId}</UserId>
-                </BoardHeader>
-                <BoardContent>{board.content}</BoardContent>
-                <BoardDate>{board.regDate}</BoardDate>
-              </BoardContentWrapper>
-            </BoardLi>
-          ))}
+          boardList
+            .filter((board) =>
+              selectedCategory ? board.sub === selectedCategory : true
+            )
+            .map((board) => (
+              <BoardLi
+                key={board.boardId}
+                onClick={() => handleDetailClick(board.boardId)}
+              >
+                <Title>{board.sub}</Title>
+                <BoardContentWrapper>
+                  <BoardHeader>
+                    <BoardTitle>{board.title}</BoardTitle>
+                    <UserId>{board.boardId}</UserId>
+                  </BoardHeader>
+                  <BoardContent>{board.content}</BoardContent>
+                  <BoardDate>{board.regDate}</BoardDate>
+                </BoardContentWrapper>
+              </BoardLi>
+            ))}
       </BoardUl>
       {/* <WriteButton onClick={handleWriteClick}></WriteButton> */}
     </BoardContainer>
