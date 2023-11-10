@@ -141,11 +141,13 @@ function BoardList() {
     <BoardContainer>
       {/* <Categories category={selectedCategory} onSelect={handleCategorySelect} /> */}
       <Categories onSelect={handleCategorySelect} category={selectedCategory} />
+      {/* <p>선택된 카테고리 : {selectedCategory}</p> */}
+      {/* <p>선택된 카테고리 : {board.sub}</p> */}
       <BoardUl>
         {boardList &&
           boardList
             .filter((board) =>
-              selectedCategory ? board.sub === selectedCategory : true
+              selectedCategory ? board.major === selectedCategory : true
             )
             .map((board) => (
               <BoardLi

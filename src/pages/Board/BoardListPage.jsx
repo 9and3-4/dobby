@@ -1,6 +1,6 @@
 import BoardList from "../../components/Board/BoardList";
 // import Categories from "../../components/Board/Categories";
-// import { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 const BoardListPage = () => {
   // const [category, setCategory] = useState("all");
