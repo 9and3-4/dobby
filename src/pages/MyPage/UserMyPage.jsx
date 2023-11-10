@@ -37,7 +37,7 @@ const Btn = styled.button`
 const UserMyPage = () => {
   const navigate = useNavigate();
 
-  const editNavigate = () => {
+  const EditNavigate = () => {
     navigate("/EditUserMain");
   };
   const PostNavigate = () => {
@@ -50,7 +50,7 @@ const UserMyPage = () => {
   return (
     <Profile_box>
       <Profile />
-      <Btn onClick={editNavigate}>내 정보 수정</Btn>
+      <Btn onClick={EditNavigate}>내 정보 수정</Btn>
       <Btn onClick={PostNavigate}>작성글 보기</Btn>
       <Btn onClick={ApplyNavigate}>지원 회사 목록</Btn>
       <Btn>즐겨찾기 목록</Btn>
