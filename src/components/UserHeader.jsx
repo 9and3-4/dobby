@@ -64,7 +64,7 @@ const SearchIcon = styled.img`
 
 const UserIcon = styled.img`
   width: 30px;
-  heigth: auto;
+  height: auto;
 `;
 
 const UserHeader = () => {
