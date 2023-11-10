@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import AdCarousel from "./MainAd";
 
 const PageTitle = styled.div`
   background-color: #ed342e;
@@ -9,6 +10,7 @@ const PageTitle = styled.div`
   font-size: 24px;
   &:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 `;
 
@@ -24,7 +26,7 @@ const BoardItem = styled.div`
   padding: 10px;
   border-radius: 5px;
   transition: transform 0.3s ease-in-out;
-  text-align: center;
+  /* text-align: center; */
   position: relative;
 
   @media (min-width: 768px) {
@@ -49,16 +51,10 @@ const BoardItem = styled.div`
 const AdContainer = styled.div`
   flex: 1;
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid black;
-  text-align: center;
-  margin: 0 100px;
+  background-color: #ed342e;
+  border-radius: 10px;
+  margin: 0 50px;
   margin-bottom: 50px;
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
 `;
 
 const Main = () => {
@@ -144,8 +140,7 @@ const Main = () => {
         )}
       </BoardContainer>
       <AdContainer>
-        {/* 광고 부분 */}
-        <img src="/Main/광고이미지.png" alt="광고 이미지" />
+        <AdCarousel />
       </AdContainer>
     </>
   );

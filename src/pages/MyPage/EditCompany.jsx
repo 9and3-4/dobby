@@ -8,11 +8,11 @@ import BackButtonComponent from "./BackButton";
 
 const Container = styled.div`
   display: flex;
-  height: 800px;
+  /* height: 800px; */
 
   @media only screen and (max-width: 768px) {
     flex-direction: column;
-    height: 150vh;
+    height: 1500px;
   }
 `;
 
