@@ -4,6 +4,7 @@ import profile_img from "../../images/companyprofile.png";
 import styled from "styled-components";
 import { useState } from "react";
 import Profile from "../../components/Mypage/profile/Profile";
+import BackButtonComponent from "./BackButton";
 
 const Container = styled.div`
   display: flex;
@@ -127,24 +128,24 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const BackButton = styled.button`
-  width: 150px;
-  background-color: #ed342e;
-  color: white;
-  margin: 15px 15px;
-  padding: 5px;
-  border-radius: 15px;
-  border: 2px solid #ed342e;
-  transition: background-color 0.2s color 0.2s;
+// const BackButton = styled.button`
+//   width: 150px;
+//   background-color: #ed342e;
+//   color: white;
+//   margin: 15px 15px;
+//   padding: 5px;
+//   border-radius: 15px;
+//   border: 2px solid #ed342e;
+//   transition: background-color 0.2s color 0.2s;
 
-  &:hover {
-    color: #fff;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 1); /* 호버 상태일 때 그림자 효과를 추가합니다 */
-    transform: translateY(
-      -2px
-    ); /* 약간 위로 올라가는 효과를 주기 위해 translateY를 사용합니다 */
-  }
-`;
+//   &:hover {
+//     color: #fff;
+//     box-shadow: 0 3px 6px rgba(0, 0, 0, 1); /* 호버 상태일 때 그림자 효과를 추가합니다 */
+//     transform: translateY(
+//       -2px
+//     ); /* 약간 위로 올라가는 효과를 주기 위해 translateY를 사용합니다 */
+//   }
+// `;
 
 const UpdateButton = styled.button`
   width: 150px;
@@ -313,9 +314,8 @@ const EditCompanyMain = () => {
           <InputContainer>
             <Withdraw>회원 탈퇴</Withdraw>
           </InputContainer>
-
           <ButtonContainer>
-            <BackButton>이전으로</BackButton>
+            <BackButtonComponent />
             <UpdateButton>수정하기</UpdateButton>
           </ButtonContainer>
         </EditWrite2>
