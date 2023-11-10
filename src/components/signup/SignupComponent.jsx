@@ -49,7 +49,7 @@ export const Container = styled.div`
   justify-content: center;
   max-width: 500px;
   margin: auto;
-  height: 800px;
+  min-height: 800px;
 
   .success {
     color: royalblue;

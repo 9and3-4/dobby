@@ -163,7 +163,7 @@ const Signup = () => {
   return (
     <Container>
       <Items className="sign">
-        <span>Sign Up</span>
+        <span>User Sign Up</span>
       </Items>
 
       <Items className="item2">

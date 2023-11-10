@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../util/Modal";
 import AxiosApi from "../../api/AxiosApi";
+import styled from "styled-components";
 import {
   Input,
   Button,
@@ -27,6 +28,7 @@ const CompanySignup = () => {
   const [inputAddress, setInputAddress] = useState("");
   const [inputYear, setInputYear] = useState("");
   const [inputStaff, setInputStaff] = useState("");
+  const [inputIncome, setInputIncome] = useState("");
   const [inputProfile, setInputProfile] = useState("");
   const [inputLogo, setInputLogo] = useState("");
 
@@ -42,6 +44,18 @@ const CompanySignup = () => {
   const [isName, setIsName] = useState(false);
   const [isPhone, setIsPhone] = useState(false);
   const [isCompanyName, setIsCompanyName] = useState(false);
+  const [isSizeScale, setIsSizeScale] = useState("");
+  const [isCeo, setIsCeo] = useState("");
+  const [isContactNumber, setIsContactNumber] = useState("");
+  const [isUrl, setIsUrl] = useState("");
+  const [isCategory, setIsCategory] = useState("");
+  const [isAddress, setIsAddress] = useState("");
+  const [isYear, setIsYear] = useState("");
+  const [isStaff, setIsStaff] = useState("");
+  const [isIncome, setIsIncome] = useState("");
+  const [isProfile, setIsProfile] = useState("");
+  const [isLogo, setIsLogo] = useState("");
+
   // 팝업
   const [modalOpen, setModalOpen] = useState(false);
   const [modalText, setModelText] = useState("중복된 아이디 입니다.");
@@ -52,7 +66,6 @@ const CompanySignup = () => {
 
   const onChangeId = (e) => {
     setInputId(e.target.value);
-
     setIdMessage("로그인 시 사용될 이메일입니다.");
     setIsId(true);
   };
@@ -91,25 +104,95 @@ const CompanySignup = () => {
     setInputCompanyName(e.target.value);
     setIsCompanyName(true);
   };
+  const onChangeSizeScale = (e) => {
+    setInputSizeScale(e.target.value);
+    // if (inputSizeScale === "" || inputSizeScale === "기업 규모 선택") {
+    //   setIsSizeScale(false);
+    // } else {
+    //   setIsSizeScale(true);
+    // }
+    setIsSizeScale(true);
+    console.log("onChangeSizeScale : " + inputSizeScale);
+  };
+  const onChangeCeo = (e) => {
+    setInputCeo(e.target.value);
+    setIsCeo(true);
+  };
+  const onChangeContactNumber = (e) => {
+    setInputContactNumber(e.target.value);
+    setIsContactNumber(true);
+  };
+  const onChangeUrl = (e) => {
+    setInputUrl(e.target.value);
+    setIsUrl(true);
+  };
+  const onChangeCategory = (e) => {
+    setInputCategory(e.target.value);
+    setIsCategory(true);
+  };
+  const onChangeAddress = (e) => {
+    setInputAddress(e.target.value);
+    setIsAddress(true);
+  };
+  const onChangeYear = (e) => {
+    setInputYear(e.target.value);
+    setIsYear(true);
+  };
+  const onChangeStaff = (e) => {
+    setInputStaff(e.target.value);
+    setIsStaff(true);
+  };
+  const onChangeIncome = (e) => {
+    setInputIncome(e.target.value);
+    setIsIncome(true);
+  };
+  const onChangeProfile = (e) => {
+    setInputProfile(e.target.value);
+    setIsProfile(true);
+  };
+  const onChangeLogo = (e) => {
+    setInputLogo(e.target.value);
+    setIsLogo(true);
+  };
+  const Unit = styled.p`
+    white-space: nowrap;
+  `;
 
   const onClickLogin = async () => {
     console.log("Click 회원가입");
     // 가입 여부 우선 확인
-    const memberCheck = await AxiosApi.memberRegCheck(inputId);
+    const memberCheck = await AxiosApi.memberRegCheck(inputId, inputUrl);
     console.log("가입 가능 여부 확인 : ", memberCheck.data);
     // 가입 여부 확인 후 가입 절차 진행
 
     if (memberCheck.data === true) {
       console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
-      const memberReg = await AxiosApi.memberReg(
+      const companyReg = await AxiosApi.companyReg(
+        inputCompanyName,
+        inputSizeScale,
+        inputCeo,
+        inputContactNumber,
+        inputUrl,
+        inputCategory,
+        inputAddress,
+        inputYear,
+        inputStaff,
+        inputIncome,
+        inputProfile,
+        inputLogo
+      );
+      const comMemberReg = await AxiosApi.comMemberReg(
         inputId,
         inputPw,
         inputName,
         inputPhone,
-        "user"
+        "company"
       );
-      console.log(memberReg.data);
-      if (memberReg.data === true) {
+      console.log(companyReg.data);
+      console.log(comMemberReg.data);
+      if (companyReg.data === true && comMemberReg.data === true) {
+        setModalOpen(true);
+        setModelText("회원 가입에 성공 했습니다.");
         navigate("/home");
       } else {
         setModalOpen(true);
@@ -121,58 +204,14 @@ const CompanySignup = () => {
       setModelText("이미 가입된 회원 입니다.");
     }
   };
+
   // 이메일 옵션
-  const [data, setData] = useState([]);
-  const [selected, setSelected] = useState("naver.com");
-
-  const handleSelect = (e) => {
-    setSelected(e.target.value);
-  };
-
-  // 이메일 합치기
-  // useEffect(() => {
-  //   console.log("setSelected : " + selected);
-  //   setInputId(inputId + "@" + selected);
-  //   console.log("inputEmail : " + inputEmail);
-  // }, [selected, inputId, inputEmail]);
-
-  // 회사 테이블에서 url 가져와서 @ 뒤에 형식으로 만들기 위해 문자열 자르기
-  useEffect(() => {
-    const filterOption = async () => {
-      const companyList = await AxiosApi.companyGet();
-      const newData = companyList.data;
-      const extractedData = [];
-      for (let i = 0; i < newData.length; i++) {
-        if (newData[i] && newData[i].url) {
-          const url = newData[i].url;
-          let startIndex;
-
-          if (url.startsWith("http://www.") || url.startsWith("https://www.")) {
-            // "www."으로 시작하는 경우
-            startIndex = url.indexOf("//") + 6;
-          } else {
-            // "www."으로 시작하지 않는 경우
-            startIndex = url.indexOf("//") + 2;
-          }
-
-          if (startIndex !== -1) {
-            extractedData.push(url.slice(startIndex));
-          } else {
-            extractedData.push(url);
-          }
-        }
-      }
-
-      console.log(extractedData);
-      setData(extractedData);
-    };
-    filterOption();
-  }, []);
+  const data = ["기업 규모 선택", "대기업", "중견기업", "중소기업", "스타트업"];
 
   return (
     <Container>
       <Items className="sign">
-        <span>Sign Up</span>
+        <span>Company Sign Up</span>
       </Items>
 
       <Items className="item2">
@@ -226,7 +265,7 @@ const CompanySignup = () => {
       <Items className="item2">
         <Input
           type="text"
-          placeholder="전화번호"
+          placeholder="전화번호 (하이픈(-) 포함)"
           value={inputPhone}
           onChange={onChangePhone}
         />
@@ -239,9 +278,114 @@ const CompanySignup = () => {
           onChange={onChangeCompanyName}
         />
       </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="기업 CEO 이름"
+          value={inputCeo}
+          onChange={onChangeCeo}
+        />
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="기업 대표 전화 (하이픈(-) 포함)"
+          value={inputContactNumber}
+          onChange={onChangeContactNumber}
+        />
+      </Items>
+      <Items className="item2">
+        <SelectBox value={inputSizeScale} onChange={onChangeSizeScale}>
+          {data.map((size, index) => (
+            <option key={index}>{size}</option>
+          ))}
+        </SelectBox>
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="홈페이지 URL ex: (https://www.secret.com)"
+          value={inputUrl}
+          onChange={onChangeUrl}
+        />
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="업종"
+          value={inputCategory}
+          onChange={onChangeCategory}
+        />
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="기업 주소"
+          value={inputAddress}
+          onChange={onChangeAddress}
+        />
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="설립년도 (숫자만 입력)"
+          value={inputYear}
+          onChange={onChangeYear}
+        />
+        <Unit>년</Unit>
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="직원수 (숫자만 입력)"
+          value={inputStaff}
+          onChange={onChangeStaff}
+        />
+        <Unit>명</Unit>
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="연봉 (만 단위로 입력)"
+          value={inputIncome}
+          onChange={onChangeIncome}
+        />
+        <Unit>만 원</Unit>
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="기업소개"
+          value={inputProfile}
+          onChange={onChangeProfile}
+        />
+      </Items>
+      <Items className="item2">
+        <Input
+          type="text"
+          placeholder="로고 (url을 입력해주세요. ex : http://www.)"
+          value={inputLogo}
+          onChange={onChangeLogo}
+        />
+      </Items>
 
       <Items className="item2">
-        {isId && isPw && isConPw && isName && isPhone && isCompanyName ? (
+        {isId &&
+        isPw &&
+        isConPw &&
+        isName &&
+        isPhone &&
+        isCompanyName &&
+        isSizeScale &&
+        isCeo &&
+        isContactNumber &&
+        isUrl & isCategory &&
+        isAddress &&
+        isYear &&
+        isStaff &&
+        isIncome &&
+        isProfile &&
+        isLogo ? (
           <Button enabled onClick={onClickLogin}>
             NEXT
           </Button>

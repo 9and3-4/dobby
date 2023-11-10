@@ -183,8 +183,7 @@ const Login = () => {
     const res = await AxiosApi.memberLogin(inputId, inputPw);
     const res2 = await AxiosApi.memberGet(inputId);
     console.log(res.data);
-    console.log("오류발생", res2.data[0].role);
-    if (res.data === true) {
+    if (res2.data === true) {
       window.localStorage.setItem("userId", inputId); // 브라우저에서 임시로 값을 저장하는 기술
       window.localStorage.setItem("userPw", inputPw);
       window.localStorage.setItem("isLogin", "TRUE");
@@ -243,7 +242,12 @@ const Login = () => {
       </Modal>
       <Items className="signup">
         <Link to="/Signup" className="link_style">
-          <span>회원가입</span>
+          <span>개인 회원가입</span>
+        </Link>
+      </Items>
+      <Items className="signup">
+        <Link to="/CompanySignup" className="link_style">
+          <span>기업 회원가입</span>
         </Link>
       </Items>
     </Container>
