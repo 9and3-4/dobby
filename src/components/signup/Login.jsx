@@ -24,6 +24,7 @@ const TitleItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const LogoImage = styled.img`
@@ -172,6 +173,11 @@ const Login = () => {
       setIsPw(true);
     }
   };
+
+  const handleTitleItemClick = () => {
+    // 클릭 시 "/"로 이동
+    navigate("/");
+  };
   const onClickLogin = async () => {
     //로그인을 위한 axios 호출
     const res = await AxiosApi.memberLogin(inputId, inputPw);
@@ -196,7 +202,7 @@ const Login = () => {
 
   return (
     <Container>
-      <TitleItem>
+      <TitleItem onClick={handleTitleItemClick}>
         <LogoImage src={newLogo} alt="logo image" />
         <Title>9&3/4 Platform</Title>
       </TitleItem>

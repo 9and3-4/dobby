@@ -25,8 +25,8 @@ function App() {
         <Routes>
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route element={<Layout />}>
-            <Route path="/" element={<CompanyMyPage />} />
-            <Route path="/Main" element={<Main />} />
+            <Route path="/" element={<Main />} />
+            <Route path="/CompanyMyPage" element={<CompanyMyPage />} />
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
             <Route path="/AdList" element={<AdList />} />

@@ -7,7 +7,7 @@ const Burger = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // ---------------------------------------------------------------------
-  const customer = "company"; // user , company, admin
+  const customer = ""; // user , company, admin
   // ---------------------------------------------------------------------
 
   useEffect(() => {
