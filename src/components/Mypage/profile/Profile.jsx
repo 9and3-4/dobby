@@ -1,7 +1,7 @@
 // 프로필 컴포넌트
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
+import { Link, useNavigate } from "react-router-dom";
 // 제일 아래 배치된 div
 const Profilebox = styled.div`
   display: flex;
@@ -48,6 +48,8 @@ const Profile = (props) => {
   // 로컬 스토리지에서 계정 정보 가져오기
   // const = userId = window.localStage.getItem("userId");
   // const [profile, setProfile] = useState("");
+  // const [logout, setLogout] = useState(false);
+  const navigate = useNavigate();
 
   // useEffect(()=> {
   // axios로 서버에 요청하기
@@ -61,6 +63,15 @@ const Profile = (props) => {
     id: "woohee@google.com",
   };
 
+  const handleLogoutClick = () => {
+    // setLogout(true);
+    window.localStorage.setItem("userId", null); // 브라우저에서 임시로 값을 저장하는 기술
+    window.localStorage.setItem("userPw", null);
+    window.localStorage.setItem("isLogin", "FALSE");
+    window.localStorage.setItem("userRole", null);
+    navigate("/");
+  };
+
   return (
     <>
       <Profilebox>
@@ -70,7 +81,7 @@ const Profile = (props) => {
         <Profileimg img src={profileData.profileurl} alt="프로필사진" />
         <ProfileText>{profileData.name} 님</ProfileText>
         <ProfileText>ID : {profileData.id}</ProfileText>
-        <BtnProfile>로그아웃</BtnProfile>
+        <BtnProfile onClick={handleLogoutClick}>로그아웃</BtnProfile>
       </Profilebox>
     </>
   );
