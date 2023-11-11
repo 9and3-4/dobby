@@ -44,41 +44,77 @@ const BtnProfile = styled.button`
   }
 `;
 
-const Profile = (props) => {
-  // 로컬 스토리지에서 계정 정보 가져오기
-  // const = userId = window.localStage.getItem("userId");
-  // const [profile, setProfile] = useState("");
-  // const [logout, setLogout] = useState(false);
+// const Profile = (props) => {
+//   // 로컬 스토리지에서 계정 정보 가져오기
+//   // const = userId = window.localStage.getItem("userId");
+//   // const [profile, setProfile] = useState("");
+//   // const [logout, setLogout] = useState(false);
+//   const navigate = useNavigate();
+
+//   // useEffect(()=> {
+//   // axios로 서버에 요청하기
+//   //}, []);
+
+//   //임시 데이터 출력 (파이어베이스 통해 프로필 사진 가져옴)
+//   const profileData = {
+//     profileurl:
+//       "https://firebasestorage.googleapis.com/v0/b/kh-mini-prj.appspot.com/o/userprofile.png?alt=media&token=2a16b8e8-48a9-4bd7-8f33-dcabe97db3b2",
+//     name: "user",
+//     id: "woohee@google.com",
+//   };
+
+//   const handleLogoutClick = () => {
+//     window.localStorage.clear();
+//     navigate("/");
+//   };
+
+//   return (
+//     <>
+//       <Profilebox>
+//         {/* {props.user === "user" && (
+//           <ProfileImg src={ProfileImg} alt="개인 프로필 사진" />
+//         )} */}
+//         <Profileimg img src={profileData.profileurl} alt="프로필사진" />
+//         <ProfileText>{profileData.name} 님</ProfileText>
+//         <ProfileText>ID : {profileData.id}</ProfileText>
+//         <BtnProfile onClick={handleLogoutClick}>로그아웃</BtnProfile>
+//       </Profilebox>
+//     </>
+//   );
+// };
+
+// export default Profile;
+const Profile = () => {
   const navigate = useNavigate();
 
-  // useEffect(()=> {
-  // axios로 서버에 요청하기
-  //}, []);
-
-  //임시 데이터 출력 (파이어베이스 통해 프로필 사진 가져옴)
-  const profileData = {
-    profileurl:
-      "https://firebasestorage.googleapis.com/v0/b/kh-mini-prj.appspot.com/o/userprofile.png?alt=media&token=2a16b8e8-48a9-4bd7-8f33-dcabe97db3b2",
-    name: "user",
-    id: "woohee@google.com",
-  };
-
   const handleLogoutClick = () => {
-    // setLogout(true);
-    window.localStorage.setItem("userId", null); // 브라우저에서 임시로 값을 저장하는 기술
-    window.localStorage.setItem("userPw", null);
-    window.localStorage.setItem("isLogin", "FALSE");
-    window.localStorage.setItem("userRole", null);
+    window.localStorage.clear();
     navigate("/");
   };
+
+  // role에 따라 프로필 데이터 동적으로 설정
+  const role = window.localStorage.getItem("userRole");
+  const profileData =
+    role === "user"
+      ? {
+          profileUrl:
+            "https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/userprofile.png?alt=media&token=bcffd93d-a021-44ae-bc59-b7dc20b4474e",
+          name: window.localStorage.getItem("userNickName"),
+          id: window.localStorage.getItem("userId"),
+        }
+      : role === "company"
+      ? {
+          profileUrl:
+            "https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/companyprofile2.png?alt=media&token=3cfba5cd-b4d5-4188-b43b-34da0e5ac6ee",
+          name: window.localStorage.getItem("userCompanyName"),
+          id: window.localStorage.getItem("userId"),
+        }
+      : {};
 
   return (
     <>
       <Profilebox>
-        {/* {props.user === "user" && (
-          <ProfileImg src={ProfileImg} alt="개인 프로필 사진" />
-        )} */}
-        <Profileimg img src={profileData.profileurl} alt="프로필사진" />
+        <Profileimg src={profileData.profileUrl} alt="프로필사진" />
         <ProfileText>{profileData.name} 님</ProfileText>
         <ProfileText>ID : {profileData.id}</ProfileText>
         <BtnProfile onClick={handleLogoutClick}>로그아웃</BtnProfile>

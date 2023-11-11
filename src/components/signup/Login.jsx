@@ -189,8 +189,11 @@ const Login = () => {
       window.localStorage.setItem("isLogin", "TRUE");
       window.localStorage.setItem("userRole", res2.data[0].role);
       if (res2.data[0].role === "user") {
+        window.localStorage.setItem("userNickName", res2.data[0].nickName);
         navigate("/");
       } else if (res2.data[0].role === "company") {
+        const res3 = await AxiosApi.customerCompanyGet(inputId); // role이 company이면 email로 회사 정보 가져오기
+        window.localStorage.setItem("userCompanyName", res3.data[0].name);
         navigate("/CompanyMyPage");
       } else {
         navigate("/AdPage");

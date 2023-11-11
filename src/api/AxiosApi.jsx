@@ -40,6 +40,13 @@ const AxiosApi = {
     return await axios.get(DOBBY_DOMAIN + "/company/companylist");
   },
 
+  customerCompanyGet: async (email) => {
+    // 자바 url
+    return await axios.get(
+      DOBBY_DOMAIN + `/users/customercompany/?email=${email}`
+    );
+  },
+
   // 기업 customer 회원 가입
   comMemberReg: async (id, pwd, name, phone, role) => {
     const comMember = {
@@ -82,5 +89,7 @@ const AxiosApi = {
     };
     return await axios.post(DOBBY_DOMAIN + "/company/new", comMember);
   },
+
+  //
 };
 export default AxiosApi;
