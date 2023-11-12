@@ -244,13 +244,31 @@ const Login = () => {
       <Modal open={modalOpen} close={closeModal} header="오류">
         아이디 및 패스워드를 재확인해 주세요.
       </Modal>
-      <Items className="signup">
-        <Link to="/Signup" className="link_style">
+      {/* <Items className="signup">
+        <Link to="/Condition" className="link_style">
           <span>개인 회원가입</span>
         </Link>
       </Items>
       <Items className="signup">
-        <Link to="/CompanySignup" className="link_style">
+        <Link to="/Condition" className="link_style">
+          <span>기업 회원가입</span>
+        </Link>
+      </Items> */}
+      <Items className="signup">
+        <Link
+          to="/Condition"
+          className="link_style"
+          state={{ userType: "user" }}
+        >
+          <span>개인 회원가입</span>
+        </Link>
+      </Items>
+      <Items className="signup">
+        <Link
+          to="/Condition"
+          className="link_style"
+          state={{ userType: "company" }}
+        >
           <span>기업 회원가입</span>
         </Link>
       </Items>
