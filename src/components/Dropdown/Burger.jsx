@@ -7,9 +7,7 @@ const Burger = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // ---------------------------------------------------------------------
-  // const customer = window.localStorage.setItem("userRole", null); // user , company, admin
   const customer = window.localStorage.getItem("userRole"); // user , company, admin
-  // const customer = "user"; // user , company, admin
   // ---------------------------------------------------------------------
 
   useEffect(() => {
