@@ -1,7 +1,6 @@
 /* 기업 마이페이지 메인 */
 
 import React from "react";
-import profile_img from "../../images/companyprofile.png";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Profile from "../../components/Mypage/profile/Profile";

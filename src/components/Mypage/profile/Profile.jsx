@@ -61,7 +61,7 @@ const Profile = () => {
           profileUrl:
             role === "user"
               ? "https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/userprofile.png?alt=media&token=bcffd93d-a021-44ae-bc59-b7dc20b4474e"
-              : "https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/companyprofile2.png?alt=media&token=3cfba5cd-b4d5-4188-b43b-34da0e5ac6ee",
+              : " https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/companyprofile2.png?alt=media&token=3cfba5cd-b4d5-4188-b43b-34da0e5ac6ee",
           name:
             role === "user"
               ? window.localStorage.getItem("userNickName")

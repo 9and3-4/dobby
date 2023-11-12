@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import AxiosApi from "../../api/AxiosApi";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -27,24 +27,29 @@ const StyledLink = styled.a`
 `;
 
 const CompanyDetail = () => {
-  //     const [companyDetail, setCompanyDetail] = useState([]);
+  const [companyDetail, setCompanyDetail] = useState([]);
+
   const location = useLocation();
-  const companyDetail = location.state?.companyData;
-  console.log(companyDetail);
+  const companyData = location.state?.companyData;
 
   useEffect(() => {
     const fetchCompanyDetail = async () => {
-      //   try {
-      //     const response = await AxiosApi.companyDetail();
-      //     if (response.status === 200) {
-      //       setCompanyDetail(response.data);
-      //     }
-      //   } catch (error) {
-      //     console.log("Error fetching company detail:", error);
-      //   }
+      try {
+        // 기업 데이터가 있을 때에만 요청을 보냄
+        if (companyData) {
+          const response = await AxiosApi.companyDetail(companyData.id);
+          if (response.status === 200) {
+            setCompanyDetail(response.data);
+            console.log(response.data); // 로그 추가
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching company detail:", error);
+      }
     };
+
     fetchCompanyDetail();
-  }, [CompanyDetail]);
+  }, [companyData]);
 
   if (!companyDetail) {
     return <div>Loading...</div>;

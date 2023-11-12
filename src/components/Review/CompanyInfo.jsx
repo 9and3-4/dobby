@@ -35,6 +35,7 @@ const CompanyInfo = () => {
         console.log(response.status);
         if (response.status === 200) {
           setInfo(response.data);
+          console.log(response.data); // 로그 추가
         }
       } catch (error) {
         console.error("Error fetching company info:", error);
