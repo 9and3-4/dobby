@@ -5,7 +5,7 @@ const Container = styled.div`
   height: 800px;
 `;
 
-const CompanyInfo = styled.div`
+const CompanyInfoBox = styled.div`
   display: flex;
 `;
 
@@ -15,10 +15,10 @@ const CompanyReview = () => {
   return (
     <>
       <Container>
-        <CompanyInfo></CompanyInfo>
+        <CompanyInfoBox></CompanyInfoBox>
       </Container>
     </>
   );
 };
 
-export default CompanyInfo;
+export default CompanyReview;
