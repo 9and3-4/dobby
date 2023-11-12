@@ -82,8 +82,13 @@ const AxiosApi = {
     };
     return await axios.post(DOBBY_DOMAIN + "/company/new", comMember);
   },
-  // 기업 리뷰 페이지 내 기업 정보 조회
+  // 기업 리뷰 페이지 내 기업 정보(기업명만) 가져오기
   infoGet: async () => {
+    return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfoall`);
+  },
+
+  // 기업 리뷰 페이지 내 기업명 클릭시 자세한 정보 가져오기
+  companyDetail: async () => {
     return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfoall`);
   },
 };
