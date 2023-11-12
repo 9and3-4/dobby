@@ -91,5 +91,17 @@ const AxiosApi = {
   companyDetail: async () => {
     return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfoall`);
   },
+
+  // 광고 신청하기
+  adApplication: async (id, image, startDate, endDate, adFee) => {
+    const adApp = {
+      id: id,
+      image: image,
+      startDate: startDate,
+      endDate: endDate,
+      adFee: adFee,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/advertisement/join", adApp);
+  },
 };
 export default AxiosApi;

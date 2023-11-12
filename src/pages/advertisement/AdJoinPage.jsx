@@ -69,7 +69,34 @@ const Price = styled.div`
 `;
 
 const AdJoinPage = () => {
-  //     const navigate = useNavigate();
+  const navigate = useNavigate();
+  const today = new Date(); // 오늘 날짜
+  const url = ""; // 이미지 주소(임시)
+  const [price, setPrice] = useState("");
+  const [period, setPeriod] = useState(); // Date 함수 사용
+
+  const priceSum = async (e) => {
+    setPrice(e);
+    setPeriod(today + e); // 오늘 날짜 + 선택한 기간 나중에 수정
+    console.log("priceSum 광고 DB에 넣기");
+    const adApplication = await AxiosApi.adApplication(
+      window.localStorage.getItem("userId"),
+      url, // firebase를 이용해 url 주소 받아오기
+      today, // 오늘 날짜
+      period, // 오늘 날짜 + 선택한 기간
+      price
+    );
+    console.log("광고 신청 정보 : " + adApplication.data[0]);
+    if (adApplication.data[0]) {
+      //setModalOpen(true);
+      // setModelText("광고 신청이 완료되었습니다. 관리자 승인 후 게시됩니다. 자세한 사항은 이메일을 확인해주십시오.")
+      navigate("/home");
+    } else {
+      //setModalOpen(true);
+      //setModelText("광고 신청을 실패했습니다. 자세한 사항은 관리자에게 문의해주십시오.")
+    }
+  };
+
   //     //팝업 처리
   //     const [modalOpen, setModalOpen] = useState(false);
   //     const closeModal = () => {
@@ -79,27 +106,23 @@ const AdJoinPage = () => {
   //       setModalOpen(false);
   //       navigate("/AdPage");
   //     };
-  //    const onClickBtn = (price) => {
-  //     swich (price) {
-  //       case 1:
-  //         navigate("/");
-  //         setModalOpen(true);
-  //         break;
-  //         case 2:
-  //           navigate("/");
-  //           setModalOpen(true);
-  //           break;
-  //           case 3:
-  //             navigate("/");
-  //             setModalOpen(true);
-  //             default:
-  //               break;
-  //     }
 
-  //    }
+  const onClickBtn = (price) => {
+    switch (price) {
+      case 1:
+        priceSum("");
+        break;
+      case 2:
+        priceSum("");
+        break;
+      case 3:
+        priceSum("");
+        break;
+      default:
+        break;
+    }
+  };
 
-  //   const res = await AxiosApi.memberLogin(inputId, inputPw);
-  //
   return (
     <Container>
       <StandardBox>
@@ -107,7 +130,13 @@ const AdJoinPage = () => {
           <BoxTitle>STANDARD</BoxTitle>
           <Period>1주일</Period>
           <Price>가격</Price>
-          <TransBtn width="200px" height="65px" margin="80px" fontsize="30px">
+          <TransBtn
+            width="200px"
+            height="65px"
+            margin="80px"
+            fontsize="30px"
+            onClick={() => onClickBtn(1)}
+          >
             신청하기
           </TransBtn>
         </Box>
@@ -117,7 +146,13 @@ const AdJoinPage = () => {
           <BoxTitle>DELUXE</BoxTitle>
           <Period>1개월</Period>
           <Price>가격</Price>
-          <TransBtn width="200px" height="65px" margin="80px" fontsize="30px">
+          <TransBtn
+            width="200px"
+            height="65px"
+            margin="80px"
+            fontsize="30px"
+            onClick={() => onClickBtn(2)}
+          >
             신청하기
           </TransBtn>
         </Box>
@@ -127,7 +162,13 @@ const AdJoinPage = () => {
           <BoxTitle>PREMIUM</BoxTitle>
           <Period>3개월</Period>
           <Price>가격</Price>
-          <TransBtn width="200px" height="65px" margin="80px" fontsize="30px">
+          <TransBtn
+            width="200px"
+            height="65px"
+            margin="80px"
+            fontsize="30px"
+            onClick={() => onClickBtn(3)}
+          >
             신청하기
           </TransBtn>
           {/* <Modal
