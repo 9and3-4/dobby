@@ -111,10 +111,8 @@ const Condition = () => {
         navigate("/CompanySignup");
       }
     } else {
-      // 모달
       setModalOpen(true);
       setModelText("모든 약관에 동의해야 합니다.");
-      // alert("모든 약관에 동의해야 합니다.");
     }
   };
 
