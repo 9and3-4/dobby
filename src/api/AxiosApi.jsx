@@ -30,6 +30,13 @@ const AxiosApi = {
     return await axios.get(DOBBY_DOMAIN + `/users/check/?id=${id}&url=${url}`);
   },
 
+  customerCompanyGet: async (email) => {
+    // 자바 url
+    return await axios.get(
+      DOBBY_DOMAIN + `/users/customercompany/?email=${email}`
+    );
+  },
+
   // 마이페이지 내가 쓴 글 리스트
   mypostlist: async (email) => {
     return await axios.get(DOBBY_DOMAIN + `/post/mypostlist/?email=${email}`);
