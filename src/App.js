@@ -15,7 +15,7 @@ import AdJoinPage from "./pages/advertisement/AdJoinPage";
 import BoardListPage from "./pages/Board/BoardListPage";
 import Signup from "./pages/LoginPage/Signup";
 import Main from "./pages/MainPage/Main";
-import BoardDetail from "./pages/Board/BoardDetailPage";
+import BoardDetailpage from "./pages/Board/BoardDetailPage";
 import AdminMain from "./pages/MainPage/AdminMain";
 import CompanySignup from "./pages/LoginPage/CompanySignup";
 
@@ -38,7 +38,7 @@ function App() {
             <Route path="/AdPage" element={<AdPage />} />
             <Route path="/AdJoinPage" element={<AdJoinPage />} />
             <Route path="/BoardListPage" element={<BoardListPage />} />
-            <Route path="/BoardDetailPage" element={<BoardDetail />} />
+            <Route path="/BoardDetailPage/:id" element={<BoardDetailpage />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/CompanySignup" element={<CompanySignup />} />
             <Route path="/AdminMain" element={<AdminMain />} />

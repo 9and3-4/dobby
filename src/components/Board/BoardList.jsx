@@ -145,7 +145,7 @@ function BoardList() {
       {/* <p>선택된 카테고리 : {selectedCategory}</p> */}
       {/* <p>선택된 카테고리 : {board.sub}</p> */}
       <BoardUl>
-        {boardList &&
+        {boardList.length > 0 &&
           boardList
             .filter((board) =>
               selectedCategory ? board.major === selectedCategory : true

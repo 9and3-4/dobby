@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import React, { useEffect, useState } from "react";
 
 const categories = [
   { name: "도비의 티끌 모으기", text: "도비의 티끌 모으기" },
@@ -18,6 +19,7 @@ const CategoriesBlock = styled.div`
   @media screen and (max-width: 768px) {
     width: 100%;
     overflow-x: auto;
+    justify-content: flex-end; // Align categories to the right
   }
 `;
 
@@ -49,13 +51,33 @@ const Category = styled.div`
 `;
 
 const Categories = ({ onSelect, category }) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <CategoriesBlock>
-      {categories.map((c) => (
+      {categories.map((c, index) => (
         <Category
           key={c.name}
           active={category === c.name}
           onClick={() => onSelect(c.name)}
+          // 화면 너비가 768px 초과일 때 마지막 카테고리만 표시하지 않도록 설정
+          style={
+            index === categories.length - 1 && windowWidth > 768
+              ? { display: "none" }
+              : {}
+          }
         >
           {c.text}
         </Category>
