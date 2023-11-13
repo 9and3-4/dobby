@@ -12,7 +12,14 @@ const FeedbackBox = styled.div`
   align-items: center;
 `;
 
-const Substance = styled.div``;
+const Substance = styled.div`
+  flex-direction: column;
+  margin: 15px;
+
+  p {
+    margin: 5px;
+  }
+`;
 
 const CompanyFeedback = () => {
   const [companyFeedback, setCompanyFeedback] = useState([]);
@@ -43,7 +50,6 @@ const CompanyFeedback = () => {
   return (
     <>
       <FeedbackBox>
-        <h2>{companyFeedback.name}</h2>
         <Substance>
           <p>작성 시간 : {companyFeedback.writedate}</p>
           <p>내용 : {companyFeedback.content}</p>

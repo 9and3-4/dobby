@@ -2,11 +2,11 @@ import styled, { css } from "styled-components";
 import { useNavigate } from "react-router";
 
 const categories = [
-  { name: "소개", text: "소개" },
-  { name: "리뷰", text: "리뷰" },
-  { name: "게시글", text: "게시글" },
-  { name: "채용", text: "채용" },
-  { name: "즐겨찾기", text: "즐겨찾기" },
+  { name: "companydetail", text: "소개", nav: "/CompanyDetail/:id" },
+  { name: "feedback", text: "리뷰", nav: "/CompanyFeedback" },
+  { name: "companypost", text: "게시글", nav: "/CompanyPost" },
+  { name: "companyhire", text: "채용", nav: "/CompanyJobPosing" },
+  { name: "favorite", text: "즐겨찾기", nav: "/" },
 ];
 
 const CategoriesBlock = styled.div`
@@ -57,7 +57,7 @@ const CompanyCategories = ({ onSelect, category }) => {
   const navigate = useNavigate();
 
   const handleDetailClick = (id) => {
-    navigate(`/CompanyDetail${id}`);
+    navigate(id);
   };
 
   return (
@@ -66,10 +66,7 @@ const CompanyCategories = ({ onSelect, category }) => {
         <Category
           key={c.name}
           active={category === c.name}
-          onClick={() => handleDetailClick(c.name)}
-          // key={c.name}
-          // to={`/CompanyDetail/${c.path}`}
-          // active={category === c.name}
+          onClick={() => handleDetailClick(c.nav)}
         >
           {c.text}
         </Category>

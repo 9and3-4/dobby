@@ -108,6 +108,24 @@ const AxiosApi = {
   companyDetail: async () => {
     return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfoall`);
   },
+  // 기업 리뷰 페이지 내 기업에 대한 리뷰 가져오기
+  companyFeedback: async (id) => {
+    return await axios.get(
+      DOBBY_DOMAIN + `/companyreview/companyfeedback/${id}`
+    );
+  },
+
+  // 기업 리뷰 페이지 내 기업 게시글 가져오기 (모바일 전용 제외함)
+  companyPost: async (id) => {
+    return await axios.get(DOBBY_DOMAIN + `/companyreview/companypost/${id}`);
+  },
+
+  // 기업 리뷰 페이지 내 기업 채용공고 가져오기
+  companyJobPosting: async (id) => {
+    return await axios.get(
+      DOBBY_DOMAIN + `/companyreview/companyjobposting/${id}`
+    );
+  },
 
   // 광고 신청하기
   adApplication: async (id, image, startDate, endDate, adFee) => {
