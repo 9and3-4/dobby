@@ -19,6 +19,7 @@ import BoardDetail from "./pages/Board/BoardDetailPage";
 import AdminMain from "./pages/MainPage/AdminMain";
 import CompanySignup from "./pages/LoginPage/CompanySignup";
 import EditUserMain from "./pages/MyPage/EditUser";
+import AdminBoardList from "./pages/admin/AdminBoardList";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/CompanySignup" element={<CompanySignup />} />
             <Route path="/AdminMain" element={<AdminMain />} />
             <Route path="/EditUserMain" element={<EditUserMain />} />
+            <Route path="/AdminBoardList" element={<AdminBoardList />} />
           </Route>
         </Routes>
       </Router>
