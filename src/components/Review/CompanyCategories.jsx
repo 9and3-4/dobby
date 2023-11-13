@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { useNavigate } from "react-router";
 
 const categories = [
   { name: "소개", text: "소개" },
@@ -53,13 +54,22 @@ const Category = styled.div`
 `;
 
 const CompanyCategories = ({ onSelect, category }) => {
+  const navigate = useNavigate();
+
+  const handleDetailClick = (id) => {
+    navigate(`/CompanyDetail${id}`);
+  };
+
   return (
     <CategoriesBlock>
       {categories.map((c) => (
         <Category
           key={c.name}
           active={category === c.name}
-          onClick={() => onSelect(c.name)}
+          onClick={() => handleDetailClick(c.name)}
+          // key={c.name}
+          // to={`/CompanyDetail/${c.path}`}
+          // active={category === c.name}
         >
           {c.text}
         </Category>

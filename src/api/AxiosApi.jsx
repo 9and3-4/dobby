@@ -99,6 +99,13 @@ const AxiosApi = {
     return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfo/${id}`);
   },
 
+  // 기업 리뷰 페이지 내 기업에 대한 리뷰 가져오기
+  companyFeedback: async (id) => {
+    return await axios.get(
+      DOBBY_DOMAIN + `/companyreview/companyfeedback/${id}`
+    );
+  },
+
   // 광고 신청하기
   adApplication: async (id, image, startDate, endDate, adFee) => {
     const adApp = {

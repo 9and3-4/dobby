@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import AxiosApi from "../../api/AxiosApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -20,13 +20,14 @@ const CompanyMain = styled.div`
   margin: 20px;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.div`
   text-decoration: none;
   color: inherit;
 `;
 
 const CompanyInfo = () => {
   const [info, setInfo] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCompanyInfo = async () => {
@@ -44,18 +45,19 @@ const CompanyInfo = () => {
     fetchCompanyInfo();
   }, []);
 
+  const onClick = (id) => {
+    console.log("회사 ID : ", id);
+    localStorage.setItem("comId", id);
+    navigate(`/CompanyDetail/${id}`);
+  };
+
   return (
     <>
       <Container>
         {info.map((company) => (
           <InfoBox key={company.id}>
             {/* Link 컴포넌트를 사용하여 클릭 시 '/company/:id' 경로로 이동 */}
-            <StyledLink
-              to={{
-                pathname: `/CompanyDetail/${company.id}`,
-                state: { companyData: company },
-              }}
-            >
+            <StyledLink onClick={() => onClick(company.id)}>
               <CompanyMain>☺ {company.name}</CompanyMain>{" "}
             </StyledLink>
           </InfoBox>

@@ -15,9 +15,14 @@ import AdJoinPage from "./pages/advertisement/AdJoinPage";
 import BoardListPage from "./pages/Board/BoardListPage";
 import Signup from "./pages/LoginPage/Signup";
 import Main from "./pages/MainPage/Main";
-import BoardDetailpage from "./pages/Board/BoardDetailPage";
+import BoardDetail from "./pages/Board/BoardDetailPage";
 import AdminMain from "./pages/MainPage/AdminMain";
 import CompanySignup from "./pages/LoginPage/CompanySignup";
+import CompanyInfo from "./components/Review/CompanyInfo";
+import CompanyDetail from "./components/Review/CompanyDetail";
+import CompanyInfoLayout from "./components/CompanyInfoLayout";
+import CompanyFeedback from "./components/Review/CompanyFeedback";
+import EditUserMain from "./pages/MyPage/EditUser";
 
 function App() {
   return (
@@ -32,21 +37,25 @@ function App() {
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
             <Route path="/AdList" element={<AdList />} />
-            <Route path="/Condition" element={<Condition />} />
+            <Route path="/Condition" element={<Condition user="company" />} />
             <Route path="/BoardWritePage" element={<BoardWritePage />} />
             <Route path="/UserMyPage" element={<UserMyPage />} />
+            <Route path="/EditUserMain" element={<EditUserMain />} />
             <Route path="/AdPage" element={<AdPage />} />
             <Route path="/AdJoinPage" element={<AdJoinPage />} />
             <Route path="/BoardListPage" element={<BoardListPage />} />
-            <Route path="/BoardDetailPage/:id" element={<BoardDetailpage />} />
+            <Route path="/BoardDetailPage" element={<BoardDetail />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/CompanySignup" element={<CompanySignup />} />
             <Route path="/AdminMain" element={<AdminMain />} />
+            <Route path="/CompanyInfo" element={<CompanyInfo />} />
+            <Route element={<CompanyInfoLayout />}>
+              <Route path="/CompanyDetail/:id" element={<CompanyDetail />} />
+              <Route path="/CompanyFeedback" element={<CompanyFeedback />} />
+            </Route>
           </Route>
         </Routes>
       </Router>
-
-      {/* <JobListings /> */}
     </>
   );
 }
