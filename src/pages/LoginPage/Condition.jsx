@@ -100,11 +100,11 @@ const Condition = () => {
   const userType = location.state?.userType;
 
   const areAllChecked = () =>
-    term1Checked && term2Checked && term3Checked && term4Checked;
+    // term1Checked && term2Checked && term3Checked && term4Checked;
+    term1Checked && term2Checked && (userType !== "company" || term4Checked);
 
   const handleNextButtonClick = () => {
     if (areAllChecked()) {
-      // console.log("다음으로 버튼이 눌렸습니다.");
       if (userType === "user") {
         navigate("/Signup");
       } else {
