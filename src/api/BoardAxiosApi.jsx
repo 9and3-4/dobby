@@ -12,20 +12,45 @@ const BoardAxiosApi = {
     return await axios.get(DOBBY_DOMAIN + `/api/board/detail/${id}`);
   },
 
-  // // 게시글 쓰기
-  // boardWrite: async (title, content, userId, img) => {
-  //   const board = {
-  //     title: title,
-  //     content: content,
-  //     userId: userId,
-  //     img: img,
-  //   };
-  //   return await axios.post(DOBBY_DOMAIN + "/api/board/new", board);
-  // },
+  //대분류, 소분류 가져오기
+  getMajorCategories: async () => {
+    try {
+      const response = await axios.get(`${DOBBY_DOMAIN}/api/majorCategories`);
+      return response.data;
+    } catch (error) {
+      console.error("대분류 카테고리 에러:", error);
+      throw error;
+    }
+  },
+
+  getSubCategories: async (majorCategoryId) => {
+    try {
+      const response = await axios.get(
+        `${DOBBY_DOMAIN}/api/subCategories/${majorCategoryId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Failed to fetch sub categories:", error);
+      throw error;
+    }
+  },
+
+  // 게시글 쓰기
+  boardWrite: async (major, sub, title, content, userId, writeDate) => {
+    const board = {
+      major: major,
+      sub: sub,
+      title: title,
+      content: content,
+      userId: userId,
+      writeDate: writeDate,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/api/board/new", board);
+  },
 
   // 게시글에 달린 댓글 조회
-  commentList: async (boardId) => {
-    return await axios.get(DOBBY_DOMAIN + `/api/comment/list/${boardId}`);
+  commentList: async (postId) => {
+    return await axios.get(DOBBY_DOMAIN + `/api/comment/list/${postId}`);
   },
   // 댓글 쓰기
   commentWrite: async (customerId, Id, content) => {

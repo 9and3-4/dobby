@@ -16,13 +16,13 @@ const Container = styled.div`
 const Title = styled.h1`
   color: #ed342e;
   font-size: 2em;
-  margin-bottom: 10px;
+  margin: 40px 0 40px;
 `;
 
 const Content = styled.p`
   color: #666;
-  height: 80%;
-  line-height: 1.5;
+  height: 50%;
+  line-height: 2;
 `;
 
 const CommentForm = styled.form`
@@ -35,16 +35,19 @@ const CommentInput = styled.input`
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
+  border: 1px solid #ed342e;
+  border-radius: 5px;
   box-sizing: border-box;
 `;
 const SubmitButton = styled.button`
   background-color: #ed342e;
   color: white;
   border: none;
-  padding: 10px 20px;
+  border-radius: 5px;
+  padding: 5px 10px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 16px;
   margin: 4px 2px;
   transition-duration: 0.4s;
@@ -81,10 +84,18 @@ const CommentUser = styled.p`
   text-align: right;
 `;
 
+const Buttoncontainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 const BoardDate = styled.p`
-  color: #777;
+  color: #ccc;
   font-size: 0.8em;
+  padding: 10px;
   text-align: right;
+  border-bottom: 1px solid #ffc8c6;
 `;
 
 function BoardDetail() {
@@ -94,6 +105,11 @@ function BoardDetail() {
   const [comments, setComments] = useState("");
   const [inputComment, setInputComment] = useState("");
   const [comAddFlag, setComAddFlag] = useState(false); // 댓글 추가 성공 여부
+  const [showComments, setShowComments] = useState(false);
+  const toggleComments = () => {
+    setShowComments(!showComments);
+  };
+
   const userId = localStorage.getItem("Id");
   console.log(`Board ID: ${id}`);
 
@@ -138,34 +154,36 @@ function BoardDetail() {
 
   return (
     <Container>
-      {/* <BoardImage
-        src={board.img ? board.img : "http://via.placeholder.com/160"}
-        alt="Board image"
-      /> */}
       <Title>{board.title}</Title>
       <Content>{board.content}</Content>
-      <BoardDate>{board.wirteDate}</BoardDate>
+      <BoardDate>{board.regDate}</BoardDate>
 
       <CommentForm onSubmit={handleSubmitComment}>
         <label>
-          댓글:
           <CommentInput
             type="text"
             value={inputComment}
             onChange={handleCommentChange}
           />
         </label>
-        <SubmitButton type="submit">댓글 추가</SubmitButton>
+        <Buttoncontainer>
+          <SubmitButton onClick={toggleComments}>
+            {showComments ? "댓글 숨기기" : `댓글보기 ${comments.length}`}
+          </SubmitButton>
+          <SubmitButton type="submit">댓글등록</SubmitButton>
+        </Buttoncontainer>
       </CommentForm>
-      <CommentList>
-        {comments &&
-          comments.map((comment) => (
-            <CommentItem key={comment.commentId}>
-              <CommentContent>{comment.content}</CommentContent>
-              <CommentUser>{comment.userId}</CommentUser>
-            </CommentItem>
-          ))}
-      </CommentList>
+      {showComments && (
+        <CommentList>
+          {comments &&
+            comments.map((comment) => (
+              <CommentItem key={comment.replyId}>
+                <CommentContent>{comment.content}</CommentContent>
+                <CommentUser>{comment.customerId}</CommentUser>
+              </CommentItem>
+            ))}
+        </CommentList>
+      )}
     </Container>
   );
 }

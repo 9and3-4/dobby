@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import BoardAxiosApi from "../../api/BoardAxiosApi";
 
 const FormContainer = styled.div`
   height: 800px;
@@ -13,25 +14,16 @@ const FormContainer = styled.div`
   }
 `;
 
-const FieldContainerTitle = styled.div`
+const FieldContainer = styled.div`
   margin: 10px;
   border: 1px solid #ed342e;
   display: flex;
   align-items: center;
   background-color: white;
   padding: 0 5px;
-`;
-const FieldContainerText = styled.div`
-  margin: 10px;
-  border: 1px solid #ed342e;
-  display: flex;
-  align-items: center;
-  padding: 0 5px;
-  background-color: white;
 `;
 
 const StyledInput = styled.input`
-  align-items: center;
   width: 100%;
   padding: 10px;
   border: none;
@@ -41,8 +33,8 @@ const StyledInput = styled.input`
 `;
 
 const StyledLabel = styled.label`
-  flex: 0 0 40px; // 라벨의 너비 고정
-  margin-right: 0; // 라벨과 입력필드 사이 여백
+  flex: 0 0 40px;
+  margin-right: 0;
   padding: 5px;
   width: 20%;
   color: #ed342e;
@@ -63,7 +55,7 @@ const StyledForm = styled.div`
   border-radius: 4px;
   font-size: 16px;
   background-color: #e8504a1a;
-  margin-bottom: 20px; // 입력창 여백
+  margin-bottom: 20px;
 `;
 
 const StyledTextarea = styled.textarea`
@@ -79,6 +71,7 @@ const StyledTextarea = styled.textarea`
     height: 500px;
   }
 `;
+
 const SubmitButton = styled.button`
   padding: 5px 15px;
   margin: 3px;
@@ -95,15 +88,10 @@ const SubmitButton = styled.button`
   }
 `;
 
-// const Label = styled.label`
-//   margin-bottom: 5px;
-//   color: #ed342e;
-// `;
-
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: center; // 버튼을 중앙에 위치시킴
-  margin-top: 20px; // 버튼 상단에 여백 추가
+  justify-content: center;
+  margin-top: 20px;
 `;
 
 const DropdownContainer = styled.div`
@@ -112,13 +100,7 @@ const DropdownContainer = styled.div`
   margin: 5px;
 `;
 
-const HeadContainer = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
 const Dropdown = styled.select`
-  display: flex;
   width: 100%;
   padding: 5px;
   margin: 5px;
@@ -128,46 +110,96 @@ const Dropdown = styled.select`
   outline: none;
 `;
 
+const HeadContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const DropdownOption = ({ value, children }) => (
+  <option value={value}>{children}</option>
+);
+
 const BoardWrite = () => {
-  const [title, setTitle] = useState(""); // 제목 입력
-  const [content, setContent] = useState(""); // 내용 입력
-  const [selectedMajorCategory, setSelectedMajorCategory] = useState(""); // 대분류 선택
-  const [selectedSubCategory, setSelectedSubCategory] = useState(""); // 소분류 선택
-  const userId = window.localStorage.getItem("userId");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [majorCategories, setMajorCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [selectedMajorCategory, setSelectedMajorCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const navigate = useNavigate();
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
-  };
+  useEffect(() => {
+    const fetchMajorCategories = async () => {
+      try {
+        const rsp = await BoardAxiosApi.getMajorCategories();
+        console.log("대분류 : ", rsp);
+        setMajorCategories(rsp.data);
+      } catch (error) {
+        console.error("대분류를 가져오는 중 오류 발생:", error);
+      }
+    };
+
+    // majorCategories 데이터를 가져오는 useEffect 호출
+    fetchMajorCategories();
+  }, []);
+
+  useEffect(() => {
+    // selectedMajorCategory가 변경될 때마다 호출되도록 변경
+    const fetchSubCategories = async () => {
+      if (selectedMajorCategory) {
+        try {
+          const rsp = await BoardAxiosApi.getSubCategories(
+            selectedMajorCategory
+          );
+          setSubCategories(rsp.data);
+        } catch (error) {
+          console.error("소분류를 가져오는 중 오류 발생:", error);
+        }
+      }
+    };
+
+    // selectedMajorCategory가 변경될 때마다 소분류 데이터를 가져오는 useEffect 호출
+    fetchSubCategories();
+  }, [selectedMajorCategory]);
+
+  const handleTitleChange = (e) => setTitle(e.target.value);
+  const handleContentChange = (e) => setContent(e.target.value);
 
   const handleMajorCategoryChange = (e) => {
     setSelectedMajorCategory(e.target.value);
+    // 대분류 변경 시 소분류 초기화
+    setSelectedSubCategory("");
   };
 
-  const handleSubCategoryChange = (e) => {
-    setSelectedSubCategory(e.target.value);
-  };
-  const DropdownOption = ({ value, children }) => (
-    <option value={value}>{children}</option>
-  );
+  const handleSubCategoryChange = (e) => setSelectedSubCategory(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(title, content, selectedMajorCategory, selectedSubCategory);
-    // try {
-    //     const rsp = await AxiosApi.boardWrite();
-    //     if(rsp.data === true) {
-    //         alert("업로드 완료");
-    //         navigate("/BoardList");
-    //     } else {
-    //         alert("업로드 실패");
-    //     }
-    // } catch (error) {
-    //     console.log(error);
-    // }
+
+    if (!selectedMajorCategory || !selectedSubCategory) {
+      alert("대분류와 소분류를 선택하세요.");
+      return;
+    }
+
+    const postData = {
+      title,
+      content,
+      majorCategoryId: selectedMajorCategory,
+      subCategoryId: selectedSubCategory,
+    };
+
+    try {
+      const rsp = await BoardAxiosApi.createPost(postData);
+
+      if (rsp.data === true) {
+        alert("업로드 완료");
+        navigate("/BoardList");
+      } else {
+        alert("업로드 실패");
+      }
+    } catch (error) {
+      console.log("데이터 업로드 중 오류 발생:", error);
+    }
   };
 
   return (
@@ -180,22 +212,12 @@ const BoardWrite = () => {
               value={selectedMajorCategory}
               onChange={handleMajorCategoryChange}
             >
-              <DropdownOption value="">도비의 티끌 모으기</DropdownOption>
-              <DropdownOption value="majorCategory1">
-                도비의 은밀한 취미생활
-              </DropdownOption>
-              <DropdownOption value="majorCategory2">
-                도비의 주인 교체작전
-              </DropdownOption>
-              <DropdownOption value="majorCategory3">
-                도비의 사랑과 전쟁
-              </DropdownOption>
-              <DropdownOption value="majorCategory4">
-                도비네 채용공고
-              </DropdownOption>
-              <DropdownOption value="majorCategory5">
-                도비의 소속회사 라운지
-              </DropdownOption>
+              <DropdownOption value="">대분류 선택</DropdownOption>
+              {majorCategories.map((majorCategory) => (
+                <DropdownOption key={majorCategory.id} value={majorCategory.id}>
+                  {majorCategory.name}
+                </DropdownOption>
+              ))}
             </Dropdown>
           </DropdownContainer>
           <DropdownContainer>
@@ -203,14 +225,17 @@ const BoardWrite = () => {
               value={selectedSubCategory}
               onChange={handleSubCategoryChange}
             >
-              <DropdownOption value="">소분류1</DropdownOption>
-              <DropdownOption value="subCategory1">소분류2</DropdownOption>
-              <DropdownOption value="subCategory2">소분류3</DropdownOption>
+              <DropdownOption value="">소분류 선택</DropdownOption>
+              {subCategories.map((subCategory) => (
+                <DropdownOption key={subCategory.id} value={subCategory.id}>
+                  {subCategory.name}
+                </DropdownOption>
+              ))}
             </Dropdown>
           </DropdownContainer>
         </HeadContainer>
 
-        <FieldContainerTitle>
+        <FieldContainer>
           <StyledLabel htmlFor="title">제목</StyledLabel>
           <StyledInput
             type="text"
@@ -218,16 +243,15 @@ const BoardWrite = () => {
             value={title}
             onChange={handleTitleChange}
           />
-        </FieldContainerTitle>
-        <FieldContainerText>
-          {/* <StyledLabel htmlFor="content">내용</StyledLabel> */}
+        </FieldContainer>
+        <FieldContainer>
           <StyledTextarea
             id="content"
             name="content"
             value={content}
             onChange={handleContentChange}
           />
-        </FieldContainerText>
+        </FieldContainer>
         <ButtonContainer>
           <SubmitButton onClick={handleSubmit}>업로드</SubmitButton>
         </ButtonContainer>

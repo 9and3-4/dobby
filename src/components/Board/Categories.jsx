@@ -15,33 +15,45 @@ const CategoriesBlock = styled.div`
   padding: 1rem;
   width: 100%;
   margin: 0 auto;
+  justify-content: center;
+  align-items: center;
   // 화면 너비가 768픽셀 이하 적용
   @media screen and (max-width: 768px) {
     width: 100%;
     overflow-x: auto;
-    justify-content: flex-end; // Align categories to the right
   }
 `;
 
 const Category = styled.div`
-  font-size: 1rem;
+  font-size: 1.3rem;
   cursor: pointer;
   white-space: pre; // 공백이나 줄바꿈이 있는 경우 그대로 표시
   text-decoration: none;
   color: inherit; // 부모의 컬러값을 그대로 가져옴
   padding-bottom: 0.25rem;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem;
+  }
 
   &:hover {
-    color: #495057;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #ed342e;
   }
   ${(props) =>
     props.active &&
     css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 600;
-      border-bottom: 2px solid #ed342e;
+      border-radius: 5px;
       color: #ed342e;
       &:hover {
-        color: #ed342e;
+        color: #fff;
+        background-color: #ed342e;
       }
     `}
 
