@@ -134,7 +134,8 @@ function BoardList() {
 
   // 글 상세보기 버튼 클릭 시
   const handleDetailClick = (id) => {
-    navigate(`/BoardDetail/${id}`);
+    console.log("상세보기 id : ", id);
+    navigate(`/BoardDetailPage/${id}`);
   };
 
   return (
@@ -158,7 +159,7 @@ function BoardList() {
                 <BoardContentWrapper>
                   <BoardHeader>
                     <BoardTitle>{board.title}</BoardTitle>
-                    <UserId>{board.boardId}</UserId>
+                    <UserId>{board.id}</UserId>
                   </BoardHeader>
                   {/* <BoardContent>{board.content}</BoardContent> */}
                   <BoardDate>{board.regDate}</BoardDate>

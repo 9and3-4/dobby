@@ -15,9 +15,7 @@ import AdJoinPage from "./pages/advertisement/AdJoinPage";
 import BoardListPage from "./pages/Board/BoardListPage";
 import Signup from "./pages/LoginPage/Signup";
 import Main from "./pages/MainPage/Main";
-import BoardDetail from "./pages/Board/BoardDetailPage";
-import AdminMain from "./pages/MainPage/AdminMain";
-import CompanySignup from "./pages/LoginPage/CompanySignup";
+import BoardDetailpage from "./pages/Board/BoardDetailPage";
 
 function App() {
   return (
@@ -27,21 +25,19 @@ function App() {
         <Routes>
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route element={<Layout />}>
-            <Route path="/" element={<Main />} />
-            <Route path="/CompanyMyPage" element={<CompanyMyPage />} />
+            <Route path="/" element={<CompanyMyPage />} />
+            <Route path="/Main" element={<Main />} />
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
             <Route path="/AdList" element={<AdList />} />
-            <Route path="/Condition" element={<Condition />} />
+            <Route path="/Condition" element={<Condition user="company" />} />
             <Route path="/BoardWritePage" element={<BoardWritePage />} />
             <Route path="/UserMyPage" element={<UserMyPage />} />
             <Route path="/AdPage" element={<AdPage />} />
             <Route path="/AdJoinPage" element={<AdJoinPage />} />
             <Route path="/BoardListPage" element={<BoardListPage />} />
-            <Route path="/BoardDetailPage" element={<BoardDetail />} />
+            <Route path="/BoardDetailPage/:id" element={<BoardDetailpage />} />
             <Route path="/Signup" element={<Signup />} />
-            <Route path="/CompanySignup" element={<CompanySignup />} />
-            <Route path="/AdminMain" element={<AdminMain />} />
           </Route>
         </Routes>
       </Router>
