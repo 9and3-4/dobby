@@ -55,27 +55,35 @@ const Profile = () => {
 
   // role에 따라 프로필 데이터 동적으로 설정
   const role = window.localStorage.getItem("userRole");
-  const profileData =
-    role === "user" || role === "company"
-      ? {
-          profileUrl:
-            role === "user"
-              ? "https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/userprofile.png?alt=media&token=bcffd93d-a021-44ae-bc59-b7dc20b4474e"
-              : " https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/companyprofile2.png?alt=media&token=3cfba5cd-b4d5-4188-b43b-34da0e5ac6ee",
-          name:
-            role === "user"
-              ? window.localStorage.getItem("userNickName")
-              : window.localStorage.getItem("userCompanyName"),
-          id: window.localStorage.getItem("userId"),
-        }
-      : {};
+  const userId = window.localStorage.getItem("userId");
+  const profileData = {
+    user: {
+      profileUrl:
+        "https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/userprofile.png?alt=media&token=bcffd93d-a021-44ae-bc59-b7dc20b4474e",
+      name: window.localStorage.getItem("userNickName"),
+      id: userId,
+    },
+    company: {
+      profileUrl:
+        " https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/companyprofile2.png?alt=media&token=3cfba5cd-b4d5-4188-b43b-34da0e5ac6ee",
+      name: window.localStorage.getItem("userCompanyName"),
+      id: userId,
+    },
+    admin: {
+      profileUrl: null,
+      name: "Admin",
+      id: userId,
+    },
+  };
+
+  const currentProfile = profileData[role] || {};
 
   return (
     <>
       <ProfileBox>
-        <ProfileImg src={profileData.profileUrl} alt="프로필사진" />
-        <ProfileText>{profileData.name} 님</ProfileText>
-        <ProfileText>ID : {profileData.id}</ProfileText>
+        <ProfileImg src={currentProfile.profileUrl} alt="프로필사진" />
+        <ProfileText>{currentProfile.name} 님</ProfileText>
+        <ProfileText>ID : {currentProfile.id}</ProfileText>
         <BtnProfile onClick={handleLogoutClick}>로그아웃</BtnProfile>
       </ProfileBox>
     </>

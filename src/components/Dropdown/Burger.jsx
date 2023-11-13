@@ -6,9 +6,7 @@ const Burger = () => {
   const [isOpen, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  // ---------------------------------------------------------------------
   const customer = window.localStorage.getItem("userRole"); // user , company, admin
-  // ---------------------------------------------------------------------
 
   useEffect(() => {
     const handleResize = () => {

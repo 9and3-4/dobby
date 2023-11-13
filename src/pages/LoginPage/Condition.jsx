@@ -88,7 +88,6 @@ const Checkbox = ({ text, checked, onChange }) => {
 
 const Condition = () => {
   const [allChecked, setAllChecked] = useState(false);
-  // const [termsData, setTermsData] = useState({});
   const [term1Checked, setTerm1Checked] = useState(false);
   const [term2Checked, setTerm2Checked] = useState(false);
   const [term3Checked, setTerm3Checked] = useState(false);
@@ -100,7 +99,6 @@ const Condition = () => {
   const userType = location.state?.userType;
 
   const areAllChecked = () =>
-    // term1Checked && term2Checked && term3Checked && term4Checked;
     term1Checked && term2Checked && (userType !== "company" || term4Checked);
 
   const handleNextButtonClick = () => {
