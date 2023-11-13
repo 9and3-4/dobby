@@ -52,11 +52,11 @@ const CompanyInfo = () => {
             {/* Link 컴포넌트를 사용하여 클릭 시 '/company/:id' 경로로 이동 */}
             <StyledLink
               to={{
-                pathname: `/company/${company.id}`,
+                pathname: `/CompanyDetail/${company.id}`,
                 state: { companyData: company },
               }}
             >
-              <CompanyMain>☺ {company.name}</CompanyMain>
+              <CompanyMain>☺ {company.name}</CompanyMain>{" "}
             </StyledLink>
           </InfoBox>
         ))}
