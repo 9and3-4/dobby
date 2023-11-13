@@ -95,8 +95,8 @@ const AxiosApi = {
   },
 
   // 기업 리뷰 페이지 내 기업명 클릭시 자세한 정보 가져오기
-  companyDetail: async () => {
-    return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfoall`);
+  companyDetail: async (id) => {
+    return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfo/${id}`);
   },
 
   // 광고 신청하기
