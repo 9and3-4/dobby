@@ -36,6 +36,7 @@ const MenuBtn = styled.button`
   border: 2px solid #ed342e;
   transition: background-color 0.2s color 0.2s;
   font-weight: bold;
+  cursor: pointer;
 
   &:hover {
     background-color: #ed342e;
@@ -50,6 +51,9 @@ const MenuBtn = styled.button`
 const AdminMain = () => {
   const navigate = useNavigate();
   // 회원정보관리(개인/기업), 게시글 관리, 기업 관리, 광고 관리 바로 가기 4가지 연결
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
 
   return (
     <>
@@ -57,7 +61,9 @@ const AdminMain = () => {
         <MainBox>
           <Title>관리자 페이지</Title>
           <Title>메 뉴</Title>
-          <MenuBtn>회원 정보 관리(개인/기업)</MenuBtn>
+          <MenuBtn onClick={() => handleNavigate("/AdminBoardList")}>
+            회원 정보 관리(개인/기업)
+          </MenuBtn>
           <MenuBtn>게시글 관리</MenuBtn>
           <MenuBtn>가입 관리</MenuBtn>
           <MenuBtn>광고 관리</MenuBtn>

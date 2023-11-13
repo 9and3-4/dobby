@@ -117,5 +117,12 @@ const AxiosApi = {
     };
     return await axios.post(DOBBY_DOMAIN + "/advertisement/join", adApp);
   },
+
+  managerUserInfoGet: async () => {
+    return await axios.get(DOBBY_DOMAIN + `/manager/userinfo`);
+  },
+  managerCompanyInfoGet: async () => {
+    return await axios.get(DOBBY_DOMAIN + `/manager/companyinfo`);
+  },
 };
 export default AxiosApi;

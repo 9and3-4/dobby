@@ -92,7 +92,7 @@ const menuOptions = {
   admin: {
     menuItem1: "회원정보 관리",
     menuItem2: "게시글 관리",
-    menuItem3: "기업 관리",
+    menuItem3: "가입 관리",
     menuItem4: "광고 관리",
     icon: null,
   },

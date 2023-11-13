@@ -23,6 +23,7 @@ import CompanyDetail from "./components/Review/CompanyDetail";
 import CompanyInfoLayout from "./components/CompanyInfoLayout";
 import CompanyFeedback from "./components/Review/CompanyFeedback";
 import EditUserMain from "./pages/MyPage/EditUser";
+import AdminBoardList from "./pages/admin/AdminBoardList";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             <Route path="/Signup" element={<Signup />} />
             <Route path="/CompanySignup" element={<CompanySignup />} />
             <Route path="/AdminMain" element={<AdminMain />} />
+            <Route path="/AdminBoardList" element={<AdminBoardList />} />
             <Route path="/CompanyInfo" element={<CompanyInfo />} />
             <Route element={<CompanyInfoLayout />}>
               <Route path="/CompanyDetail/:id" element={<CompanyDetail />} />
