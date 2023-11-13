@@ -103,6 +103,7 @@ const InputLabel = styled.label`
   color: #ed342e;
   margin: 10px;
   padding-top: 7px;
+  white-space: nowrap;
 `;
 
 const InputField = styled.input`
@@ -236,6 +237,33 @@ const EditCompanyMain = () => {
         </Profilebox>
         <EditWrite>
           <MainText>내 정보 수정</MainText>
+          <InputContainer>
+            <InputLabel htmlFor="companyName">기업명</InputLabel>
+            <InputField
+              id="companyName"
+              type="text"
+              value={companyName} // 입력 필드의 값으로 기업명 상태 사용
+              onChange={NameChange} // 값이 변경될 때 호출
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputLabel htmlFor="companyName">기업명</InputLabel>
+            <InputField
+              id="companyName"
+              type="text"
+              value={companyName} // 입력 필드의 값으로 기업명 상태 사용
+              onChange={NameChange} // 값이 변경될 때 호출
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputLabel htmlFor="companyName">기업명</InputLabel>
+            <InputField
+              id="companyName"
+              type="text"
+              value={companyName} // 입력 필드의 값으로 기업명 상태 사용
+              onChange={NameChange} // 값이 변경될 때 호출
+            />
+          </InputContainer>
           <InputContainer>
             <InputLabel htmlFor="companyName">기업명</InputLabel>
             <InputField

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../../util/Modal";
 import AxiosApi from "../../api/AxiosApi";
 import styled from "styled-components";
+import { storage } from "../../api/Firebase";
 import {
   Input,
   Button,
@@ -12,6 +13,20 @@ import {
 import { SelectBox } from "../../components/signup/SignupEmailComponent";
 
 const CompanySignup = () => {
+  const InputNone = styled.p`
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 170px; /* 원하는 너비 설정 */
+    height: 40px; /* 높이값 초기화 */
+    line-height: normal; /* line-height 초기화 */
+    padding: 0.8em 0.5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+    font-family: inherit; /* 폰트 상속 */
+    border: 1px solid var(--RED);
+    border-radius: 18px; /* iSO 둥근모서리 제거 */
+    outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
+    color: #999;
+  `;
+
   const navigate = useNavigate();
   // 키보드 입력
   const [inputId, setInputId] = useState("");
@@ -30,7 +45,6 @@ const CompanySignup = () => {
   const [inputStaff, setInputStaff] = useState("");
   const [inputIncome, setInputIncome] = useState("");
   const [inputProfile, setInputProfile] = useState("");
-  const [inputLogo, setInputLogo] = useState("");
 
   // 오류 메시지
   const [idMessage, setIdMessage] = useState("");
@@ -55,6 +69,16 @@ const CompanySignup = () => {
   const [isIncome, setIsIncome] = useState("");
   const [isProfile, setIsProfile] = useState("");
   const [isLogo, setIsLogo] = useState("");
+
+  // 파일 업로드
+  const [file, setFile] = useState(null);
+  const [url, setUrl] = useState("");
+
+  const handleFileInputChange = (e) => {
+    // 파일이 들어오면 file에 저장
+    setFile(e.target.files[0]);
+    setIsLogo(true);
+  };
 
   // 팝업
   const [modalOpen, setModalOpen] = useState(false);
@@ -150,10 +174,7 @@ const CompanySignup = () => {
     setInputProfile(e.target.value);
     setIsProfile(true);
   };
-  const onChangeLogo = (e) => {
-    setInputLogo(e.target.value);
-    setIsLogo(true);
-  };
+
   const Unit = styled.p`
     white-space: nowrap;
   `;
@@ -165,7 +186,17 @@ const CompanySignup = () => {
     console.log("가입 가능 여부 확인 : ", memberCheck.data);
     // 가입 여부 확인 후 가입 절차 진행
 
-    if (memberCheck.data === true) {
+    // NEXT 클릭 시 이미지 업로드
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(file.name);
+    fileRef.put(file).then(() => {
+      console.log("File uploaded successfully!");
+      fileRef.getDownloadURL().then((url) => {
+        console.log("저장 경로 확인 : " + url);
+        setUrl(url);
+      });
+    });
+    if (memberCheck.data === true && url !== null) {
       console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
       const companyReg = await AxiosApi.companyReg(
         inputCompanyName,
@@ -179,7 +210,7 @@ const CompanySignup = () => {
         inputStaff,
         inputIncome,
         inputProfile,
-        inputLogo
+        url
       );
       const comMemberReg = await AxiosApi.comMemberReg(
         inputId,
@@ -355,18 +386,14 @@ const CompanySignup = () => {
       <Items className="item2">
         <Input
           type="text"
-          placeholder="기업소개"
+          placeholder="기업 소개"
           value={inputProfile}
           onChange={onChangeProfile}
         />
       </Items>
       <Items className="item2">
-        <Input
-          type="text"
-          placeholder="로고 (url을 입력해주세요. ex : http://www.)"
-          value={inputLogo}
-          onChange={onChangeLogo}
-        />
+        <InputNone>기업 로고 (정사각형)</InputNone>
+        <input type="file" onChange={handleFileInputChange} />
       </Items>
 
       <Items className="item2">

@@ -10,6 +10,16 @@ const AxiosApi = {
     };
     return await axios.post(DOBBY_DOMAIN + "/users/login", login);
   },
+  // 개인 회원 정보 수정
+  memberUpdate: async (id, name, nickName, pwd) => {
+    const memInfo = {
+      id: id,
+      name: name,
+      nickName: nickName,
+      pwd: pwd,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/users/memUpdate", memInfo);
+  },
   //회원 조회
   memberGet: async (id) => {
     return await axios.get(DOBBY_DOMAIN + `/users/member/?name=${id}`);
@@ -29,12 +39,12 @@ const AxiosApi = {
   memberRegCheck: async (id, url) => {
     return await axios.get(DOBBY_DOMAIN + `/users/check/?id=${id}&url=${url}`);
   },
-
-  customerCompanyGet: async (email) => {
-    // 자바 url
-    return await axios.get(
-      DOBBY_DOMAIN + `/users/customercompany/?email=${email}`
-    );
+  // 회원 탈퇴
+  memberDel: async (id) => {
+    const del = {
+      id: id,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/user/delete", del);
   },
 
   // 마이페이지 내가 쓴 글 리스트
@@ -95,15 +105,8 @@ const AxiosApi = {
   },
 
   // 기업 리뷰 페이지 내 기업명 클릭시 자세한 정보 가져오기
-  companyDetail: async (id) => {
-    return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfo/${id}`);
-  },
-
-  // 기업 리뷰 페이지 내 기업에 대한 리뷰 가져오기
-  companyFeedback: async (id) => {
-    return await axios.get(
-      DOBBY_DOMAIN + `/companyreview/companyfeedback/${id}`
-    );
+  companyDetail: async () => {
+    return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfoall`);
   },
 
   // 광고 신청하기
@@ -115,14 +118,7 @@ const AxiosApi = {
       endDate: endDate,
       adFee: adFee,
     };
-    return await axios.post(DOBBY_DOMAIN + "/advertisement/join", adApp);
-  },
-
-  managerUserInfoGet: async () => {
-    return await axios.get(DOBBY_DOMAIN + `/manager/userinfo`);
-  },
-  managerCompanyInfoGet: async () => {
-    return await axios.get(DOBBY_DOMAIN + `/manager/companyinfo`);
+    return await axios.post(DOBBY_DOMAIN + "/advertisement/new", adApp);
   },
 };
 export default AxiosApi;

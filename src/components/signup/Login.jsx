@@ -187,6 +187,7 @@ const Login = () => {
       window.localStorage.setItem("userId", inputId); // 브라우저에서 임시로 값을 저장하는 기술
       window.localStorage.setItem("userPw", inputPw);
       window.localStorage.setItem("isLogin", "TRUE");
+      window.localStorage.setItem("userInfo", res2.data[0]);
       window.localStorage.setItem("userRole", res2.data[0].role);
       if (res2.data[0].role === "user") {
         window.localStorage.setItem("userNickName", res2.data[0].nickName);
@@ -196,7 +197,7 @@ const Login = () => {
         window.localStorage.setItem("userCompanyName", res3.data[0].name);
         navigate("/CompanyMyPage");
       } else {
-        navigate("/AdminMain");
+        navigate("/AdPage");
       }
     } else {
       setModalOpen(true);
@@ -244,6 +245,16 @@ const Login = () => {
       <Modal open={modalOpen} close={closeModal} header="오류">
         아이디 및 패스워드를 재확인해 주세요.
       </Modal>
+      {/* <Items className="signup">
+        <Link to="/Condition" className="link_style">
+          <span>개인 회원가입</span>
+        </Link>
+      </Items>
+      <Items className="signup">
+        <Link to="/Condition" className="link_style">
+          <span>기업 회원가입</span>
+        </Link>
+      </Items> */}
       <Items className="signup">
         <Link
           to="/Condition"

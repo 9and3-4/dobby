@@ -1,9 +1,13 @@
 /* 개인 마이페이지 정보 수정 */
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Profile from "../../components/Mypage/profile/Profile";
 import BackButtonComponent from "./BackButton";
+import AxiosApi from "../../api/AxiosApi";
+import Modal from "../../util/Modal";
+import { useNavigate, json } from "react-router-dom";
+import { Items } from "../../components/signup/SignupComponent";
 
 const Container = styled.div`
   display: flex;
@@ -36,7 +40,7 @@ const EditWrite = styled.div`
   flex-direction: column;
   padding-left: 50px;
   padding-top: 50px;
-  height: 345px;
+  min-height: 150px;
 
   @media only screen and (max-width: 768px) {
     padding-left: 0;
@@ -85,6 +89,7 @@ const InputLabel = styled.label`
   color: #ed342e;
   margin: 10px;
   padding-top: 7px;
+  white-space: nowrap;
 `;
 
 const InputField = styled.input`
@@ -149,39 +154,126 @@ const Withdraw = styled.button`
 `;
 
 const EditUserMain = () => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    const getMember = async () => {
+      const res = await AxiosApi.memberGet(
+        window.localStorage.getItem("userId")
+      );
+      console.log("고객 정보 : " + res.data[0]); // 고객 정보 불러오기
+
+      setUserData(res.data[0]);
+      console.log("고객 email : " + window.localStorage.getItem("userId"));
+    };
+    getMember();
+  }, []);
+
+  // Modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalText, setModalText] = useState("중복된 아이디 입니다.");
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  // 오류 메시지
+  const [curMessage, setCurMessage] = useState("");
+  const [pwMessage, setPwMessage] = useState("");
+  const [conPwMessage, setConPwMessage] = useState("");
+
+  // 유효성 검사
+  const [isName, setIsName] = useState(false);
+  const [isNickName, setIsNickName] = useState(false);
+  const [isCurPw, setIsCurPw] = useState(false);
+  const [isPw, setIsPw] = useState(false);
+  const [isConPw, setIsConPw] = useState(false);
+
+  console.log("userData: " + userData);
   const [userName, setUserName] = useState(""); // 이름
   const NameChange = (e) => {
     setUserName(e.target.value);
+    setIsName(true);
   };
 
   const [nickName, setNickName] = useState(""); // 닉네임
   const nickNameChange = (e) => {
     setNickName(e.target.value);
-  };
-
-  const [company, setCompany] = useState(""); // 소속 회사명
-  const companyChange = (e) => {
-    setCompany(e.target.value);
-  };
-
-  const [phoneNumber, setPhoneNumber] = useState(""); // 휴대폰번호
-  const PhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
+    setIsNickName(true);
   };
 
   const [currentPw, setCurrentPw] = useState(""); // 현재 비밀번호
   const currentPwChange = (e) => {
     setCurrentPw(e.target.value);
+    console.log(currentPw);
+    console.log(window.localStorage.getItem("userPw"));
+    if (currentPw !== window.localStorage.getItem("userPw")) {
+      setCurMessage("현재 비밀번호와 일치하지 않습니다.");
+      setIsCurPw(false);
+    } else {
+      setCurMessage("현재 비밀번호와 일치합니다.");
+      setIsCurPw(true);
+    }
   };
 
   const [newPw, setNewPw] = useState(""); // 새 비밀번호
   const newPwChange = (e) => {
-    setNewPw(e.target.value);
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+    const passwordNew = e.target.value;
+    setNewPw(passwordNew);
+    if (!passwordRegex.test(passwordNew)) {
+      setPwMessage("숫자+영문자 조합으로 8자리 이상 입력해주세요!");
+      setIsPw(false);
+    } else {
+      setPwMessage("안전한 비밀번호에요 : )");
+      setIsPw(true);
+    }
   };
 
   const [newPwCheck, setNewPwCheck] = useState(""); // 새 비밀번호 확인
   const newPwCheckChange = (e) => {
-    setNewPwCheck(e.target.value);
+    const passwordCurrent = e.target.value;
+    setNewPwCheck(passwordCurrent);
+    if (passwordCurrent !== newPw) {
+      setConPwMessage("비밀 번호가 일치하지 않습니다.");
+      setIsConPw(false);
+    } else {
+      setConPwMessage("비밀 번호가 일치 합니다.");
+      setIsConPw(true);
+    }
+  };
+
+  // 수정하기 버튼 클릭 시
+  const onClickBtn = async () => {
+    const res2 = await AxiosApi.memberUpdate(
+      window.localStorage.getItem("userId"),
+      userName,
+      nickName,
+      newPw
+    );
+    console.log("res2 : " + res2);
+    if (res2) {
+      // 팝업
+      setModalOpen(true);
+      setModalText("회원 정보가 수정되었습니다.");
+    } else {
+      setModalOpen(true);
+      setModalText("회원 정보 수정을 실패했습니다.");
+    }
+  };
+
+  // 탈퇴하기 버튼 클릭 시
+  const onClickBtn2 = async () => {
+    const res3 = await AxiosApi.memberDel(
+      window.localStorage.getItem("userId")
+    );
+    if (res3) {
+      setModalOpen(true);
+      setModalText("회원 탈퇴가 정상적으로 처리되었습니다.");
+    } else {
+      setModalOpen(true);
+      setModalText("회원 탈퇴를 실패하였습니다.");
+    }
   };
 
   return (
@@ -202,30 +294,12 @@ const EditUserMain = () => {
             />
           </InputContainer>
           <InputContainer>
-            <InputLabel htmlFor="nickName">사용자명</InputLabel>
+            <InputLabel htmlFor="nickName">닉네임</InputLabel>
             <InputField
               id="nickName"
               type="text"
               value={nickName} // 입력 필드의 값으로 닉네임 사용
               onChange={nickNameChange} // 값이 변경될 때 호출
-            />
-          </InputContainer>
-          <InputContainer>
-            <InputLabel htmlFor="company">회사명</InputLabel>
-            <InputField
-              id="company"
-              type="text"
-              value={company} // 입력 필드의 값으로 소속회사 상태 사용
-              onChange={companyChange} // 값이 변경될 때 호출
-            />
-          </InputContainer>
-          <InputContainer>
-            <InputLabel htmlFor="phoneNumber">휴대폰 번호</InputLabel>
-            <InputField
-              id="phoneNumber"
-              type="text"
-              value={phoneNumber} // 입력 필드의 값으로 휴대폰번호 사용
-              onChange={PhoneNumberChange} // 값이 변경될 때 호출
             />
           </InputContainer>
         </EditWrite>
@@ -239,6 +313,13 @@ const EditUserMain = () => {
               onChange={currentPwChange} // 값이 변경될 때 호출
             />
           </InputContainer>
+          <Items className="hint">
+            {currentPw.length > 0 && (
+              <span className={`message ${isCurPw ? "success" : "error"}`}>
+                {curMessage}
+              </span>
+            )}
+          </Items>
           <InputContainer>
             <InputLabel htmlFor="newPw">새 비밀번호</InputLabel>
             <InputField
@@ -248,6 +329,13 @@ const EditUserMain = () => {
               onChange={newPwChange} // 값이 변경될 때 호출
             />
           </InputContainer>
+          <Items className="hint">
+            {newPw.length > 0 && (
+              <span className={`message ${isPw ? "success" : "error"}`}>
+                {pwMessage}
+              </span>
+            )}
+          </Items>
           <InputContainer>
             <InputLabel htmlFor="newPwCheck">새 비밀번호 확인</InputLabel>
             <InputField
@@ -257,15 +345,31 @@ const EditUserMain = () => {
               onChange={newPwCheckChange} // 값이 변경될 때 호출
             />
           </InputContainer>
+          <Items className="hint">
+            {newPwCheck.length > 0 && (
+              <span className={`message ${isConPw ? "success" : "error"}`}>
+                {conPwMessage}
+              </span>
+            )}
+          </Items>
           <InputContainer>
-            <Withdraw>회원 탈퇴</Withdraw>
+            <Withdraw onClick={onClickBtn2}>회원 탈퇴</Withdraw>
           </InputContainer>
 
           <ButtonContainer>
             <BackButtonComponent />
-            <UpdateButton>수정하기</UpdateButton>
+            {isName && isNickName && isCurPw && isPw && isConPw ? (
+              <UpdateButton enabled onClick={onClickBtn}>
+                수정하기
+              </UpdateButton>
+            ) : (
+              <UpdateButton disabled>수정하기</UpdateButton>
+            )}
           </ButtonContainer>
         </EditWrite2>
+        <Modal open={modalOpen} close={closeModal} header="알림">
+          {modalText}
+        </Modal>
       </Container>
     </>
   );
