@@ -133,13 +133,13 @@ const Menu = (props) => {
       // case "광고 신청":
       //   navigate();
       //   break;
-      // case "회원정보 관리":
-      //   navigate();
-      //   break;
+      case "회원정보 관리":
+        navigate("/AdminBoardList");
+        break;
       // case "게시글 관리":
       //   navigate();
       //   break;
-      // case "기업 관리":
+      // case "가입 관리":
       //   navigate();
       //   break;
       // case "광고 관리":
