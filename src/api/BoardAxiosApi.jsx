@@ -49,14 +49,14 @@ const BoardAxiosApi = {
   },
 
   // 게시글에 달린 댓글 조회
-  commentList: async (postId) => {
-    return await axios.get(DOBBY_DOMAIN + `/api/comment/list/${postId}`);
+  commentList: async (Id) => {
+    return await axios.get(DOBBY_DOMAIN + `/api/comment/list/${Id}`);
   },
   // 댓글 쓰기
   commentWrite: async (customerId, Id, content) => {
     const comment = {
-      boardId: Id,
-      userId: customerId,
+      postId: Id,
+      customerId: customerId,
       content: content,
     };
     return await axios.post(DOBBY_DOMAIN + `/api/comment/new`, comment);

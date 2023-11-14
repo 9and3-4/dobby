@@ -8,7 +8,7 @@ const Container = styled.div`
   padding: 20px;
   margin: auto;
   max-width: 800px;
-  height: 85%;
+  height: 90%;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
 `;
@@ -60,6 +60,7 @@ const SubmitButton = styled.button`
 const CommentList = styled.ul`
   list-style: none;
   padding: 0;
+  height: 20%;
 `;
 
 const CommentItem = styled.li`
