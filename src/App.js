@@ -12,6 +12,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import UserMyPage from "./pages/MyPage/UserMyPage";
 import AdPage from "./pages/advertisement/AdPage";
 import AdJoinPage from "./pages/advertisement/AdJoinPage";
+import AdminBoardList from "./pages/admin/AdminBoardList";
 import BoardListPage from "./pages/Board/BoardListPage";
 import Signup from "./pages/LoginPage/Signup";
 import Main from "./pages/MainPage/Main";
@@ -51,6 +52,7 @@ function App() {
             <Route path="/CompanySignup" element={<CompanySignup />} />
             <Route path="/AdminMain" element={<AdminMain />} />
             <Route path="/CompanyInfo" element={<CompanyInfo />} />
+            <Route path="/AdminBoardList" element={<AdminBoardList />} />g
             <Route element={<CompanyInfoLayout />}>
               <Route path="/CompanyDetail/:id" element={<CompanyDetail />} />
               <Route path="/CompanyFeedback" element={<CompanyFeedback />} />
