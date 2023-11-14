@@ -48,7 +48,7 @@ const CompanyJobPosing = () => {
   }, []);
 
   if (!CompanyJobPosing) {
-    return <div>Loading...</div>;
+    return <div>올라온 공고가 없습니다.</div>;
   }
   return (
     <>
@@ -58,7 +58,7 @@ const CompanyJobPosing = () => {
           <p>자격요건 : {CompanyJobPosing.qualification}</p>
           <p>내용 : {CompanyJobPosing.description}</p>
           <p>마감시간 : {CompanyJobPosing.deadline}</p>
-          <p>이미지 {CompanyJobPosing.image}</p>
+          {/* <p>이미지 {CompanyJobPosing.image}</p> */}
         </JobPosting>
       </JobPostingBox>
     </>

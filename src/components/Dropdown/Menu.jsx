@@ -119,7 +119,7 @@ const Menu = (props) => {
         navigate("/LoginPage");
         break;
       case "기업 리뷰":
-        navigate("/reviews");
+        navigate("/companyInfo");
         break;
       case "채용 공고":
         navigate("/JobListings");

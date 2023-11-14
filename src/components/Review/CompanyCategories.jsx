@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { useNavigate } from "react-router";
 
 const categories = [
-  { name: "companydetail", text: "소개", nav: "/CompanyDetail/:id" },
+  { name: "companydetail", text: "소개", nav: "/CompanyDetail" },
   { name: "feedback", text: "리뷰", nav: "/CompanyFeedback" },
   { name: "companypost", text: "게시글", nav: "/CompanyPost" },
   { name: "companyhire", text: "채용", nav: "/CompanyJobPosing" },

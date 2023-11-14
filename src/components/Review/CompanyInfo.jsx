@@ -48,7 +48,7 @@ const CompanyInfo = () => {
   const onClick = (id) => {
     console.log("회사 ID : ", id);
     localStorage.setItem("comId", id);
-    navigate(`/CompanyDetail/${id}`);
+    navigate(`/CompanyDetail`);
   };
 
   return (

@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import AxiosApi from "../../api/AxiosApi";
+import PostDate, { formatDate } from "../../components/Mypage/Post/PostDate";
 
 const FeedbackBox = styled.div`
   color: var(--RED);
   font-size: 18px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Substance = styled.div`
@@ -32,8 +31,10 @@ const CompanyFeedback = () => {
       try {
         const response = await AxiosApi.companyFeedback(id);
         if (response.status === 200) {
+          const tranData = response.data.map((e) => formatDate(e.WriteDate));
+          console.log(tranData);
+
           setCompanyFeedback(response.data);
-          console.log(response.data);
         }
       } catch (error) {
         console.error("Error fetching company detail:", error);
@@ -44,7 +45,7 @@ const CompanyFeedback = () => {
   }, []);
 
   if (!companyFeedback) {
-    return <div>Loading...</div>;
+    return <div>올라온 리뷰가 없습니다.</div>;
   }
 
   return (
@@ -52,7 +53,7 @@ const CompanyFeedback = () => {
       <FeedbackBox>
         {companyFeedback.map((feedback, index) => (
           <Substance key={index}>
-            <p>작성 시간 : {feedback.writedate}</p>
+            <p>작성 시간 : {formatDate("2023-11-01T04:10:20.000+00:00")}</p>
             <p>내용 : {feedback.content}</p>
             <p>별점 : {feedback.rating}</p>
           </Substance>

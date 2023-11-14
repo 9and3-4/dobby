@@ -36,7 +36,8 @@ const StyledLink = styled.a`
 
 const CompanyDetail = () => {
   const [companyDetail, setCompanyDetail] = useState([]);
-  const { id } = useParams(); // useParams를 사용하여 URL에서 기업 ID를 가져옴
+  //const { id } = useParams(); // useParams를 사용하여 URL에서 기업 ID를 가져옴
+  const id = localStorage.getItem("comId");
 
   useEffect(() => {
     console.log("기업 상세 조회 id : ", id);

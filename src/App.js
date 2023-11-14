@@ -28,8 +28,8 @@ import CompanyPost from "./components/Review/CompanyPost";
 import CompanyJobPosing from "./components/Review/CompanyJobPosting";
 import DobbyIntroduction from "./components/DobbyIntroduction";
 import TermsofUse from "./components/Termsofuse";
-import AdminJobPostList from "./pages/admin/AdminJobPostList";
-import AdminAdList from "./pages/admin/AdminAdList";
+import PostListPage from "./pages/MyPage/PostListPage";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
   return (
@@ -44,9 +44,10 @@ function App() {
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
             <Route path="/AdList" element={<AdList />} />
-            <Route path="/Condition" element={<Condition />} />
+            <Route path="/Condition" element={<Condition user="company" />} />
             <Route path="/BoardWritePage" element={<BoardWritePage />} />
             <Route path="/UserMyPage" element={<UserMyPage />} />
+            <Route path="/PostListPage" element={<PostListPage />} />
             <Route path="/EditUserMain" element={<EditUserMain />} />
             <Route path="/AdPage" element={<AdPage />} />
             <Route path="/AdJoinPage" element={<AdJoinPage />} />
@@ -56,17 +57,16 @@ function App() {
             <Route path="/CompanySignup" element={<CompanySignup />} />
             <Route path="/AdminMain" element={<AdminMain />} />
             <Route path="/CompanyInfo" element={<CompanyInfo />} />
-            <Route path="/AdminBoardList" element={<AdminBoardList />} />
-            <Route path="/AdminJobPostList" element={<AdminJobPostList />} />
-            <Route path="/AdminAdList" element={<AdminAdList />} />
+            <Route path="/AdminBoardList" element={<AdminBoardList />} />g
             <Route element={<CompanyInfoLayout />}>
-              <Route path="/CompanyDetail/:id" element={<CompanyDetail />} />
+              <Route path="/CompanyDetail" element={<CompanyDetail />} />
               <Route path="/CompanyFeedback" element={<CompanyFeedback />} />
               <Route path="/CompanyPost" element={<CompanyPost />} />
               <Route path="/CompanyJobPosing" element={<CompanyJobPosing />} />
             </Route>
             <Route path="/DobbyIntroduction" element={<DobbyIntroduction />} />
             <Route path="/TermsofUse" element={<TermsofUse />} />
+            <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
           </Route>
         </Routes>
       </Router>

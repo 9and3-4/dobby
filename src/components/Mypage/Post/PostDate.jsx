@@ -7,7 +7,8 @@ const StyledPostDate = styled.p`
   font-size: 0.8em;
 `;
 
-function formatDate(dateString) {
+export function formatDate(dateString) {
+  console.log(dateString);
   const date = new Date(dateString);
   const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
     .toString()

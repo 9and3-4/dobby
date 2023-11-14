@@ -1,4 +1,4 @@
-// footer 하단 서비스소개
+// footer 서비스소개
 
 import React from "react";
 import styled from "styled-components";
@@ -11,6 +11,10 @@ const Container = styled.div`
   color: var(--RED);
   justify: center;
   align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    height: 900px;
+  }
 `;
 
 const Dobby = styled.div`
@@ -81,7 +85,7 @@ const DobbyIntroduction = () => {
               대한민국 대기업 직장인 10명 중 9명이 이미 비밀 통로를 통해 많을
               비밀을 공유 했어요 !
             </p>
-            <p>당신도 함께 비밀을 공유할 차례입니다.</p>
+            <p>당신의 비밀도 속삭여 주세요</p>
           </DobbyBox2>
         </Dobby>
         <Title>FAQ</Title>
@@ -129,7 +133,7 @@ const DobbyIntroduction = () => {
               <h6>Q. 비밀 통로를 사용하다 문제가 발생 했어요</h6>
               <Answear>
                 {" "}
-                02-1000-7777로 오전9시-오후6시 사이 연락 주시면 해결해
+                02-1000-7777 로 오전 9시-오후 6시 사이 연락 주시면 해결해
                 드리겠습니다.
               </Answear>
               <Answear>* 도비 점심시간 1-2시</Answear>

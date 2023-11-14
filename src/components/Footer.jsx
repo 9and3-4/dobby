@@ -60,7 +60,7 @@ const Footer = () => {
         <Menu>
           <StyledLink to="/DobbyIntroduction">서비스 소개</StyledLink>
           <StyledLink to="/TermsofUse">이용약관</StyledLink>
-          <MenuItem>개인정보 처리방침</MenuItem>
+          <StyledLink to="/PrivacyPolicy">개인정보 처리방침</StyledLink>
           <MenuItem>기업 서비스</MenuItem>
         </Menu>
         <Copyright>© 9&3/4 Platform</Copyright>

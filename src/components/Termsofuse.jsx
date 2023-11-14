@@ -1,14 +1,18 @@
-// footer 하단 이용약관
+// footer  이용약관
 
 import React from "react";
 import styled from "styled-components";
 import BackButtonComponent from "../pages/MyPage/BackButton";
 
 const Container = styled.div`
-  height: 1000px;
+  height: 1200px;
   display: flex;
   flex-direction: column;
   color: var(--RED);
+
+  @media only screen and (max-width: 768px) {
+    height: 1800px;
+  }
 `;
 
 const Top = styled.div`
@@ -37,6 +41,7 @@ const Content = styled.div`
 
   p {
     font-size: 15px;
+    letter-spacing: 0.5px;
   }
 `;
 
@@ -47,7 +52,7 @@ const TermsofUse = () => {
     <>
       <Container>
         <Top>
-          <Title>커뮤니스 서비스 이용약관</Title>
+          <Title>커뮤니티 서비스 이용약관</Title>
           {/* <Logo src={logoUrl} alt="logo" /> */}
         </Top>
         <Bottom>
@@ -170,8 +175,8 @@ const TermsofUse = () => {
               잔여 약관은 유효하고 본 약관과 관련된 당사자들에게 그대로 적용됨을
               명시합니다
               <br />
-              본 약관은 아래 시행일로부터 시행됩니다. <br />- 시행일 2023년 11월
-              16일
+              본 약관은 아래 시행일로부터 시행됩니다. <br />
+              <br />- 시행일 2023년 11월 16일
             </p>
           </Content>
         </Bottom>

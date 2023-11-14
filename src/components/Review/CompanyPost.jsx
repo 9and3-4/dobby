@@ -2,14 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import AxiosApi from "../../api/AxiosApi";
+import PostDate, { formatDate } from "../../components/Mypage/Post/PostDate";
 
 const PostBox = styled.div`
   color: var(--RED);
   font-size: 18px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Posting = styled.div`
@@ -36,8 +35,15 @@ const CompanyPost = () => {
       try {
         const response = await AxiosApi.companyPost(id);
         if (response.status === 200) {
-          setCompanyPost(response.data);
-          console.log(response.data);
+          // setCompanyPost(response.data);
+          // console.log(response.data);
+          // 변환된 날짜를 추가
+          const postsWithFormattedDate = response.data.map((post) => ({
+            ...post,
+            formattedDate: formatDate(post.writedate),
+          }));
+          setCompanyPost(postsWithFormattedDate);
+          console.log(postsWithFormattedDate);
         }
       } catch (error) {
         console.error("Error fetching company detail:", error);
@@ -47,19 +53,20 @@ const CompanyPost = () => {
   }, []);
 
   if (!CompanyPost) {
-    return <div>Loading...</div>;
+    return <div>올라온 글이 없습니다.</div>;
   }
 
   return (
     <>
       <PostBox>
-        {companyPost.map((feedback, index) => (
+        {companyPost.map((e, index) => (
           <Posting key={index}>
-            <h2>제목 : {companyPost.title}</h2>
-            <p>{companyPost.content}</p>
-            <p>작성시간 : {companyPost.wirtedate}</p>
-            <p>👀 {companyPost.viewcount}</p>
-            <p>♥ {companyPost.likecount}</p>
+            <h2>제목 : {e.title}</h2>
+            <p>{e.content}</p>
+            {/* <p>작성시간 : {e.writedate}</p> */}
+            <PostDate date={e.formattedDate} />
+            <p>👀 {e.viewCount}</p>
+            <p>♥ {e.likeCount}</p>
           </Posting>
         ))}
       </PostBox>
