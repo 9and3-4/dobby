@@ -23,10 +23,10 @@ const BoardAxiosApi = {
     }
   },
 
-  getSubCategories: async (id) => {
+  getSubCategories: async (majorCategory) => {
     try {
       const response = await axios.get(
-        `${DOBBY_DOMAIN}/api/board/subcategories/${id}`
+        `${DOBBY_DOMAIN}/api/board/subcategories/${majorCategory}`
       );
       return response.data;
     } catch (error) {
