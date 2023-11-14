@@ -92,7 +92,7 @@ const menuOptions = {
   admin: {
     menuItem1: "회원정보 관리",
     menuItem2: "게시글 관리",
-    menuItem3: "가입 관리",
+    menuItem3: "채용 공고 관리",
     menuItem4: "광고 관리",
     icon: null,
   },
@@ -136,9 +136,9 @@ const Menu = (props) => {
       case "회원정보 관리":
         navigate("/AdminBoardList");
         break;
-      // case "게시글 관리":
-      //   navigate();
-      //   break;
+      case "게시글 관리":
+        navigate("/BoardListPage");
+        break;
       // case "가입 관리":
       //   navigate();
       //   break;

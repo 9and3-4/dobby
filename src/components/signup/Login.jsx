@@ -197,7 +197,7 @@ const Login = () => {
         window.localStorage.setItem("userCompanyName", res3.data[0].name);
         navigate("/CompanyMyPage");
       } else {
-        navigate("/AdPage");
+        navigate("/AdminMain");
       }
     } else {
       setModalOpen(true);

@@ -120,6 +120,19 @@ const AxiosApi = {
   companyPost: async (id) => {
     return await axios.get(DOBBY_DOMAIN + `/companyreview/companypost/${id}`);
   },
+  customerCompanyGet: async (email) => {
+    // 자바 url
+    return await axios.get(
+      DOBBY_DOMAIN + `/users/customercompany/?email=${email}`
+    );
+  },
+  manageState: async (isActive, id) => {
+    const state = {
+      isActive: isActive,
+      id: id,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/manager/state", state);
+  },
 
   // 기업 리뷰 페이지 내 기업 채용공고 가져오기
   companyJobPosting: async (id) => {

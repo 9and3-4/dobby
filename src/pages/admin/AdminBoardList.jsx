@@ -54,6 +54,19 @@ const TableRow = styled.tr`
   background-color: ${(props) => (props.isHovered ? "#eee" : "transparent")};
   color: ${(props) => (props.isHovered ? "#ed342e" : "inherit")};
   cursor: pointer;
+
+  ${(props) => {
+    if (props.isActive === "inactive") {
+      return `
+        background-color: #fdffcb;
+      `;
+    } else if (props.isActive === "quit") {
+      return `
+        background-color: #bbb;
+      `;
+    }
+    return "";
+  }}
 `;
 
 const ModalButtonContainer = styled.div`
@@ -88,8 +101,6 @@ const AdminBoardList = () => {
         currentType === "user"
           ? await AxiosApi.managerUserInfoGet()
           : await AxiosApi.managerCompanyInfoGet();
-
-      console.log(response.data);
       setBoardList(response.data);
     } catch (error) {
       console.log(error);
@@ -132,6 +143,13 @@ const AdminBoardList = () => {
   };
   const closeModal = () => {
     setIsModalOpen(false);
+    setSelectedUser(null);
+  };
+
+  const handleManageState = async (state) => {
+    await AxiosApi.manageState(state, selectedUser);
+    fetchBoardList(); // 상태가 변경될 때마다 데이터 다시 불러오기
+    setIsModalOpen(false);
   };
 
   return (
@@ -169,12 +187,15 @@ const AdminBoardList = () => {
                 onMouseEnter={() => handleRowMouseEnter(index)}
                 onMouseLeave={handleRowMouseLeave}
                 isHovered={hoveredRow === index}
+                isActive={board.isActive} // 추가된 부분: isActive props 전달
               >
                 {currentType === "user" ? (
                   <>
                     <BoardTd>{board.id}</BoardTd>
                     <BoardTd>{board.role}</BoardTd>
-                    <BoardTd>{board.email}</BoardTd>
+                    <BoardTd>
+                      {board.email && board.email.replace(/\/$/, "")}
+                    </BoardTd>
                     <BoardTd>{board.password}</BoardTd>
                     <BoardTd>{board.nickName}</BoardTd>
                     <BoardTd>{board.name}</BoardTd>
@@ -185,14 +206,18 @@ const AdminBoardList = () => {
                     <BoardTd>{board.id}</BoardTd>
                     <BoardTd>{board.companyId}</BoardTd>
                     <BoardTd>{board.role}</BoardTd>
-                    <BoardTd>{board.email}</BoardTd>
+                    <BoardTd>
+                      {board.email && board.email.replace(/\/$/, "")}
+                    </BoardTd>
                     <BoardTd>{board.password}</BoardTd>
                     <BoardTd>{board.companyName}</BoardTd>
                     <BoardTd>{board.ceo}</BoardTd>
                     <BoardTd>{board.customerContact}</BoardTd>
                     <BoardTd>{board.businessCategory}</BoardTd>
                     <BoardTd>{board.sizeScale}</BoardTd>
-                    <BoardTd>{board.companyUrl}</BoardTd>
+                    <BoardTd>
+                      {board.companyUrl && board.companyUrl.replace(/\/$/, "")}
+                    </BoardTd>
                     <BoardTd>{board.isActive}</BoardTd>
                   </>
                 )}
@@ -200,7 +225,6 @@ const AdminBoardList = () => {
             ))}
         </tbody>
       </BoardTable>
-      {/* 모달 창 구현 */}
       {isModalOpen && (
         <div>
           <Modal
@@ -209,9 +233,15 @@ const AdminBoardList = () => {
             header={`customer id : ${selectedUser}`}
           >
             <ModalButtonContainer>
-              <ModalButton>active</ModalButton> {/* api 요청 추가 */}
-              <ModalButton>inactive</ModalButton>
-              <ModalButton>quit</ModalButton>
+              <ModalButton onClick={() => handleManageState("active")}>
+                active
+              </ModalButton>
+              <ModalButton onClick={() => handleManageState("inactive")}>
+                inactive
+              </ModalButton>
+              <ModalButton onClick={() => handleManageState("quit")}>
+                quit
+              </ModalButton>
             </ModalButtonContainer>
           </Modal>
         </div>
