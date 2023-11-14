@@ -300,7 +300,7 @@ const AdList = () => {
       ID: 10,
       COMPANY_ID: 100,
       IMAGE:
-        "https://www.urbanbrush.net/web/wp-content/uploads/edd/2022/11/urbanbrush-20221108214712319041.jpg",
+        "https://www.urbanbrush.net/web/wp-content/uploads/edd/2022/11/urbanbrush-20221108214712319041.jpg",
       START_DATE: "2023-11-13 12:00:00",
       END_DATE: "2023-11-20 12:00:00",
       AD_FEE: "STANDARD",

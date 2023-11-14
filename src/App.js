@@ -55,7 +55,6 @@ function App() {
             <Route path="/AdminMain" element={<AdminMain />} />
             <Route path="/CompanyInfo" element={<CompanyInfo />} />
             <Route path="/AdminBoardList" element={<AdminBoardList />} />
-
             <Route element={<CompanyInfoLayout />}>
               <Route path="/CompanyDetail/:id" element={<CompanyDetail />} />
               <Route path="/CompanyFeedback" element={<CompanyFeedback />} />

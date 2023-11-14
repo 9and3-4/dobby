@@ -158,5 +158,11 @@ const AxiosApi = {
   managerCompanyInfoGet: async () => {
     return await axios.get(DOBBY_DOMAIN + "/manager/companyinfo");
   },
+  managerJobPostingInfoGet: async () => {
+    return await axios.get(DOBBY_DOMAIN + "/manager/userinfo");
+  },
+  managerAdListInfoGet: async () => {
+    return await axios.get(DOBBY_DOMAIN + "/manager/userinfo");
+  },
 };
 export default AxiosApi;
