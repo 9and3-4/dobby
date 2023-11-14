@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import searchIcon from "../../images/searchicon.jpg";
 import userIcon from "../../images/userprofile.png";
-import companyIcon from "../../images/companyprofile.png";
+import companyIcon from "../../images/companyprofile2.png";
 import adminIcon from "../../images/adminprofile.png";
 
 const MenuContainer = styled.div`
@@ -131,7 +131,7 @@ const Menu = (props) => {
       //   navigate();
       //   break;
       case "광고 신청":
-        navigate("/AdList");
+        navigate("/AdPage");
         break;
       case "회원정보 관리":
         navigate("/AdminBoardList");
@@ -139,7 +139,7 @@ const Menu = (props) => {
       case "게시글 관리":
         navigate("/BoardListPage");
         break;
-      // case "가입 관리":
+      // case "채용 공고 관리":
       //   navigate();
       //   break;
       // case "광고 관리":
