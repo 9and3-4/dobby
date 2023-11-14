@@ -236,7 +236,7 @@ const CompanySignup = () => {
     }
   };
 
-  // 이메일 옵션
+  // 회사 규모 option
   const data = ["기업 규모 선택", "대기업", "중견기업", "중소기업", "스타트업"];
 
   return (

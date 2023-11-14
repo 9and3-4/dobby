@@ -78,101 +78,6 @@ const AdJoinPage = () => {
   const [price, setPrice] = useState("");
   const [period, setPeriod] = useState(""); // Date 함수 사용
 
-  //팝업 처리
-  const [modalOpen, setModalOpen] = useState(false); // confirm(확인)이 있는 Modal
-  const [modalOpen2, setModalOpen2] = useState(false); // close(취소)만 있는 Modal
-  const [modalText, setModalText] = useState("");
-  const [application, setApplication] = useState(false); // 신청 확인 버튼
-  // Modal 닫기 버튼
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-  const closeModal2 = () => {
-    setModalOpen2(false);
-  };
-  // Modal 확인 버튼
-  const sucModal = () => {
-    setApplication(true);
-    setModalOpen(false);
-  };
-
-  // 날짜 형식 'YYYY-MM-DD'으로 변환
-  const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    const day = ("0" + date.getDate()).slice(-2);
-    return `${year}-${month}-${day}`;
-  };
-
-  // 미래 날짜 계산하기
-  function calculateFutureDate(p2) {
-    const today = new Date();
-    const futureDate = new Date(today);
-    futureDate.setDate(today.getDate() + p2);
-    console.log(formatDate(futureDate));
-    return formatDate(futureDate);
-  }
-  // firebase에 이미지 업로드
-  const imageUpload = () => {
-    const storageRef = storage.ref();
-    const fileRef = storageRef.child(file.name);
-    fileRef.put(file).then(() => {
-      console.log("File uploaded successfully!");
-      fileRef.getDownloadURL().then((url) => {
-        console.log("저장 경로 확인 : " + url);
-        setUrl(url);
-      });
-    });
-    return url;
-  };
-
-  const priceSum = async (p1, p2) => {
-    // 첨부된 파일이 있을 때,
-    if (file !== null) {
-      setModalOpen(true);
-      setModalText("신청하시겠습니까?");
-      // // Modal에서 확인 버튼 눌렸을 때,
-      if (application === true) {
-        setPrice(p1); // 가격 price에 전달
-        const futureDate = calculateFutureDate(p2); // 미래 날짜 계산
-        try {
-          const urlImage = imageUpload();
-          console.log(urlImage, futureDate, formatDate(today), price);
-          // AxiosApi로 광고 신청한 정보 전송
-          const adApplication = await AxiosApi.adApplication(
-            window.localStorage.getItem("userId"),
-            urlImage, // firebase를 이용해 url 주소 받아오기
-            formatDate(today), // 오늘 날짜
-            futureDate, // 오늘 날짜 + 선택한 기간
-            price
-          );
-          console.log("광고 신청 정보 : " + adApplication.data);
-          setApplication(false);
-          if (adApplication.data === true) {
-            setModalOpen2(true);
-            setModalText(
-              "광고 신청이 완료되었습니다. 관리자 승인 후 게시됩니다. 자세한 사항은 이메일을 확인해주십시오."
-            );
-            navigate("/home");
-          } else {
-            // setModalOpen2(true);
-            setModalText(
-              "광고 신청을 실패했습니다. 자세한 사항은 관리자에게 문의해주십시오."
-            );
-          }
-        } catch (error) {
-          console.error("Error uploading image:", error);
-          setModalOpen2(true);
-          setModalText("이미지 업로드 중 오류가 발생했습니다.");
-        }
-      }
-    } else {
-      // 첨부된 파일이 없을 때
-      setModalOpen2(true);
-      setModalText("사진 파일을 첨부해주십시오.");
-    }
-  };
-
   // 파일 업로드
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState("");
@@ -187,22 +92,107 @@ const AdJoinPage = () => {
     }
   };
 
-  const onClickBtn = (price) => {
-    switch (price) {
-      case 1:
-        priceSum("70", 7); // 70만원 7일
-        break;
-      case 2:
-        priceSum("250", 30); // 1개월
-        break;
-      case 3:
-        priceSum("800", 90); // 3개월
-        break;
-      default:
-        break;
-    }
+  //팝업 처리
+  const [modalOpen, setModalOpen] = useState(false); // confirm(확인)이 있는 Modal
+  const [modalText, setModalText] = useState("");
+  const [modalSelect, setModalSelect] = useState(1);
+  // Modal 닫기 버튼
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
+  // 날짜 형식 'YYYY-MM-DD'으로 변환
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  };
+
+  // 미래 날짜 계산하기
+  function calculateFutureDate(plusDay) {
+    const today = new Date();
+    const futureDate = new Date(today);
+    futureDate.setDate(today.getDate() + plusDay);
+    console.log(formatDate(futureDate));
+    setPeriod(formatDate(futureDate));
+  }
+  // firebase에 이미지 업로드
+  const imageUpload = () => {
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(file.name);
+    fileRef.put(file).then(() => {
+      console.log("File uploaded successfully!");
+      fileRef.getDownloadURL().then((url) => {
+        console.log("저장 경로 확인 : " + url);
+        setUrl(url);
+      });
+    });
+  };
+
+  const onClickBtn = (p) => {
+    // 첨부된 파일이 있을 때,
+    if (file !== null) {
+      setModalOpen(true);
+      setModalText("신청하시겠습니까?");
+      setModalSelect(1);
+      switch (p) {
+        case 1:
+          setPrice(70); // 가격
+          calculateFutureDate(7); // 종료 날짜
+          imageUpload(); // 이미지 업로드
+          break;
+        case 2:
+          setPrice(250); // 가격
+          calculateFutureDate(30); // 종료 날짜
+          imageUpload(); // 이미지 업로드
+          break;
+        case 3:
+          setPrice(800); // 가격
+          calculateFutureDate(90); // 종료 날짜
+          imageUpload(); // 이미지 업로드
+          break;
+        default:
+          break;
+      }
+    } else {
+      // 첨부된 파일이 없을 때
+      setModalOpen(true);
+      setModalText("사진 파일을 첨부해주십시오.");
+      setModalSelect(2);
+    }
+  };
+  // Modal 확인 버튼
+  const sucModal = async () => {
+    setModalOpen(false);
+
+    console.log("price : " + price + ", period : " + period + ", url : " + url);
+    // AxiosApi로 광고 신청한 정보 전송
+    const adApplication = await AxiosApi.adApplication(
+      window.localStorage.getItem("userId"),
+      url, // firebase를 이용해 url 주소 받아오기
+      formatDate(today), // 오늘 날짜
+      period, // 오늘 날짜 + 선택한 기간
+      price
+    );
+
+    console.log("광고 신청 정보 : " + adApplication.data);
+
+    if (adApplication.data === true) {
+      setModalOpen(true);
+      setModalText(
+        "광고 신청이 완료되었습니다. 관리자 승인 후 게시됩니다. 자세한 사항은 이메일을 확인해주십시오."
+      );
+      setModalSelect(2);
+      navigate("/home");
+    } else {
+      setModalOpen(true);
+      setModalText(
+        "광고 신청을 실패했습니다. 자세한 사항은 관리자에게 문의해주십시오."
+      );
+      setModalSelect(2);
+    }
+  };
   return (
     <Container>
       <StandardBox>
@@ -254,18 +244,22 @@ const AdJoinPage = () => {
             신청하기
           </TransBtn>
           <InputImg type="file" onChange={handleFileInputChange} />
-          <Modal
-            open={modalOpen}
-            type="true"
-            confirm={sucModal}
-            close={closeModal}
-            header="광고 신청"
-          >
-            {modalText}
-          </Modal>
-          <Modal open={modalOpen2} close={closeModal2} header="알림">
-            {modalText}
-          </Modal>
+          {modalSelect === 1 && (
+            <Modal
+              open={modalOpen}
+              type={true}
+              confirm={sucModal}
+              close={closeModal}
+              header="광고 신청"
+            >
+              {modalText}
+            </Modal>
+          )}
+          {modalSelect === 2 && (
+            <Modal open={modalOpen} close={closeModal} header="알림">
+              {modalText}
+            </Modal>
+          )}
         </Box>
       </PremiumBox>
     </Container>

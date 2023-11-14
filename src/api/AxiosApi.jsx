@@ -20,6 +20,16 @@ const AxiosApi = {
     };
     return await axios.post(DOBBY_DOMAIN + "/users/memUpdate", memInfo);
   },
+  // 기업 회원 정보 수정
+  memberUpdate2: async (id, name, phone, pwd) => {
+    const memInfo = {
+      id: id,
+      name: name,
+      phone: phone,
+      pwd: pwd,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/users/memUpdate2", memInfo);
+  },
   //회원 조회
   memberGet: async (id) => {
     return await axios.get(DOBBY_DOMAIN + `/users/member/?name=${id}`);
@@ -39,12 +49,19 @@ const AxiosApi = {
   memberRegCheck: async (id, url) => {
     return await axios.get(DOBBY_DOMAIN + `/users/check/?id=${id}&url=${url}`);
   },
+
+  customerCompanyGet: async (email) => {
+    // 자바 url
+    return await axios.get(
+      DOBBY_DOMAIN + `/company/customercompany/?email=${email}`
+    );
+  },
   // 회원 탈퇴
   memberDel: async (id) => {
     const del = {
       id: id,
     };
-    return await axios.post(DOBBY_DOMAIN + "/user/delete", del);
+    return await axios.post(DOBBY_DOMAIN + "/users/delete", del);
   },
 
   // 마이페이지 내가 쓴 글 리스트
@@ -99,6 +116,44 @@ const AxiosApi = {
     };
     return await axios.post(DOBBY_DOMAIN + "/company/new", comMember);
   },
+  // 기업 company 회원 수정
+  companyUpdate: async (
+    id,
+    companyName,
+    sizeScale,
+    ceo,
+    contactNumber,
+    category,
+    address,
+    year,
+    staff,
+    income,
+    profile,
+    logo
+  ) => {
+    const comupdate = {
+      id: id,
+      companyName: companyName,
+      sizeScale: sizeScale,
+      ceo: ceo,
+      contactNumber: contactNumber,
+      category: category,
+      address: address,
+      year: year,
+      staff: staff,
+      income: income,
+      profile: profile,
+      logo: logo,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/company/update", comupdate);
+  },
+  // 기업 탈퇴
+  companyDel: async (id) => {
+    const del = {
+      id: id,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/company/delete", del);
+  },
   // 기업 리뷰 페이지 내 기업 정보(기업명만) 가져오기
   infoGet: async () => {
     return await axios.get(DOBBY_DOMAIN + `/companyreview/companyinfoall`);
@@ -119,19 +174,6 @@ const AxiosApi = {
   // 기업 리뷰 페이지 내 기업 게시글 가져오기 (모바일 전용 제외함)
   companyPost: async (id) => {
     return await axios.get(DOBBY_DOMAIN + `/companyreview/companypost/${id}`);
-  },
-  customerCompanyGet: async (email) => {
-    // 자바 url
-    return await axios.get(
-      DOBBY_DOMAIN + `/users/customercompany/?email=${email}`
-    );
-  },
-  manageState: async (isActive, id) => {
-    const state = {
-      isActive: isActive,
-      id: id,
-    };
-    return await axios.post(DOBBY_DOMAIN + "/manager/state", state);
   },
 
   // 기업 리뷰 페이지 내 기업 채용공고 가져오기
@@ -157,12 +199,6 @@ const AxiosApi = {
   },
   managerCompanyInfoGet: async () => {
     return await axios.get(DOBBY_DOMAIN + "/manager/companyinfo");
-  },
-  managerJobPostingInfoGet: async () => {
-    return await axios.get(DOBBY_DOMAIN + "/manager/jobpostinfo");
-  },
-  managerAdListInfoGet: async () => {
-    return await axios.get(DOBBY_DOMAIN + "/manager/adlistinfo");
   },
 };
 export default AxiosApi;

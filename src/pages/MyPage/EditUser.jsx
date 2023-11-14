@@ -161,8 +161,8 @@ const EditUserMain = () => {
       const res = await AxiosApi.memberGet(
         window.localStorage.getItem("userId")
       );
-      console.log("고객 정보 : " + res.data[0]); // 고객 정보 불러오기
 
+      console.log(res.data[0]);
       setUserData(res.data[0]);
       console.log("고객 email : " + window.localStorage.getItem("userId"));
     };
@@ -189,7 +189,6 @@ const EditUserMain = () => {
   const [isPw, setIsPw] = useState(false);
   const [isConPw, setIsConPw] = useState(false);
 
-  console.log("userData: " + userData);
   const [userName, setUserName] = useState(""); // 이름
   const NameChange = (e) => {
     setUserName(e.target.value);
@@ -276,6 +275,8 @@ const EditUserMain = () => {
     }
   };
 
+  if (!userData) return <></>;
+
   return (
     <>
       <Container>
@@ -289,6 +290,7 @@ const EditUserMain = () => {
             <InputField
               id="userName"
               type="text"
+              placeholder={userData.name}
               value={userName} // 입력 필드의 값으로 실명 사용
               onChange={NameChange} // 값이 변경될 때 호출
             />
@@ -298,6 +300,7 @@ const EditUserMain = () => {
             <InputField
               id="nickName"
               type="text"
+              placeholder={userData.nickName}
               value={nickName} // 입력 필드의 값으로 닉네임 사용
               onChange={nickNameChange} // 값이 변경될 때 호출
             />
