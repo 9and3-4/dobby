@@ -46,7 +46,7 @@ function App() {
             <Route path="/AdPage" element={<AdPage />} />
             <Route path="/AdJoinPage" element={<AdJoinPage />} />
             <Route path="/BoardListPage" element={<BoardListPage />} />
-            <Route path="/BoardDetailPage" element={<BoardDetail />} />
+            <Route path="/BoardDetailPage/:id" element={<BoardDetail />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/CompanySignup" element={<CompanySignup />} />
             <Route path="/AdminMain" element={<AdminMain />} />
