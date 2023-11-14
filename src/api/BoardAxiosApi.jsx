@@ -15,7 +15,7 @@ const BoardAxiosApi = {
   //대분류, 소분류 가져오기
   getMajorCategories: async () => {
     try {
-      const response = await axios.get(`${DOBBY_DOMAIN}/api/majorCategories`);
+      const response = await axios.get(`${DOBBY_DOMAIN}/api/board/categories`);
       return response.data;
     } catch (error) {
       console.error("대분류 카테고리 에러:", error);
@@ -23,14 +23,14 @@ const BoardAxiosApi = {
     }
   },
 
-  getSubCategories: async (majorCategoryId) => {
+  getSubCategories: async (id) => {
     try {
       const response = await axios.get(
-        `${DOBBY_DOMAIN}/api/subCategories/${majorCategoryId}`
+        `${DOBBY_DOMAIN}/api/board/subcategories/${id}`
       );
       return response.data;
     } catch (error) {
-      console.error("Failed to fetch sub categories:", error);
+      console.error("소분류 카테고리 에러:", error);
       throw error;
     }
   },

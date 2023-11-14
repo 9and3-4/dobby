@@ -129,11 +129,12 @@ const BoardWrite = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    //대분류 선택에 따라 소분류를 가져오는 역할을 하는 fetch
     const fetchMajorCategories = async () => {
       try {
         const rsp = await BoardAxiosApi.getMajorCategories();
         console.log("대분류 : ", rsp);
-        setMajorCategories(rsp.data);
+        setMajorCategories(rsp);
       } catch (error) {
         console.error("대분류를 가져오는 중 오류 발생:", error);
       }
@@ -160,14 +161,23 @@ const BoardWrite = () => {
 
     // selectedMajorCategory가 변경될 때마다 소분류 데이터를 가져오는 useEffect 호출
     fetchSubCategories();
+    console.log("선택major category:", selectedMajorCategory);
   }, [selectedMajorCategory]);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleContentChange = (e) => setContent(e.target.value);
 
   const handleMajorCategoryChange = (e) => {
+    const selectedValue = e.target.value;
+    console.log("선택major category:", selectedMajorCategory);
+    setSelectedMajorCategory(selectedValue);
+
     setSelectedMajorCategory(e.target.value);
+    console.log(e.target.value);
+    console.log("핸들메이저카테고리 확인 : ", selectedMajorCategory);
     // 대분류 변경 시 소분류 초기화
+    // axios로 대분류 값으로 소분류 가져오는 서버 날려야함
+
     setSelectedSubCategory("");
   };
 
@@ -213,9 +223,9 @@ const BoardWrite = () => {
               onChange={handleMajorCategoryChange}
             >
               <DropdownOption value="">대분류 선택</DropdownOption>
-              {majorCategories.map((majorCategory) => (
-                <DropdownOption key={majorCategory.id} value={majorCategory.id}>
-                  {majorCategory.name}
+              {majorCategories.map((majorCategory, index) => (
+                <DropdownOption key={index} value={majorCategory}>
+                  {majorCategory}
                 </DropdownOption>
               ))}
             </Dropdown>
@@ -226,9 +236,9 @@ const BoardWrite = () => {
               onChange={handleSubCategoryChange}
             >
               <DropdownOption value="">소분류 선택</DropdownOption>
-              {subCategories.map((subCategory) => (
-                <DropdownOption key={subCategory.id} value={subCategory.id}>
-                  {subCategory.name}
+              {subCategories.map((subCategory, index) => (
+                <DropdownOption key={index} value={index}>
+                  {subCategory}
                 </DropdownOption>
               ))}
             </Dropdown>
