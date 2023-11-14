@@ -70,7 +70,8 @@ const Profile = () => {
       id: userId,
     },
     admin: {
-      profileUrl: null,
+      profileUrl:
+        "https://firebasestorage.googleapis.com/v0/b/mini-project-1f72d.appspot.com/o/adminprofile.png?alt=media&token=1e99e763-f1b6-4900-af15-dc6f46e5fed0",
       name: "Admin",
       id: userId,
     },
