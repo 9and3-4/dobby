@@ -42,7 +42,7 @@ function App() {
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
             <Route path="/AdList" element={<AdList />} />
-            <Route path="/Condition" element={<Condition user="company" />} />
+            <Route path="/Condition" element={<Condition />} />
             <Route path="/BoardWritePage" element={<BoardWritePage />} />
             <Route path="/UserMyPage" element={<UserMyPage />} />
             <Route path="/EditUserMain" element={<EditUserMain />} />
@@ -54,7 +54,8 @@ function App() {
             <Route path="/CompanySignup" element={<CompanySignup />} />
             <Route path="/AdminMain" element={<AdminMain />} />
             <Route path="/CompanyInfo" element={<CompanyInfo />} />
-            <Route path="/AdminBoardList" element={<AdminBoardList />} />g
+            <Route path="/AdminBoardList" element={<AdminBoardList />} />
+
             <Route element={<CompanyInfoLayout />}>
               <Route path="/CompanyDetail/:id" element={<CompanyDetail />} />
               <Route path="/CompanyFeedback" element={<CompanyFeedback />} />

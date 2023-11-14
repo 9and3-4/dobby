@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import searchIcon from "../../images/searchicon.jpg";
 import userIcon from "../../images/userprofile.png";
 import companyIcon from "../../images/companyprofile.png";
-import adminIcon from "../../images/93152D.jpg";
+import adminIcon from "../../images/adminprofile.png";
 
 const MenuContainer = styled.div`
   background-color: #fff;
@@ -94,7 +94,7 @@ const menuOptions = {
     menuItem2: "게시글 관리",
     menuItem3: "채용 공고 관리",
     menuItem4: "광고 관리",
-    icon: null,
+    icon: adminIcon,
   },
   default: {
     menuItem1: "기업 리뷰",
@@ -130,9 +130,9 @@ const Menu = (props) => {
       // case "회사소개":
       //   navigate();
       //   break;
-      // case "광고 신청":
-      //   navigate();
-      //   break;
+      case "광고 신청":
+        navigate("/AdList");
+        break;
       case "회원정보 관리":
         navigate("/AdminBoardList");
         break;
@@ -159,6 +159,9 @@ const Menu = (props) => {
         break;
       case "company":
         navigate("/companyMypage");
+        break;
+      case "admin":
+        navigate("/userMypage");
         break;
       default:
         navigate("/");
