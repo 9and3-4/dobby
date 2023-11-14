@@ -32,7 +32,7 @@ const CompanyFeedback = () => {
       try {
         const response = await AxiosApi.companyFeedback(id);
         if (response.status === 200) {
-          setCompanyFeedback(response.data[0]);
+          setCompanyFeedback(response.data);
           console.log(response.data);
         }
       } catch (error) {
@@ -50,11 +50,13 @@ const CompanyFeedback = () => {
   return (
     <>
       <FeedbackBox>
-        <Substance>
-          <p>작성 시간 : {companyFeedback.writedate}</p>
-          <p>내용 : {companyFeedback.content}</p>
-          <p>별점 : {companyFeedback.rating}</p>
-        </Substance>
+        {companyFeedback.map((feedback, index) => (
+          <Substance key={index}>
+            <p>작성 시간 : {feedback.writedate}</p>
+            <p>내용 : {feedback.content}</p>
+            <p>별점 : {feedback.rating}</p>
+          </Substance>
+        ))}
       </FeedbackBox>
     </>
   );

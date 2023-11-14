@@ -36,7 +36,7 @@ const CompanyPost = () => {
       try {
         const response = await AxiosApi.companyPost(id);
         if (response.status === 200) {
-          setCompanyPost(response.data[0]);
+          setCompanyPost(response.data);
           console.log(response.data);
         }
       } catch (error) {
@@ -53,13 +53,15 @@ const CompanyPost = () => {
   return (
     <>
       <PostBox>
-        <Posting>
-          <h2>제목 : {companyPost.title}</h2>
-          <p>{companyPost.content}</p>
-          <p>작성시간 : {companyPost.wirtedate}</p>
-          <p>👀 {companyPost.viewcount}</p>
-          <p>♥ {companyPost.likecount}</p>
-        </Posting>
+        {companyPost.map((feedback, index) => (
+          <Posting key={index}>
+            <h2>제목 : {companyPost.title}</h2>
+            <p>{companyPost.content}</p>
+            <p>작성시간 : {companyPost.wirtedate}</p>
+            <p>👀 {companyPost.viewcount}</p>
+            <p>♥ {companyPost.likecount}</p>
+          </Posting>
+        ))}
       </PostBox>
     </>
   );

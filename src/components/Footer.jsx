@@ -1,47 +1,5 @@
-// Footer.js
-//2023-11-04T18:53:00
-
-// import styled from "styled-components";
-
-// const Position = styled.div`
-//   position: absolute;
-//   bottom: 0;
-// `;
-
-// const Container = styled.div`
-//   padding: 0 10px;
-//   margin: 0;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   color: white;
-// `;
-
-// const Text = styled.p`
-//   font-size: 20px;
-// `;
-
-// const Line = styled.hr`
-//   border: 0;
-//   border-top: 1px solid #a13333; /* 원하는 색상으로 대체  93152d */
-//   width: 100vw; /* 줄의 너비 조정 가능 */
-// `;
-
-// const Footer = () => {
-//   return (
-//     <Position>
-//       <Line />
-//       <Container>
-//         <Text>Footer</Text>
-//       </Container>
-//     </Position>
-//   );
-// };
-// export default Footer;
-
-/* 대안 2: 흰색 바탕 + ed342e(밝은 빨강) 조합 */
-
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Position = styled.div`
   position: relative;
@@ -84,14 +42,24 @@ const Copyright = styled.div`
   }
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: var(--RED);
+  padding: 0 10px;
+  font-size: 15px;
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
 const Footer = () => {
   return (
     <Position>
       <Line />
       <Container>
         <Menu>
-          <MenuItem>서비스 소개</MenuItem>
-          <MenuItem>이용약관</MenuItem>
+          <StyledLink to="/DobbyIntroduction">서비스 소개</StyledLink>
+          <StyledLink to="/TermsofUse">이용약관</StyledLink>
           <MenuItem>개인정보 처리방침</MenuItem>
           <MenuItem>기업 서비스</MenuItem>
         </Menu>

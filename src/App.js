@@ -26,6 +26,8 @@ import CompanyFeedback from "./components/Review/CompanyFeedback";
 import EditUserMain from "./pages/MyPage/EditUser";
 import CompanyPost from "./components/Review/CompanyPost";
 import CompanyJobPosing from "./components/Review/CompanyJobPosting";
+import DobbyIntroduction from "./components/DobbyIntroduction";
+import TermsofUse from "./components/Termsofuse";
 
 function App() {
   return (
@@ -59,6 +61,8 @@ function App() {
               <Route path="/CompanyPost" element={<CompanyPost />} />
               <Route path="/CompanyJobPosing" element={<CompanyJobPosing />} />
             </Route>
+            <Route path="/DobbyIntroduction" element={<DobbyIntroduction />} />
+            <Route path="/TermsofUse" element={<TermsofUse />} />
           </Route>
         </Routes>
       </Router>
