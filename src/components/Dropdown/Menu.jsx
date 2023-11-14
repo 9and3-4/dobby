@@ -139,12 +139,12 @@ const Menu = (props) => {
       case "게시글 관리":
         navigate("/BoardListPage");
         break;
-      // case "채용 공고 관리":
-      //   navigate();
-      //   break;
-      // case "광고 관리":
-      //   navigate();
-      //   break;
+      case "채용 공고 관리":
+        navigate("/AdminJobPostList");
+        break;
+      case "광고 관리":
+        navigate("/AdminAdList");
+        break;
       default:
         navigate("/");
     }

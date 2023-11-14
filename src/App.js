@@ -28,6 +28,8 @@ import CompanyPost from "./components/Review/CompanyPost";
 import CompanyJobPosing from "./components/Review/CompanyJobPosting";
 import DobbyIntroduction from "./components/DobbyIntroduction";
 import TermsofUse from "./components/Termsofuse";
+import AdminJobPostList from "./pages/admin/AdminJobPostList";
+import AdminAdList from "./pages/admin/AdminAdList";
 
 function App() {
   return (
@@ -55,6 +57,8 @@ function App() {
             <Route path="/AdminMain" element={<AdminMain />} />
             <Route path="/CompanyInfo" element={<CompanyInfo />} />
             <Route path="/AdminBoardList" element={<AdminBoardList />} />
+            <Route path="/AdminJobPostList" element={<AdminJobPostList />} />
+            <Route path="/AdminAdList" element={<AdminAdList />} />
             <Route element={<CompanyInfoLayout />}>
               <Route path="/CompanyDetail/:id" element={<CompanyDetail />} />
               <Route path="/CompanyFeedback" element={<CompanyFeedback />} />

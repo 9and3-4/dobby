@@ -33,6 +33,12 @@ const BoardTh = styled.th`
 const BoardTd = styled.td`
   border: 1px solid #ddd;
   padding: 15px;
+  background-color: ${(props) =>
+    props.isEnabled === "inactive"
+      ? "#fdffcb"
+      : props.isEnabled === "quit"
+      ? "#bbb"
+      : "transparent"};
 `;
 
 const TableRow = styled.tr`
@@ -58,6 +64,7 @@ const ModalButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 const ModalButton = styled.button`
   margin: 0 20px;
   width: 100px;
@@ -73,38 +80,40 @@ const ModalButton = styled.button`
   }
 `;
 
-const AdminBoardList = () => {
+const AdminJobPostList = () => {
   const [boardList, setBoardList] = useState([]);
-  //   const [currentType, setCurrentType] = useState("user");
   const [selectedUser, setSelectedUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
 
   const fetchBoardList = async () => {
     try {
-      const response = await AxiosApi.managerCompanyInfoGet(); // jobposting api
+      const response = await AxiosApi.managerJobPostingInfoGet(); // jobposting api
+      console.log(response);
       setBoardList(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  //   useEffect(() => {
-  //     fetchBoardList();
-  //   }, [currentType]);
+  useEffect(() => {
+    fetchBoardList();
+  }, []);
 
   const headers = [
-    "id",
-    "COMPANY_ID",
-    "TITLE",
-    "DESCRIPTION",
-    "QUALIFICATION",
-    "DEADLINE",
-    "IMAGE",
-    "ISENABLED",
+    "jobPostingId",
+    "companyId",
+    "companyName",
+    "title",
+    "description",
+    "qualification",
+    "deadline",
+    // "image",
+    "isEnabled",
   ];
-  const handleRowClick = (user) => {
-    setSelectedUser(user);
+
+  const handleRowClick = (board) => {
+    setSelectedUser(board);
     setIsModalOpen(true);
   };
 
@@ -115,13 +124,14 @@ const AdminBoardList = () => {
   const handleRowMouseLeave = () => {
     setHoveredRow(null);
   };
+
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedUser(null);
   };
 
   const handleManageState = async (state) => {
-    await AxiosApi.manageState(state, selectedUser);
+    // await AxiosApi.manageState(state, selectedUser);
     fetchBoardList(); // 상태가 변경될 때마다 데이터 다시 불러오기
     setIsModalOpen(false);
   };
@@ -141,33 +151,26 @@ const AdminBoardList = () => {
           {boardList &&
             boardList.map((board, index) => (
               <TableRow
-                key={board.id}
-                onClick={() => handleRowClick(board.id)}
+                key={board.jobPostingId}
+                onClick={() => handleRowClick(board)}
                 onMouseEnter={() => handleRowMouseEnter(index)}
                 onMouseLeave={handleRowMouseLeave}
                 isHovered={hoveredRow === index}
-                isActive={board.isActive} // 추가된 부분: isActive props 전달
+                isActive={board.isEnabled}
               >
-                {
-                  <>
-                    <BoardTd>{board.id}</BoardTd>
-                    <BoardTd>{board.companyId}</BoardTd>
-                    <BoardTd>{board.role}</BoardTd>
-                    <BoardTd>
-                      {board.email && board.email.replace(/\/$/, "")}
-                    </BoardTd>
-                    <BoardTd>{board.password}</BoardTd>
-                    <BoardTd>{board.companyName}</BoardTd>
-                    <BoardTd>{board.ceo}</BoardTd>
-                    <BoardTd>{board.customerContact}</BoardTd>
-                    <BoardTd>{board.businessCategory}</BoardTd>
-                    <BoardTd>{board.sizeScale}</BoardTd>
-                    <BoardTd>
-                      {board.companyUrl && board.companyUrl.replace(/\/$/, "")}
-                    </BoardTd>
-                    <BoardTd>{board.isActive}</BoardTd>
-                  </>
-                }
+                <>
+                  <BoardTd>{board.jobPostingId}</BoardTd>
+                  <BoardTd>{board.companyId}</BoardTd>
+                  <BoardTd>{board.companyName}</BoardTd>
+                  <BoardTd>{board.title}</BoardTd>
+                  <BoardTd>{board.description}</BoardTd>
+                  <BoardTd>{board.qualification}</BoardTd>
+                  <BoardTd>{board.deadline}</BoardTd>
+                  {/* <BoardTd>{board.image}</BoardTd> */}
+                  <BoardTd isEnabled={board.isEnabled}>
+                    {board.isEnabled ? "Enabled" : "Disabled"}
+                  </BoardTd>
+                </>
               </TableRow>
             ))}
         </tbody>
@@ -177,14 +180,14 @@ const AdminBoardList = () => {
           <Modal
             open={isModalOpen}
             close={closeModal}
-            header={`customer id : ${selectedUser}`}
+            header={`jobPosting id : ${selectedUser.jobPostingId}`}
           >
             <ModalButtonContainer>
-              <ModalButton onClick={() => handleManageState("enabled")}>
-                enabled
+              <ModalButton onClick={() => handleManageState(1)}>
+                Enabled
               </ModalButton>
-              <ModalButton onClick={() => handleManageState("disabled")}>
-                disabled
+              <ModalButton onClick={() => handleManageState(0)}>
+                Disabled
               </ModalButton>
             </ModalButtonContainer>
           </Modal>
@@ -194,4 +197,4 @@ const AdminBoardList = () => {
   );
 };
 
-export default AdminBoardList;
+export default AdminJobPostList;
