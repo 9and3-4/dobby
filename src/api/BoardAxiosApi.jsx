@@ -53,12 +53,13 @@ const BoardAxiosApi = {
     return await axios.get(DOBBY_DOMAIN + `/api/comment/list/${Id}`);
   },
   // 댓글 쓰기
-  commentWrite: async (customerId, Id, content) => {
+  commentWrite: async (userId, postId, content) => {
     const comment = {
-      postId: Id,
-      customerId: customerId,
+      postId: postId,
+      userId: userId,
       content: content,
     };
+    console.log("댓글쓰기 : ", comment);
     return await axios.post(DOBBY_DOMAIN + `/api/comment/new`, comment);
   },
 };

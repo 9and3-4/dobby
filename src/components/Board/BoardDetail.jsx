@@ -65,7 +65,7 @@ const CommentList = styled.ul`
 
 const CommentItem = styled.li`
   padding: 10px 0;
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
 `;
 
 const CommentContent = styled.p`
@@ -101,7 +101,7 @@ const BoardDate = styled.p`
 
 function BoardDetail() {
   const { id } = useParams();
-  console.log(`useParams Board ID: ${id}`);
+  // console.log(`useParams Board ID: ${id}`);
   const [board, setBoard] = useState("");
   const [comments, setComments] = useState("");
   const [inputComment, setInputComment] = useState("");
@@ -111,13 +111,13 @@ function BoardDetail() {
     setShowComments(!showComments);
   };
 
-  const userId = localStorage.getItem("Id");
+  const userId = window.localStorage.getItem("userId");
   console.log(`Board ID: ${id}`);
 
   useEffect(() => {
     const getBoardDetail = async () => {
       try {
-        console.log(`Board ID in useEffect: ${id}`);
+        // console.log(`Board ID in useEffect: ${id}`);
         const response = await BoardAxiosApi.boardDetail(id);
         console.log(response.data);
         setBoard(response.data);
@@ -142,10 +142,10 @@ function BoardDetail() {
     try {
       const response = await BoardAxiosApi.commentWrite(
         userId,
-        id,
-        inputComment
+        comments,
+        showComments
       );
-      console.log(response);
+      console.log("response : ", response);
       setInputComment("");
       setComAddFlag(!comAddFlag);
     } catch (error) {
@@ -178,9 +178,9 @@ function BoardDetail() {
         <CommentList>
           {comments &&
             comments.map((comment) => (
-              <CommentItem key={comment.replyId}>
+              <CommentItem key={comment.postId}>
                 <CommentContent>{comment.content}</CommentContent>
-                <CommentUser>{comment.customerId}</CommentUser>
+                <CommentUser>{comment.userId}</CommentUser>
               </CommentItem>
             ))}
         </CommentList>

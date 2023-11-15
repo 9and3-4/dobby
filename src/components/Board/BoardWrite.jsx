@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BoardAxiosApi from "../../api/BoardAxiosApi";
+import Modal from "../../util/Modal";
 
 const FormContainer = styled.div`
   height: 800px;
@@ -130,6 +131,15 @@ const BoardWrite = () => {
   console.log("userId : " + userId);
   const navigate = useNavigate();
 
+  // Modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalText, setModalText] = useState(false);
+
+  // close 버튼 눌렀을 때 실행되는 함수
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   useEffect(() => {
     //대분류 선택에 따라 소분류를 가져오는 역할을 하는 fetch
     const fetchMajorCategories = async () => {
@@ -188,7 +198,8 @@ const BoardWrite = () => {
     e.preventDefault();
 
     if (!selectedMajorCategory || !selectedSubCategory) {
-      alert("대분류와 소분류를 선택하세요.");
+      setModalOpen(true);
+      setModalText("대분류와 소분류를 선택하십시오.");
       return;
     }
 
@@ -211,10 +222,12 @@ const BoardWrite = () => {
       console.log("글쓰기 업로드 : " + rsp.data);
 
       if (rsp.data === true) {
-        alert("업로드 완료");
+        setModalOpen(true);
+        setModalText("업로드를 성공하였습니다.");
         navigate("/BoardListPage");
       } else {
-        alert("업로드 실패");
+        setModalOpen(true);
+        setModalText("업로드를 성공하였습니다.");
       }
     } catch (error) {
       console.log("데이터 업로드 중 오류 발생:", error);
@@ -276,6 +289,9 @@ const BoardWrite = () => {
           <SubmitButton onClick={handleSubmit}>업로드</SubmitButton>
         </ButtonContainer>
       </StyledForm>
+      <Modal open={modalOpen} close={closeModal} header="알림">
+        {modalText}
+      </Modal>
     </FormContainer>
   );
 };
