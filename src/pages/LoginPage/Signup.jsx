@@ -101,7 +101,7 @@ const Signup = () => {
       );
       console.log(memberReg.data);
       if (memberReg.data === true) {
-        navigate("/home");
+        navigate("/");
       } else {
         setModalOpen(true);
         setModelText("회원 가입에 실패 했습니다.");

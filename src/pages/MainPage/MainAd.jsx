@@ -7,13 +7,20 @@ import styled from "styled-components";
 // const Container = styled.div`
 //   margin: 0 100px;
 // `;
+
+const StyledCarousel = styled(Carousel)`
+  max-width: 900px; // 원하는 최대 너비
+  margin: 0 auto; // 가운데 정렬
+`;
+
 const CardBox = styled.div`
   cursor: pointer;
+  /* margin: 0 30%; */
 `;
 
 const CardImg = styled.img`
   width: auto;
-  height: 600px;
+  height: 300px;
   border: none;
   @media (max-width: 768px) {
     height: 30%;
@@ -39,13 +46,13 @@ const AdCarousel = () => {
   };
 
   return (
-    <Carousel {...settings}>
+    <StyledCarousel {...settings}>
       {images.map((image, index) => (
         <CardBox key={index}>
           <CardImg src={image} alt={`Slide ${index + 1}`} />
         </CardBox>
       ))}
-    </Carousel>
+    </StyledCarousel>
   );
 };
 
