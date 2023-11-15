@@ -36,15 +36,15 @@ const BoardAxiosApi = {
   },
 
   // 게시글 쓰기
-  boardWrite: async (major, sub, title, content, userId, writeDate) => {
+  boardWrite: async (major, sub, title, content, userId) => {
     const board = {
       major: major,
       sub: sub,
       title: title,
       content: content,
       userId: userId,
-      writeDate: writeDate,
     };
+    console.log("보드데이터 : ", board);
     return await axios.post(DOBBY_DOMAIN + "/api/board/new", board);
   },
 

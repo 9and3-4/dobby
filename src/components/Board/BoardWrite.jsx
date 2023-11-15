@@ -126,6 +126,8 @@ const BoardWrite = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [selectedMajorCategory, setSelectedMajorCategory] = useState([]);
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const userId = window.localStorage.getItem("userId");
+  console.log("userId : " + userId);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -154,7 +156,7 @@ const BoardWrite = () => {
             selectedMajorCategory
           );
           setSubCategories(rsp);
-          console.log("rsp" + rsp);
+          console.log("소분류 : " + rsp);
         } catch (error) {
           console.error("소분류를 가져오는 중 오류 발생:", error);
         }
@@ -163,7 +165,7 @@ const BoardWrite = () => {
 
     // selectedMajorCategory가 변경될 때마다 소분류 데이터를 가져오는 useEffect 호출
     fetchSubCategories();
-    console.log("선택major category:", selectedMajorCategory);
+    // console.log("선택major category:", selectedMajorCategory);
   }, [selectedMajorCategory]);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -190,19 +192,27 @@ const BoardWrite = () => {
       return;
     }
 
-    const postData = {
+    const boardData = {
+      major: selectedMajorCategory,
+      sub: selectedSubCategory,
       title,
       content,
-      majorCategoryId: selectedMajorCategory,
-      subCategoryId: selectedSubCategory,
+      userId,
     };
 
     try {
-      const rsp = await BoardAxiosApi.createPost(postData);
+      const rsp = await BoardAxiosApi.boardWrite(
+        selectedMajorCategory,
+        selectedSubCategory,
+        title,
+        content,
+        userId
+      );
+      console.log("글쓰기 업로드 : " + rsp.data);
 
       if (rsp.data === true) {
         alert("업로드 완료");
-        navigate("/BoardList");
+        navigate("/BoardListPage");
       } else {
         alert("업로드 실패");
       }
@@ -248,6 +258,7 @@ const BoardWrite = () => {
           <StyledLabel htmlFor="title">제목</StyledLabel>
           <StyledInput
             type="text"
+            id="title"
             name="title"
             value={title}
             onChange={handleTitleChange}
