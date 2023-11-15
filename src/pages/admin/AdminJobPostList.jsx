@@ -47,13 +47,9 @@ const TableRow = styled.tr`
   cursor: pointer;
 
   ${(props) => {
-    if (props.isActive === "inactive") {
+    if (props.isActive === 0) {
       return `
         background-color: #fdffcb;
-      `;
-    } else if (props.isActive === "quit") {
-      return `
-        background-color: #bbb;
       `;
     }
     return "";

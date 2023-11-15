@@ -7,7 +7,7 @@ import Categories from "../../components/Board/Categories";
 const PageTitle = styled.div`
   background-color: #ed342e;
   color: #fff;
-  padding: 25px;
+  padding: 0px;
   text-align: center;
   &:hover {
     text-decoration: underline;
