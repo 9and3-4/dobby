@@ -5,6 +5,7 @@ import AxiosApi from "../../api/AxiosApi";
 import PostDate, { formatDate } from "../../components/Mypage/Post/PostDate";
 
 const PostBox = styled.div`
+  margin: 10px;
   color: var(--RED);
   font-size: 18px;
   display: flex;
@@ -21,7 +22,16 @@ const Posting = styled.div`
     margin: 10px;
   }
   p {
-    margin: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: var(--BLACK);
+  }
+  hr {
+    border: 1px solid #fcb1b1;
+  }
+  span {
+    color: var(--RED);
   }
 `;
 
@@ -66,7 +76,11 @@ const CompanyPost = () => {
             {/* <p>작성시간 : {e.writedate}</p> */}
             <PostDate date={e.formattedDate} />
             <p>👀 {e.viewCount}</p>
-            <p>♥ {e.likeCount}</p>
+            <p>
+              <span>♥ </span>
+              {e.likeCount}
+            </p>
+            <hr />
           </Posting>
         ))}
       </PostBox>

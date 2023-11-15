@@ -10,6 +10,10 @@ const AxiosApi = {
     };
     return await axios.post(DOBBY_DOMAIN + "/users/login", login);
   },
+  // 인증번호받기
+  authCheck: async (id) => {
+    return await axios.get(DOBBY_DOMAIN + `/email/mail/?id=${id}`);
+  },
   // 개인 회원 정보 수정
   memberUpdate: async (id, name, nickName, pwd) => {
     const memInfo = {

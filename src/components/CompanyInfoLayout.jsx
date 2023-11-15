@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  height: 800px;
+  min-height: 800px;
   flex-direction: column;
   justify-content: center;
   align-items: center;

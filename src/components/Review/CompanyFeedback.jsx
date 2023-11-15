@@ -5,6 +5,7 @@ import AxiosApi from "../../api/AxiosApi";
 import PostDate, { formatDate } from "../../components/Mypage/Post/PostDate";
 
 const FeedbackBox = styled.div`
+  margin: 10px;
   color: var(--RED);
   font-size: 18px;
   display: flex;
@@ -15,8 +16,19 @@ const Substance = styled.div`
   flex-direction: column;
   margin: 15px;
 
+  h2 {
+    font-size: 23px;
+    font-weight: bold;
+    margin: 10px;
+  }
   p {
-    margin: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: var(--BLACK);
+  }
+  hr {
+    border: 1px solid #fcb1b1;
   }
 `;
 
@@ -53,9 +65,10 @@ const CompanyFeedback = () => {
       <FeedbackBox>
         {companyFeedback.map((feedback, index) => (
           <Substance key={index}>
+            <h2>내용 : {feedback.content}</h2>
             <p>작성 시간 : {formatDate("2023-11-01T04:10:20.000+00:00")}</p>
-            <p>내용 : {feedback.content}</p>
             <p>별점 : {feedback.rating}</p>
+            <hr />
           </Substance>
         ))}
       </FeedbackBox>

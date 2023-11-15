@@ -21,7 +21,8 @@ const Introduction = styled.div`
 
   p {
     font-size: 17px;
-    margin-bottom: 8px;
+    margin-top: 25px;
+    color: var(--BLACK);
   }
 `;
 
