@@ -187,6 +187,13 @@ const AxiosApi = {
     return await axios.get(DOBBY_DOMAIN + `/companymypage/companyadlist/${id}`);
   },
 
+  // 기업 마이페이지 내 채용 공고 가져오기
+  jobList: async (id) => {
+    return await axios.get(
+      DOBBY_DOMAIN + `/companymypage/companyjobposting/${id}`
+    );
+  },
+
   // 광고 신청하기
   adApplication: async (id, image, startDate, endDate, adFee) => {
     const adApp = {

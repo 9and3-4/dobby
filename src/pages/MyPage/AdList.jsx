@@ -371,6 +371,7 @@ import { useState, useEffect } from "react";
 import AxiosApi from "../../api/AxiosApi";
 import { useNavigate } from "react-router-dom";
 import PostDate from "../../components/Mypage/Post/PostDate";
+import BackButtonComponent from "./BackButton";
 
 // 맨 하단 ..
 const Container = styled.div`
@@ -398,6 +399,11 @@ const ProfileBox = styled.div`
   padding-left: 20px;
 `;
 
+const MeinTextBox = styled.div`
+  display: flex;
+  display: column;
+`;
+
 const PostList = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -417,8 +423,13 @@ const MainText = styled.div`
   font-size: 23px;
   color: var(--RED);
   font-weight: bold;
-  padding: 10px;
+  margin: 10px;
   padding-top: 20px;
+`;
+
+const SecondBox = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const ListUl = styled.ul`
@@ -503,34 +514,40 @@ const AdList = () => {
       <Container>
         <ProfileBox>
           <Profile />
+          <BackButtonComponent />
         </ProfileBox>
-        <MainText>광고 등록 목록</MainText>
-        <PostList>
-          <ListUl>
-            {adList &&
-              adList.map((adList) => (
-                <ListLi key={adList.adlistId}>
-                  <AdListContentWrapper>
-                    <ListHeader>
-                      <ListImage
-                        src={adList.image}
-                        alt={`Ad Image ${adList.id}`}
-                      />
-                    </ListHeader>
-                    <ListBody>
-                      <DateBox>
-                        <ListText>{adList.id}</ListText>
-                        <PostDate date={adList.startDate} />
-                        &nbsp;-&nbsp;
-                        <PostDate date={adList.endDate} />
-                        <ListText>등록 상품 : {adList.adfee}</ListText>
-                      </DateBox>
-                    </ListBody>
-                  </AdListContentWrapper>
-                </ListLi>
-              ))}
-          </ListUl>
-        </PostList>
+        <SecondBox>
+          <MeinTextBox>
+            <MainText>광고 등록 목록</MainText>
+          </MeinTextBox>
+          <PostList>
+            <ListUl>
+              {adList &&
+                adList.map((adList) => (
+                  <ListLi key={adList.adlistId}>
+                    <AdListContentWrapper>
+                      <ListHeader>
+                        <ListImage
+                          src={adList.image}
+                          alt={`Ad Image ${adList.id}`}
+                        />
+                      </ListHeader>
+                      <ListBody>
+                        <DateBox>
+                          <ListText>{adList.id}</ListText>
+                          <ListText>이용 기간</ListText>
+                          <PostDate date={adList.startDate} />
+                          &nbsp;-&nbsp;
+                          <PostDate date={adList.endDate} />
+                          <ListText>등록 상품 : {adList.adfee}</ListText>
+                        </DateBox>
+                      </ListBody>
+                    </AdListContentWrapper>
+                  </ListLi>
+                ))}
+            </ListUl>
+          </PostList>
+        </SecondBox>
       </Container>
     </>
   );

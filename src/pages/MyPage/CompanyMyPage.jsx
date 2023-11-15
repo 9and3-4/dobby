@@ -44,7 +44,7 @@ const CompanyMyPage = () => {
     navigate("/EditCompanyMain");
   };
   const jobListNavigate = () => {
-    navigate("/JobListings");
+    navigate("/JobPostingList");
   };
   const adListNavigate = () => {
     navigate("/AdList");
