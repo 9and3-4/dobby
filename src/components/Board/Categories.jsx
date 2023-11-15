@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const categories = [
   { name: "도비의 티끌 모으기", text: "도비의 티끌 모으기" },
@@ -63,6 +64,8 @@ const Category = styled.div`
 `;
 
 const Categories = ({ onSelect, category }) => {
+  const location = useLocation();
+  const nameFromUrl = location.state?.name;
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -82,7 +85,7 @@ const Categories = ({ onSelect, category }) => {
       {categories.map((c, index) => (
         <Category
           key={c.name}
-          active={category === c.name}
+          active={category === c.name || nameFromUrl === c.name}
           onClick={() => onSelect(c.name)}
           // 화면 너비가 768px 초과일 때 마지막 카테고리만 표시하지 않도록 설정
           style={

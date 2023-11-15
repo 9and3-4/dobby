@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import AdCarousel from "./MainAd";
 import { useNavigate } from "react-router-dom";
+import Categories from "../../components/Board/Categories";
 
 const PageTitle = styled.div`
   background-color: #ed342e;
@@ -101,7 +102,7 @@ const Main = () => {
   const renderBoardItem = (index, imageSrc, altText) => (
     <BoardItem
       key={index}
-      onClick={() => navigate("/BoardListPage")}
+      onClick={() => navigate("/BoardListPage", { state: { name: altText } })}
       onMouseEnter={() => handleMouseEnter(index)}
       onMouseLeave={() => handleMouseLeave(index)}
     >

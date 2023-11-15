@@ -33,14 +33,17 @@ const BoardUl = styled.ul`
 `;
 
 const BoardLi = styled.li`
-  background-color: #f2f2f2;
+  background-color: #ffffff;
   margin: 10px 0;
   padding: 10px 14px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(78, 78, 78, 0.1);
   display: flex; // 내부 요소들을 flex로 배치합니다.
   align-items: center; // 세로 중앙 정렬
   /* width: 1000px; */
+  &:hover {
+    background-color: #ffe6e5;
+  }
 `;
 
 const BoardTitle = styled.h2`
