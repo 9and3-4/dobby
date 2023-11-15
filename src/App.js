@@ -31,6 +31,8 @@ import TermsofUse from "./components/Termsofuse";
 import PostListPage from "./pages/MyPage/PostListPage";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import ProvideService from "./components/ProvideService";
+import AdminJobPostList from "./pages/admin/AdminJobPostList";
+import AdminAdList from "./pages/admin/AdminAdList";
 
 function App() {
   return (
@@ -45,7 +47,7 @@ function App() {
             <Route path="/EditCompanyMain" element={<EditCompanyMain />} />
             <Route path="/JobListings" element={<JobListings />} />
             <Route path="/AdList" element={<AdList />} />
-            <Route path="/Condition" element={<Condition user="company" />} />
+            <Route path="/Condition" element={<Condition />} />
             <Route path="/BoardWritePage" element={<BoardWritePage />} />
             <Route path="/UserMyPage" element={<UserMyPage />} />
             <Route path="/PostListPage" element={<PostListPage />} />
@@ -58,7 +60,9 @@ function App() {
             <Route path="/CompanySignup" element={<CompanySignup />} />
             <Route path="/AdminMain" element={<AdminMain />} />
             <Route path="/CompanyInfo" element={<CompanyInfo />} />
-            <Route path="/AdminBoardList" element={<AdminBoardList />} />g
+            <Route path="/AdminBoardList" element={<AdminBoardList />} />
+            <Route path="/AdminJobPostList" element={<AdminJobPostList />} />
+            <Route path="/AdminAdList" element={<AdminAdList />} />
             <Route element={<CompanyInfoLayout />}>
               <Route path="/CompanyDetail" element={<CompanyDetail />} />
               <Route path="/CompanyFeedback" element={<CompanyFeedback />} />

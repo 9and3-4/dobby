@@ -219,5 +219,19 @@ const AxiosApi = {
     };
     return await axios.post(DOBBY_DOMAIN + "/manager/adliststate", state);
   },
+  managerJobPostingInfoGet: async () => {
+    return await axios.get(DOBBY_DOMAIN + "/manager/jobpostinfo");
+  },
+  managerAdListInfoGet: async () => {
+    return await axios.get(DOBBY_DOMAIN + "/manager/adlistinfo");
+  },
+
+  manageState: async (isActive, id) => {
+    const state = {
+      isActive: isActive,
+      id: id,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/manager/state", state);
+  },
 };
 export default AxiosApi;
