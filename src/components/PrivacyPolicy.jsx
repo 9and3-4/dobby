@@ -5,6 +5,7 @@ import styled from "styled-components";
 import BackButtonComponent from "../pages/MyPage/BackButton";
 
 const Container = styled.div`
+  margin-bottom: 100px;
   color: var(--RED);
   height: 1000px;
   display: flex;
