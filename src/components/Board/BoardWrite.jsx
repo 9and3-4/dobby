@@ -153,11 +153,8 @@ const BoardWrite = () => {
           const rsp = await BoardAxiosApi.getSubCategories(
             selectedMajorCategory
           );
-
           setSubCategories(rsp);
           console.log("rsp" + rsp);
-
-          // rsp 는 불러와짐
         } catch (error) {
           console.error("소분류를 가져오는 중 오류 발생:", error);
         }
@@ -175,15 +172,11 @@ const BoardWrite = () => {
   const handleMajorCategoryChange = (e) => {
     // const selectedValue = e.target.value;
     // setSelectedMajorCategory(selectedValue);
-
     setSelectedMajorCategory(e.target.value);
 
     // console.log(e.target.value);
-    // 현재 여기서 빈배열이 들어오고 있음!!!!!!!!!!!!!!!!!!!!
     console.log("핸들메이저카테고리 확인 : ", e.target.value);
-
     // axios로 대분류 값으로 소분류 가져오는 서버 날려야함
-
     setSelectedSubCategory("");
   };
 
@@ -242,9 +235,6 @@ const BoardWrite = () => {
               onChange={handleSubCategoryChange}
             >
               <DropdownOption value="">소분류 선택</DropdownOption>
-              {/* 쌤 여기서 부터 오류가나요 왜죠? 알려주세요
-              배열 빈걸로 들어오는건 해결을 했는데..
-              map에서 오류가 나네용?? -허주은- */}
               {subCategories.map((subCategory, index) => (
                 <DropdownOption key={index} value={subCategory}>
                   {subCategory}
