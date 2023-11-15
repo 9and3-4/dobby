@@ -182,6 +182,10 @@ const AxiosApi = {
       DOBBY_DOMAIN + `/companyreview/companyjobposting/${id}`
     );
   },
+  // 기업 마이페이지 내 광고 가져오기
+  AdList: async (id) => {
+    return await axios.get(DOBBY_DOMAIN + `/companymypage/companyadlist/${id}`);
+  },
 
   // 광고 신청하기
   adApplication: async (id, image, startDate, endDate, adFee) => {
