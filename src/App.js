@@ -30,6 +30,7 @@ import DobbyIntroduction from "./components/DobbyIntroduction";
 import TermsofUse from "./components/Termsofuse";
 import PostListPage from "./pages/MyPage/PostListPage";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import ProvideService from "./components/ProvideService";
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
             <Route path="/DobbyIntroduction" element={<DobbyIntroduction />} />
             <Route path="/TermsofUse" element={<TermsofUse />} />
             <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+            <Route path="/ProvideService" element={<ProvideService />} />
           </Route>
         </Routes>
       </Router>
