@@ -200,5 +200,20 @@ const AxiosApi = {
   managerCompanyInfoGet: async () => {
     return await axios.get(DOBBY_DOMAIN + "/manager/companyinfo");
   },
+  manageJobPostingState: async (isActive, id) => {
+    const state = {
+      isActive: isActive,
+      id: id,
+    };
+    console.log(state);
+    return await axios.post(DOBBY_DOMAIN + "/manager/jobpoststate", state);
+  },
+  manageAdListState: async (isActive, id) => {
+    const state = {
+      isActive: isActive,
+      id: id,
+    };
+    return await axios.post(DOBBY_DOMAIN + "/manager/adliststate", state);
+  },
 };
 export default AxiosApi;

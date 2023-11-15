@@ -82,7 +82,7 @@ const ModalButton = styled.button`
 
 const AdminJobPostList = () => {
   const [boardList, setBoardList] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedJobPosting, setSelectedJobPosting] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
 
@@ -103,17 +103,17 @@ const AdminJobPostList = () => {
   const headers = [
     "jobPostingId",
     "companyId",
-    "companyName",
-    "title",
-    "description",
-    "qualification",
-    "deadline",
+    "회사명",
+    "제목",
+    "설명",
+    "자격 요건",
+    "마감일",
     // "image",
     "isEnabled",
   ];
 
   const handleRowClick = (board) => {
-    setSelectedUser(board);
+    setSelectedJobPosting(board);
     setIsModalOpen(true);
   };
 
@@ -127,11 +127,14 @@ const AdminJobPostList = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedUser(null);
+    setSelectedJobPosting(null);
   };
 
   const handleManageState = async (state) => {
-    // await AxiosApi.manageState(state, selectedUser);
+    await AxiosApi.manageJobPostingState(
+      state,
+      selectedJobPosting.jobPostingId
+    ); // 여기에 Update API 추가
     fetchBoardList(); // 상태가 변경될 때마다 데이터 다시 불러오기
     setIsModalOpen(false);
   };
@@ -180,7 +183,7 @@ const AdminJobPostList = () => {
           <Modal
             open={isModalOpen}
             close={closeModal}
-            header={`jobPosting id : ${selectedUser.jobPostingId}`}
+            header={`jobPosting id : ${selectedJobPosting.jobPostingId}`} // .jobPostingId
           >
             <ModalButtonContainer>
               <ModalButton onClick={() => handleManageState(1)}>

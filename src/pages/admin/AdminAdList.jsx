@@ -82,7 +82,7 @@ const ModalButton = styled.button`
 
 const AdminAdList = () => {
   const [boardList, setBoardList] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedAdvertisement, setSelectedAdvertisement] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
 
@@ -112,7 +112,7 @@ const AdminAdList = () => {
   ];
 
   const handleRowClick = (board) => {
-    setSelectedUser(board);
+    setSelectedAdvertisement(board);
     setIsModalOpen(true);
   };
 
@@ -126,11 +126,11 @@ const AdminAdList = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedUser(null);
+    setSelectedAdvertisement(null);
   };
 
   const handleManageState = async (state) => {
-    // await AxiosApi.manageState(state, selectedUser);
+    await AxiosApi.manageState(state, selectedAdvertisement.advertisementID);
     fetchBoardList(); // 상태가 변경될 때마다 데이터 다시 불러오기
     setIsModalOpen(false);
   };
@@ -178,7 +178,7 @@ const AdminAdList = () => {
           <Modal
             open={isModalOpen}
             close={closeModal}
-            header={`jobPosting id : ${selectedUser.jobPostingId}`}
+            header={`jobPosting id : ${selectedAdvertisement.advertisementID}`}
           >
             <ModalButtonContainer>
               <ModalButton onClick={() => handleManageState(1)}>
