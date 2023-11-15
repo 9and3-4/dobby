@@ -99,11 +99,11 @@ const AdminAdList = () => {
   const headers = [
     "advertisementID",
     "companyId",
-    "companyName",
-    "image",
-    "startDate",
-    "endDate",
-    "adFee",
+    "회사명",
+    "이미지",
+    "시작날짜",
+    "종료날짜",
+    "광고 등록비",
     "isEnabled",
   ];
 
@@ -126,7 +126,10 @@ const AdminAdList = () => {
   };
 
   const handleManageState = async (state) => {
-    await AxiosApi.manageState(state, selectedAdvertisement.advertisementID);
+    await AxiosApi.manageAdListState(
+      state,
+      selectedAdvertisement.advertisementID
+    );
     fetchBoardList(); // 상태가 변경될 때마다 데이터 다시 불러오기
     setIsModalOpen(false);
   };
@@ -174,7 +177,7 @@ const AdminAdList = () => {
           <Modal
             open={isModalOpen}
             close={closeModal}
-            header={`jobPosting id : ${selectedAdvertisement.advertisementID}`}
+            header={`Advertisement id : ${selectedAdvertisement.advertisementID}`}
           >
             <ModalButtonContainer>
               <ModalButton onClick={() => handleManageState(1)}>
