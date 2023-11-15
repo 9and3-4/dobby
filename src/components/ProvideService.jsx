@@ -1,4 +1,4 @@
-// footer 개인서비스
+// footer 기업 서비스
 
 import React from "react";
 import styled from "styled-components";
@@ -8,6 +8,11 @@ const Container = styled.div`
   height: 800px;
   color: var(--RED);
   display: flex;
+
+  @media only screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    margin-bottom: 300px;
+  }
 `;
 
 const Box1 = styled.div`
