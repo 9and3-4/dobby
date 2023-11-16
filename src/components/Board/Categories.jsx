@@ -20,7 +20,7 @@ const CategoriesBlock = styled.div`
   align-items: center;
   // 화면 너비가 768픽셀 이하 적용
   @media screen and (max-width: 768px) {
-    width: 100%;
+    width: 105%;
     overflow-x: auto;
   }
 `;
