@@ -189,6 +189,7 @@ const Login = () => {
       window.localStorage.setItem("isLogin", "TRUE");
       window.localStorage.setItem("userInfo", res2.data[0]);
       window.localStorage.setItem("userRole", res2.data[0].role);
+      window.localStorage.setItem("customerId", res2.data[0].id);
       if (res2.data[0].role === "user") {
         window.localStorage.setItem("userNickName", res2.data[0].nickName);
         navigate("/");

@@ -1,5 +1,6 @@
 import axios from "axios";
 const DOBBY_DOMAIN = "http://localhost:8111";
+// const DOBBY_DOMAIN = "http://192.168.10.20:8111";
 
 const AxiosApi = {
   // 로그인

@@ -1,5 +1,6 @@
 import axios from "axios";
 const DOBBY_DOMAIN = "http://localhost:8111";
+// const DOBBY_DOMAIN = "http://192.168.10.20:8111";
 
 const BoardAxiosApi = {
   //게시글 조회
@@ -56,7 +57,7 @@ const BoardAxiosApi = {
   commentWrite: async (userId, postId, content) => {
     const comment = {
       postId: postId,
-      userId: userId,
+      customerId: userId,
       content: content,
     };
     console.log("댓글쓰기 : ", comment);
