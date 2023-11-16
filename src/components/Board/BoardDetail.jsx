@@ -101,7 +101,6 @@ const BoardDate = styled.p`
 
 function BoardDetail() {
   const { id } = useParams();
-  console.log(`useParams Board ID: ${id}`);
   const [board, setBoard] = useState("");
   const [comments, setComments] = useState("");
   const [inputComment, setInputComment] = useState("");
@@ -118,13 +117,11 @@ function BoardDetail() {
   useEffect(() => {
     const getBoardDetail = async () => {
       try {
-        console.log(`Board ID in useEffect: ${id}`);
         const response = await BoardAxiosApi.boardDetail(id);
         console.log(response.data);
         setBoard(response.data);
         const response2 = await BoardAxiosApi.commentList(id);
         setComments(response2.data);
-        console.log(`Board ID: ${id}`);
       } catch (error) {
         console.log(error);
       }
@@ -146,7 +143,7 @@ function BoardDetail() {
         id,
         inputComment
       );
-      console.log(response);
+      console.log("댓글쓰기 리턴: ", response);
       setInputComment("");
       setComAddFlag(!comAddFlag);
     } catch (error) {

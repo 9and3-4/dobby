@@ -128,7 +128,6 @@ const BoardWrite = () => {
   const [selectedMajorCategory, setSelectedMajorCategory] = useState([]);
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const userId = window.localStorage.getItem("userId");
-  console.log("userId : " + userId);
   const navigate = useNavigate();
 
   // Modal
@@ -166,16 +165,12 @@ const BoardWrite = () => {
             selectedMajorCategory
           );
           setSubCategories(rsp);
-          console.log("소분류 : " + rsp);
-        } catch (error) {
-          console.error("소분류를 가져오는 중 오류 발생:", error);
-        }
+        } catch (error) {}
       }
     };
 
     // selectedMajorCategory가 변경될 때마다 소분류 데이터를 가져오는 useEffect 호출
     fetchSubCategories();
-    // console.log("선택major category:", selectedMajorCategory);
   }, [selectedMajorCategory]);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -185,10 +180,7 @@ const BoardWrite = () => {
     // const selectedValue = e.target.value;
     // setSelectedMajorCategory(selectedValue);
     setSelectedMajorCategory(e.target.value);
-
-    // console.log(e.target.value);
-    console.log("핸들메이저카테고리 확인 : ", e.target.value);
-    // axios로 대분류 값으로 소분류 가져오는 서버 날려야함
+    console.log("setSelectedMajorCategory : ", e.target.value);
     setSelectedSubCategory("");
   };
 
