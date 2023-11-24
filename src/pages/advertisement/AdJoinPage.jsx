@@ -184,7 +184,7 @@ const AdJoinPage = () => {
         "광고 신청이 완료되었습니다. 관리자 승인 후 게시됩니다. 자세한 사항은 이메일을 확인해주십시오."
       );
       setModalSelect(2);
-      navigate("/home");
+      navigate("/");
     } else {
       setModalOpen(true);
       setModalText(
